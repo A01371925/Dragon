@@ -13,9 +13,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Created by LEDNR on 30/01/18.
  */
 
-class PantallaConfiguracion implements Screen {
+public class PantallaConfiguracion implements Screen {
 
-    private final MenuPrincipal menuPrincipal;
+    private final Juego juego;
 
     // Cámara.
     private OrthographicCamera camera;
@@ -24,8 +24,8 @@ class PantallaConfiguracion implements Screen {
     // Batch.
     private SpriteBatch batch;
 
-    public PantallaConfiguracion(MenuPrincipal menuPrincipal) {
-        this.menuPrincipal = menuPrincipal;
+    public PantallaConfiguracion(Juego juego) {
+        this.juego = juego;
 
     }
 
@@ -39,10 +39,10 @@ class PantallaConfiguracion implements Screen {
     }
 
     private void crearCamara() {
-        camera = new OrthographicCamera(PantallaMenu.ANCHO, PantallaMenu.ALTO);
-        camera.position.set(PantallaMenu.ANCHO/2,PantallaMenu.ALTO/2,0);
+        camera = new OrthographicCamera(MenuPrincipal.ANCHO, MenuPrincipal.ALTO);
+        camera.position.set(MenuPrincipal.ANCHO/2,MenuPrincipal.ALTO/2,0);
         camera.update();
-        viewport = new StretchViewport(PantallaMenu.ANCHO,PantallaMenu.ALTO,camera);
+        viewport = new StretchViewport(MenuPrincipal.ANCHO,MenuPrincipal.ALTO,camera);
     }
 
     @Override
@@ -98,7 +98,7 @@ class PantallaConfiguracion implements Screen {
 
         @Override
         public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-            menuPrincipal.setScreen(new MenuPrincipal(menuPrincipal));
+            juego.setScreen(new MenuPrincipal(juego));
             return true; // Ya prosesamos el evento.
         }
 
