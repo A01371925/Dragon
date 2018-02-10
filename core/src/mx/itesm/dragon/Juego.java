@@ -11,6 +11,6 @@ public class Juego extends Game{
     @Override
     public void create() {
         // Pone la pantalla inicial.
-        //setScreen(new MenuPrincipal(this));
+        setScreen(new MenuPrincipal(this));
     }
 }

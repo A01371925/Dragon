@@ -1,14 +1,126 @@
 package mx.itesm.dragon;
 
-import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
- * Created by LEDNR on 06/02/18.
+ * Created by jorge on 09/02/2018.
  */
 
-public class AcercaDe extends Game{
-    @Override
-    public void create() {
+class AcercaDe implements Screen {
 
+    private final Juego juego;
+
+    // Cámara.
+    private OrthographicCamera camera;
+    private Viewport viewport;
+
+    // Batch.
+    private SpriteBatch batch;
+
+    public AcercaDe(Juego juego) {
+        this.juego = juego;
+
+    }
+
+    @Override
+    public void show() {
+        crearCamara();
+        batch = new SpriteBatch();
+
+        Gdx.input.setInputProcessor(new ProcesadorEntrada());
+
+
+    }
+
+    private void crearCamara() {
+        camera = new OrthographicCamera(MenuPrincipal.ANCHO, MenuPrincipal.ALTO);
+        camera.position.set(MenuPrincipal.ANCHO/2,MenuPrincipal.ALTO/2,0);
+        camera.update();
+        viewport = new StretchViewport(MenuPrincipal.ANCHO,MenuPrincipal.ALTO,camera);
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(1,0.4f,0,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.setProjectionMatrix(camera.combined);
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        viewport.update(width, height);
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
+    private class ProcesadorEntrada implements InputProcessor {
+
+        @Override
+        public boolean keyDown(int keycode) {
+            return false;
+        }
+
+        @Override
+        public boolean keyUp(int keycode) {
+            return false;
+        }
+
+        @Override
+        public boolean keyTyped(char character) {
+            return false;
+        }
+
+        @Override
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            juego.setScreen(new MenuPrincipal(juego));
+            return true; // Ya prosesamos el evento.
+        }
+
+        @Override
+        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+            return false;
+        }
+
+        @Override
+        public boolean touchDragged(int screenX, int screenY, int pointer) {
+            return false;
+        }
+
+        @Override
+        public boolean mouseMoved(int screenX, int screenY) {
+            return false;
+        }
+
+        @Override
+        public boolean scrolled(int amount) {
+            return false;
+        }
     }
 }

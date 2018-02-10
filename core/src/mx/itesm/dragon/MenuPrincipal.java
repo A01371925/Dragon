@@ -56,11 +56,19 @@ public class MenuPrincipal implements Screen {
                         new Texture("play.png")));
         TextureRegionDrawable trdPlayTouch = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("playTouch.png")));
+                        new Texture("pressed.png")));
+
+        TextureRegionDrawable trdInfo = new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("button_i.png")));
 
         ImageButton btnPlay = new ImageButton(trdPlay,trdPlayTouch);
 
+        ImageButton btnInfo = new ImageButton(trdInfo);
+
         btnPlay.setPosition(ANCHO/2-btnPlay.getWidth()/2,ALTO/2-btnPlay.getHeight()/2);
+
+        btnInfo.setPosition(ANCHO/2-btnPlay.getWidth()/5,ALTO/2 - btnPlay.getHeight()/2*2); // Falta ajustar la posición del botón
 
         btnPlay.addListener(new ClickListener(){
             @Override
@@ -68,11 +76,26 @@ public class MenuPrincipal implements Screen {
                 super.clicked(event, x, y);
                 // Gdx.app.log("ClickedListener","Hizo click el usuario");
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new PantallaJuego(juego));
+                //juego.setScreen(new PantallaJugar(juego)); // Falta la clase PantallaJugar
             }
         });
 
+        btnInfo.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                // Gdx.app.log("ClickedListener","Hizo click el usuario");
+                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
+                juego.setScreen(new AcercaDe(juego));
+            }
+        });
+
+
+
         stageMenu.addActor(btnPlay);
+
+        stageMenu.addActor(btnInfo);
+
         Gdx.input.setInputProcessor(stageMenu);
     }
 
