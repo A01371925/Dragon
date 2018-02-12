@@ -83,7 +83,7 @@ public class MenuPrincipal implements Screen {
                 super.clicked(event, x, y);
                 // Gdx.app.log("ClickedListener","Hizo click el usuario");
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                //juego.setScreen(new PantallaJugar(juego)); // Falta la clase PantallaJugar
+                juego.setScreen(new PantallaJugar(juego)); // Falta la clase PantallaJugar
             }
         });
 
