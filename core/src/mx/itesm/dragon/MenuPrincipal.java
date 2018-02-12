@@ -1,6 +1,5 @@
 package mx.itesm.dragon;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -62,13 +61,21 @@ public class MenuPrincipal implements Screen {
                 new TextureRegion(
                         new Texture("button_i.png")));
 
+        TextureRegionDrawable trdConfig = new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("button_config.png")));
+
         ImageButton btnPlay = new ImageButton(trdPlay,trdPlayTouch);
 
         ImageButton btnInfo = new ImageButton(trdInfo);
 
+        ImageButton btnConfig = new ImageButton(trdConfig);
+
         btnPlay.setPosition(ANCHO/2-btnPlay.getWidth()/2,ALTO/2-btnPlay.getHeight()/2);
 
-        btnInfo.setPosition(ANCHO/2-btnPlay.getWidth()/5,ALTO/2 - btnPlay.getHeight()/2*2); // Falta ajustar la posición del botón
+        btnInfo.setPosition(ANCHO/2-btnPlay.getWidth()/5,ALTO/2 - btnPlay.getHeight()/4); // Falta ajustar la posición del botón
+
+        btnConfig.setPosition(ANCHO/2-btnPlay.getWidth(),ALTO/2 - btnPlay.getHeight()/8); // Falta ajustar la posición del botón
 
         btnPlay.addListener(new ClickListener(){
             @Override
@@ -80,7 +87,7 @@ public class MenuPrincipal implements Screen {
             }
         });
 
-        btnInfo.addListener(new ClickListener(){
+        btnInfo.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -90,11 +97,22 @@ public class MenuPrincipal implements Screen {
             }
         });
 
+        btnConfig.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                juego.setScreen(new PantallaConfiguracion(juego));
+            }
+        });
+
 
 
         stageMenu.addActor(btnPlay);
 
         stageMenu.addActor(btnInfo);
+
+        stageMenu.addActor(btnConfig);
 
         Gdx.input.setInputProcessor(stageMenu);
     }
