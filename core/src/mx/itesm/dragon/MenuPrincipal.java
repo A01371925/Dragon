@@ -33,8 +33,8 @@ public class MenuPrincipal implements Screen {
     private SpriteBatch batch;
 
     // MUNDO.
-    public static final float ANCHO = 1280;
-    public static final float ALTO = 720;
+    public static final float ANCHO = 720;
+    public static final float ALTO = 1280;
 
     public MenuPrincipal(Juego juego) {
         this.juego = juego;
@@ -59,11 +59,11 @@ public class MenuPrincipal implements Screen {
 
         TextureRegionDrawable trdInfo = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("button_i.png")));
+                        new Texture("i.png")));
 
         TextureRegionDrawable trdConfig = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("button_config.png")));
+                        new Texture("config.png")));
 
         ImageButton btnPlay = new ImageButton(trdPlay,trdPlayTouch);
 
@@ -71,11 +71,11 @@ public class MenuPrincipal implements Screen {
 
         ImageButton btnConfig = new ImageButton(trdConfig);
 
-        btnPlay.setPosition(ANCHO/2-btnPlay.getWidth()/2,ALTO/2-btnPlay.getHeight()/2);
+        btnPlay.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2,(ALTO / 2) - btnPlay.getHeight() / 2);
 
-        btnInfo.setPosition(ANCHO/2-btnPlay.getWidth()/5,ALTO/2 - btnPlay.getHeight()/4); // Falta ajustar la posición del botón
+        btnInfo.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2.5f,(ALTO / 3) - btnPlay.getHeight() / 2); // Falta ajustar la posición del botón
 
-        btnConfig.setPosition(ANCHO/2-btnPlay.getWidth(),ALTO/2 - btnPlay.getHeight()/8); // Falta ajustar la posición del botón
+        btnConfig.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2.5f,(ALTO / 4) - btnPlay.getHeight() / 2); // Falta ajustar la posición del botón
 
         btnPlay.addListener(new ClickListener(){
             @Override
@@ -83,7 +83,7 @@ public class MenuPrincipal implements Screen {
                 super.clicked(event, x, y);
                 // Gdx.app.log("ClickedListener","Hizo click el usuario");
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new PantallaJugar(juego)); // Falta la clase PantallaJugar
+                juego.setScreen(new PantallaJugar(juego)); //
             }
         });
 
