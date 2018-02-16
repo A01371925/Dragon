@@ -50,32 +50,49 @@ public class MenuPrincipal implements Screen {
     private void crearMenu() {
         stageMenu = new Stage(viewport);
 
+        TextureRegionDrawable imagenDragon = new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("BotonPlayDragon1.png")));
+
         TextureRegionDrawable trdPlay = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("play.png")));
+                        new Texture("BotonPlay1.png")));
         TextureRegionDrawable trdPlayTouch = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("pressed.png")));
+                        new Texture("BotonPlay2.png")));
 
         TextureRegionDrawable trdInfo = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("i.png")));
+                        new Texture("BotonAcerca de1.png")));
+        /*TextureRegionDrawable trdInfoTouch = new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("Boton Acerca de 2.png")));
+                        */
 
         TextureRegionDrawable trdConfig = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("config.png")));
+                        new Texture("BotonConfiguracion1.png")));
+        TextureRegionDrawable trdConfigTouch = new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("BotonConfiguracion2.png")));
+
+        ImageButton botonDragon = new ImageButton(imagenDragon);
 
         ImageButton btnPlay = new ImageButton(trdPlay,trdPlayTouch);
 
-        ImageButton btnInfo = new ImageButton(trdInfo);
+        ImageButton btnInfo = new ImageButton(trdInfo/*,trdInfoTouch*/);
 
-        ImageButton btnConfig = new ImageButton(trdConfig);
+        ImageButton btnConfig = new ImageButton(trdConfig,trdConfigTouch);
+
+
+        botonDragon.setPosition((ANCHO / 2) - botonDragon.getWidth() / 2,(ALTO*0.291F));
 
         btnPlay.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2,(ALTO / 2) - btnPlay.getHeight() / 2);
 
-        btnInfo.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2.5f,(ALTO / 3) - btnPlay.getHeight() / 2); // Falta ajustar la posición del botón
+        btnInfo.setPosition(0,btnInfo.getHeight()/4); // Falta ajustar la posición del botón
 
-        btnConfig.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2.5f,(ALTO / 4) - btnPlay.getHeight() / 2); // Falta ajustar la posición del botón
+        btnConfig.setPosition(ANCHO - btnConfig.getWidth()-20,btnConfig.getHeight()/4); // Falta ajustar la posición del botón
+
 
         btnPlay.addListener(new ClickListener(){
             @Override
@@ -107,6 +124,7 @@ public class MenuPrincipal implements Screen {
         });
 
 
+        stageMenu.addActor(botonDragon);
 
         stageMenu.addActor(btnPlay);
 
