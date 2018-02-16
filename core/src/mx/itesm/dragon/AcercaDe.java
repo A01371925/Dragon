@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.awt.Menu;
+
 /**
  * Created by jorge on 09/02/2018.
  */
@@ -27,6 +29,12 @@ class AcercaDe implements Screen {
 
     // Texturas.
     private Texture texturaAcercaDe;
+    private Texture texturaNombreLuis;
+    private Texture texturaNombreCharlotte;
+    private Texture texturaNombreJorge;
+    private Texture texturaNombreMarco;
+    private Texture texturaNombreAna;
+
 
     public AcercaDe(Juego juego) {
         this.juego = juego;
@@ -54,6 +62,11 @@ class AcercaDe implements Screen {
 
     private void cargarTexturas() {
         texturaAcercaDe = new Texture("FondoAcercaDe.png");
+        texturaNombreLuis = new Texture("Boton Acerca de Luis.png");
+        texturaNombreCharlotte = new Texture("Boton Acerca de Charlotte.png");
+        texturaNombreJorge = new Texture("Boton Acerca de Jorge.png");
+        texturaNombreMarco = new Texture("Boton Acerca de Marco.png");
+        texturaNombreAna = new Texture("Boton Acerca de Ana.png");
     }
 
     @Override
@@ -66,6 +79,11 @@ class AcercaDe implements Screen {
         batch.begin();
         // Dibujar elementos del juego.
         batch.draw(texturaAcercaDe,0 ,0);
+        batch.draw(texturaNombreLuis, 120,1000);
+        batch.draw(texturaNombreCharlotte,220,800);
+        batch.draw(texturaNombreMarco,120, 600);
+        batch.draw(texturaNombreAna,220, 400);
+        batch.draw(texturaNombreJorge,120,200);
         batch.end();
 
     }
