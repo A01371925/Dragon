@@ -22,6 +22,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MenuPrincipal implements Screen {
     private final Juego juego;
 
+    private Texture texturaFondo;
+
     // Cámara.
     private OrthographicCamera camera;
     private Viewport viewport;
@@ -39,7 +41,7 @@ public class MenuPrincipal implements Screen {
     public MenuPrincipal(Juego juego) {
         this.juego = juego;
     }
-    // hola
+
 
     public void show() {
         crearCamara();
@@ -49,6 +51,7 @@ public class MenuPrincipal implements Screen {
 
     private void crearMenu() {
         stageMenu = new Stage(viewport);
+
 
         TextureRegionDrawable imagenDragon = new TextureRegionDrawable(
                 new TextureRegion(
@@ -89,7 +92,7 @@ public class MenuPrincipal implements Screen {
 
         btnPlay.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2,(ALTO / 2) - btnPlay.getHeight() / 2);
 
-        btnInfo.setPosition(0,btnInfo.getHeight()/4); // Falta ajustar la posición del botón
+        btnInfo.setPosition(ANCHO - btnInfo.getWidth()-10,ALTO - btnInfo.getHeight()-20); // Falta ajustar la posición del botón
 
         btnConfig.setPosition(ANCHO - btnConfig.getWidth()-20,btnConfig.getHeight()/4); // Falta ajustar la posición del botón
 
@@ -144,6 +147,7 @@ public class MenuPrincipal implements Screen {
 
     @Override
     public void render(float delta) {
+
         Gdx.gl.glClearColor(25/255f,158/255f,218/255f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
