@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -24,8 +25,13 @@ public class PantallaJugar implements Screen {
     private OrthographicCamera camera;
     private Viewport viewport;
 
+
     // Batch.
     private SpriteBatch batch;
+
+    // Texturas.
+    private Texture texturaNivel;
+    // private Texture texturaDragon;
 
     public PantallaJugar(Juego juego) {
         this.juego = juego;
@@ -33,9 +39,22 @@ public class PantallaJugar implements Screen {
 
     @Override
     public void show() {
+        // Crear la cámara.
         crearCamara();
+
         batch = new SpriteBatch();
+
+        // Carga todas las texturas.
+        cargarTexturas();
+
+        // Indica quién escucha y atiende eventos
         Gdx.input.setInputProcessor(new ProcesadorEntreada());
+
+    }
+
+    private void cargarTexturas() {
+        texturaNivel = new Texture("fondoNivel1.png");
+        // texturaDragon = new Texture("dragonN.png");
     }
 
     private void crearCamara() {
@@ -47,9 +66,18 @@ public class PantallaJugar implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,0,0,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClearColor(1,0,0,1);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
+
+        batch.begin();
+
+            // Dibujar elementos del juego.
+            batch.draw(texturaNivel,0 ,0);
+            // batch.draw(texturaDragon, MenuPrincipal.ANCHO / 2, 0);
+        batch.end();
+
+
     }
 
     @Override
