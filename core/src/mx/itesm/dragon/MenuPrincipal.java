@@ -148,11 +148,15 @@ public class MenuPrincipal implements Screen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(25/255f,158/255f,218/255f,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        texturaFondo = new Texture("FondoMenu.png");
+        batch.begin();
+        batch.draw(texturaFondo,0,80);
+        batch.end();
+
 
         batch.setProjectionMatrix(camera.combined);
         stageMenu.draw();
+
     }
 
     @Override
