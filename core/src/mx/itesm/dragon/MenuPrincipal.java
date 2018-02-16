@@ -74,10 +74,10 @@ public class MenuPrincipal implements Screen {
 
         TextureRegionDrawable trdConfig = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("BotonConfiguracion1.png")));
+                        new Texture("BotonConfiguracion2.png")));
         TextureRegionDrawable trdConfigTouch = new TextureRegionDrawable(
                 new TextureRegion(
-                        new Texture("BotonConfiguracion2.png")));
+                        new Texture("BotonConfiguracion1.png")));
 
         ImageButton botonDragon = new ImageButton(imagenDragon);
 
@@ -148,9 +148,9 @@ public class MenuPrincipal implements Screen {
     @Override
     public void render(float delta) {
 
-        texturaFondo = new Texture("FondoMenu.png");
+        texturaFondo = new Texture("FondoMenuPrincipal.png");
         batch.begin();
-        batch.draw(texturaFondo,0,80);
+        batch.draw(texturaFondo,0,0);
         batch.end();
 
 

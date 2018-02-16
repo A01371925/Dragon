@@ -31,7 +31,10 @@ public class PantallaJugar implements Screen {
 
     // Texturas.
     private Texture texturaNivel;
-    // private Texture texturaDragon;
+    private Texture texturaDragon;
+
+    // Objetos.
+    private  Dragon dragon;
 
     public PantallaJugar(Juego juego) {
         this.juego = juego;
@@ -47,14 +50,19 @@ public class PantallaJugar implements Screen {
         // Carga todas las texturas.
         cargarTexturas();
 
+        crearObjetos();
         // Indica quién escucha y atiende eventos
         Gdx.input.setInputProcessor(new ProcesadorEntreada());
 
     }
 
+    private void crearObjetos() {
+        dragon = new Dragon(texturaDragon,MenuPrincipal.ANCHO, 0);
+    }
+
     private void cargarTexturas() {
         texturaNivel = new Texture("fondoNivel1.png");
-        // texturaDragon = new Texture("dragonN.png");
+        texturaDragon = new Texture("Dragon.png");
     }
 
     private void crearCamara() {
@@ -74,7 +82,7 @@ public class PantallaJugar implements Screen {
 
             // Dibujar elementos del juego.
             batch.draw(texturaNivel,0 ,0);
-            // batch.draw(texturaDragon, MenuPrincipal.ANCHO / 2, 0);
+            batch.draw(texturaDragon, MenuPrincipal.ANCHO / 2, 0);
         batch.end();
 
 
