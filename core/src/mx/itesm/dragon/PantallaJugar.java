@@ -82,7 +82,7 @@ public class PantallaJugar implements Screen {
 
             // Dibujar elementos del juego.
             batch.draw(texturaNivel,0 ,0);
-            batch.draw(texturaDragon, MenuPrincipal.ANCHO / 2, 0);
+            batch.draw(texturaDragon, MenuPrincipal.ANCHO * 0.3f, 0);
         batch.end();
 
 

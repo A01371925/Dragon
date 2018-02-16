@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -24,6 +25,10 @@ public class PantallaConfiguracion implements Screen {
     // Batch.
     private SpriteBatch batch;
 
+    // Texturas.
+    private Texture texturaConfiguración;
+
+
     public PantallaConfiguracion(Juego juego) {
         this.juego = juego;
 
@@ -33,6 +38,10 @@ public class PantallaConfiguracion implements Screen {
     public void show() {
         crearCamara();
         batch = new SpriteBatch();
+
+        // Cargar toda las texturas
+        cargarTexturas();
+
         Gdx.input.setInputProcessor(new ProcesadorEntrada());
 
 
@@ -45,12 +54,23 @@ public class PantallaConfiguracion implements Screen {
         viewport = new StretchViewport(MenuPrincipal.ANCHO,MenuPrincipal.ALTO,camera);
     }
 
+    private void cargarTexturas() {
+        texturaConfiguración = new Texture("Screenshot Fondo Configuracion.png");
+    }
+
+
     @Override
     public void render(float delta) {
+        /*
         Gdx.gl.glClearColor(1,1,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        */
         batch.setProjectionMatrix(camera.combined);
+
+        batch.begin();
+        // Dibujar elementos del juego.
+        batch.draw(texturaConfiguración,0 ,0);
+        batch.end();
 
     }
 

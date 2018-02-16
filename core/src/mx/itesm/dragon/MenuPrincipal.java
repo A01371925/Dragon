@@ -87,14 +87,14 @@ public class MenuPrincipal implements Screen {
 
         ImageButton btnConfig = new ImageButton(trdConfig,trdConfigTouch);
 
+        // Posición de los botones
+        botonDragon.setPosition((ANCHO / 2) - botonDragon.getWidth() / 2,ALTO * 0.15F);
 
-        botonDragon.setPosition((ANCHO / 2) - botonDragon.getWidth() / 2,(ALTO*0.291F));
+        btnPlay.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2,botonDragon.getHeight() * 0.53f );
 
-        btnPlay.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2,(ALTO / 2) - btnPlay.getHeight() / 2);
+        btnInfo.setPosition(ANCHO - btnInfo.getWidth()-10,ALTO - btnInfo.getHeight()-20);
 
-        btnInfo.setPosition(ANCHO - btnInfo.getWidth()-10,ALTO - btnInfo.getHeight()-20); // Falta ajustar la posición del botón
-
-        btnConfig.setPosition(ANCHO - btnConfig.getWidth()-20,btnConfig.getHeight()/4); // Falta ajustar la posición del botón
+        btnConfig.setPosition(ANCHO - btnConfig.getWidth()-20,btnConfig.getHeight()/4);
 
 
         btnPlay.addListener(new ClickListener(){
