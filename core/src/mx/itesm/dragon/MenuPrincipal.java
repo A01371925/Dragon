@@ -34,7 +34,7 @@ public class MenuPrincipal implements Screen {
     // Batch.
     private SpriteBatch batch;
 
-    // MUNDO.
+    // Mundo.
     public static final float ANCHO = 720;
     public static final float ALTO = 1280;
 
@@ -50,6 +50,7 @@ public class MenuPrincipal implements Screen {
     }
 
     private void crearMenu() {
+        texturaFondo = new Texture("FondoMenuPrincipal.png");
         stageMenu = new Stage(viewport);
 
 
@@ -87,7 +88,7 @@ public class MenuPrincipal implements Screen {
 
         ImageButton btnConfig = new ImageButton(trdConfig,trdConfigTouch);
 
-        // Posición de los botones
+        // Posición de los botones.
         botonDragon.setPosition((ANCHO / 2) - botonDragon.getWidth() / 2,ALTO * 0.15F);
 
         btnPlay.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2,botonDragon.getHeight() * 0.53f );
@@ -148,7 +149,7 @@ public class MenuPrincipal implements Screen {
     @Override
     public void render(float delta) {
 
-        texturaFondo = new Texture("FondoMenuPrincipal.png");
+
         batch.begin();
         batch.draw(texturaFondo,0,0);
         batch.end();
@@ -181,6 +182,7 @@ public class MenuPrincipal implements Screen {
 
     @Override
     public void dispose() {
+        texturaFondo.dispose();
 
     }
 }

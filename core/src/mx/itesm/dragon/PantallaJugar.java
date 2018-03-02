@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -34,7 +35,7 @@ public class PantallaJugar implements Screen {
     private Texture texturaDragon;
 
     // Objetos.
-    private  Dragon dragon;
+    private Dragon dragon;
 
     public PantallaJugar(Juego juego) {
         this.juego = juego;
@@ -57,6 +58,7 @@ public class PantallaJugar implements Screen {
     }
 
     private void crearObjetos() {
+
         dragon = new Dragon(texturaDragon,MenuPrincipal.ANCHO, 0);
     }
 
@@ -74,8 +76,8 @@ public class PantallaJugar implements Screen {
 
     @Override
     public void render(float delta) {
-        //Gdx.gl.glClearColor(1,0,0,1);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
@@ -83,14 +85,17 @@ public class PantallaJugar implements Screen {
             // Dibujar elementos del juego.
             batch.draw(texturaNivel,0 ,0);
             batch.draw(texturaDragon, MenuPrincipal.ANCHO * 0.3f, 0);
+
+            dragon.dibujar(batch);
         batch.end();
 
 
     }
 
+
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width,height);
     }
 
     @Override
@@ -113,7 +118,7 @@ public class PantallaJugar implements Screen {
 
     }
 
-    private class ProcesadorEntreada implements InputProcessor {
+    class ProcesadorEntreada implements InputProcessor {
 
         @Override
         public boolean keyDown(int keycode) {
@@ -132,8 +137,7 @@ public class PantallaJugar implements Screen {
 
         @Override
         public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-            juego.setScreen(new MenuPrincipal(juego));
-            return true;
+            return false;
         }
 
         @Override
@@ -143,7 +147,10 @@ public class PantallaJugar implements Screen {
 
         @Override
         public boolean touchDragged(int screenX, int screenY, int pointer) {
-            return false;
+            Vector3 v = new Vector3(screenX, screenY, 0);
+            camera.unproject(v);
+            dragon.sprite.setY(v.y);
+            return true; // Ya se procesó el evento
         }
 
         @Override
