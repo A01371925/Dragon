@@ -59,7 +59,7 @@ public class PantallaJugar implements Screen {
 
     private void crearObjetos() {
 
-        dragon = new Dragon(texturaDragon,MenuPrincipal.ANCHO, 0);
+        dragon = new Dragon(texturaDragon, MenuPrincipal.ANCHO * 0.3f, 0);
     }
 
     private void cargarTexturas() {
@@ -84,9 +84,9 @@ public class PantallaJugar implements Screen {
 
             // Dibujar elementos del juego.
             batch.draw(texturaNivel,0 ,0);
-            batch.draw(texturaDragon, MenuPrincipal.ANCHO * 0.3f, 0);
 
-            dragon.dibujar(batch);
+
+            dragon.sprite.draw(batch);
         batch.end();
 
 
@@ -149,7 +149,8 @@ public class PantallaJugar implements Screen {
         public boolean touchDragged(int screenX, int screenY, int pointer) {
             Vector3 v = new Vector3(screenX, screenY, 0);
             camera.unproject(v);
-            dragon.sprite.setY(v.y);
+            dragon.sprite.setX(v.x);
+            Gdx.app.log("touchDra", "y=" + v.y);
             return true; // Ya se procesó el evento
         }
 
