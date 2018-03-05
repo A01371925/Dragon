@@ -17,14 +17,14 @@ public class Fondo extends Objeto{
     }
 
 
-    public void mover(float dx) {
-        imagenA.setY(imagenA.getY() - dx);
-        imagenB.setY(imagenB.getY() - dx);
+    public void mover(float dy) {
+        imagenA.setY(imagenA.getY() - dy);
+        imagenB.setY(imagenB.getY() - dy);
 
         // Actualizar posiciones.
         if (imagenA.getY() <= -imagenA.getHeight()) {
             imagenA.setY(imagenB.getY() + imagenB.getHeight());
-        } if (imagenB.getY() <= -imagenB.getWidth()) {
+        } else if (imagenB.getY() <= -imagenB.getHeight()) {
             imagenB.setY(imagenA.getY() + imagenA.getHeight());
         }
     }

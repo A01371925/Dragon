@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Personaje;
@@ -16,8 +17,11 @@ public class PantallaJugar extends Pantalla {
     // Fondo.
     private Fondo fondo;
 
+    // Vector.
+    //private Vector3 v;
+
     // Objetos.
-    private Personaje personaje;
+    private Personaje dragon;
 
     public PantallaJugar(Juego juego) {
         this.juego = juego;
@@ -26,11 +30,12 @@ public class PantallaJugar extends Pantalla {
     @Override
     public void show() {
         fondo = new Fondo(new Texture("fondoNivel1.png"));
-        personaje = new Personaje(new Texture("Dragon.png"),ANCHO * 3f,0);
-        personaje.sprite.setPosition(ANCHO / 2 - personaje.sprite.getWidth() / 2, 0);
+        dragon = new Personaje(new Texture("Dragon.png"),ANCHO * 3f,0);
+        dragon.sprite.setPosition(ANCHO / 2 - dragon.sprite.getWidth() / 2, 0);
         // Indica quién escucha y atiende eventos.
         Gdx.input.setInputProcessor(new ProcesadorEntreada());
     }
+
 
     @Override
     public void render(float delta) {
@@ -38,33 +43,32 @@ public class PantallaJugar extends Pantalla {
         actualizarObjetos(delta);
         actualizarCamara();
         moverCamara();
-
         // DIBUJAR.
         borrarPantalla();
         batch.begin();
             // Dibujar elementos de la pantalla.
             fondo.render(batch);
-            personaje.render(batch);
+            dragon.render(batch);
         batch.end();
     }
 
     private void actualizarCamara() {
         // Depende de la posición del personaje. Siempre sigue al personaje
-        float posY = personaje.sprite.getY();
-        // Primera mitad de la pantalla
+        float posY = dragon.sprite.getY();
+        // Primera mitad de la pantalla.
         if (posY < ALTO/2 ) {
-            camara.position.set(ANCHO/2, ALTO/2, 0);
-        } else if (posY > ALTO_MAPA - ANCHO/2) {   // Última mitad de la pantalla
-            camara.position.set(camara.position.x,ALTO_MAPA-ANCHO/2,0);
-        } else {    // En 'medio' del mapa
-            camara.position.set(camara.position.x,posY,0);
-        }
+            camara.position.set(ANCHO / 2, ALTO / 2, 0);
+        } else if (posY > ALTO_MAPA - ANCHO / 2) {   // Última mitad de la pantalla
+            camara.position.set(camara.position.x,ALTO_MAPA - ANCHO/2,0);
+        } /*else if (posY < ALTO_MAPA - ANCHO / 2){    // En 'medio' del mapa
+            camara.position.set(camara.position.x, posY,0);
+        }*/
         camara.update();
     }
 
     private void actualizarObjetos(float delta) {
         fondo.mover(delta * 100);
-        personaje.sprite.setY(personaje.sprite.getY());
+        dragon.sprite.setY(dragon.sprite.getY());
     }
 
     @Override
@@ -101,7 +105,11 @@ public class PantallaJugar extends Pantalla {
 
         @Override
         public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-            return false;
+            /*Vector3 v = new Vector3(screenX,screenY,0);
+            camara.unproject(v);
+            dragon.sprite.setX(v.x - dragon.sprite.getWidth());
+            Gdx.app.log("touchDra", "x=" + v.x);*/
+            return false;// poner "x" inicial
         }
 
         @Override
@@ -113,8 +121,7 @@ public class PantallaJugar extends Pantalla {
         public boolean touchDragged(int screenX, int screenY, int pointer) {
             Vector3 v = new Vector3(screenX, screenY, 0);
             camara.unproject(v);
-            personaje.sprite.setX(v.x);
-            Gdx.app.log("touchDra", "x=" + v.x);
+            dragon.sprite.setX(v.x - dragon.sprite.getWidth() / 2);
             return true; // Ya se procesó el evento
         }
 
