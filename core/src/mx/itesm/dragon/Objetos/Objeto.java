@@ -1,4 +1,4 @@
-package mx.itesm.dragon;
+package mx.itesm.dragon.Objetos;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -11,12 +11,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Objeto {
     // Sprite que representa gráficamente el objeto
-    protected Sprite sprite;
+    public Sprite sprite;
 
+    public Objeto() {
+    }
     // Constructor para crear el objeto con cierta textura y posición
     public Objeto(Texture textura, float x, float y){
         sprite = new Sprite(textura);
         sprite.setPosition(x, y);
     }
-
 }
