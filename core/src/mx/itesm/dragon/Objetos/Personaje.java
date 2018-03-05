@@ -11,9 +11,6 @@ public class Personaje extends Objeto {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(sprite, sprite.getX(), sprite.getY());
+        sprite.draw(batch);
     }
-
-
-
 }

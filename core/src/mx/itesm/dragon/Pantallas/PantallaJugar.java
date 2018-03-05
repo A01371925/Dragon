@@ -27,6 +27,7 @@ public class PantallaJugar extends Pantalla {
     public void show() {
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         personaje = new Personaje(new Texture("Dragon.png"),ANCHO * 3f,0);
+        personaje.sprite.setPosition(ANCHO / 2 - personaje.sprite.getWidth() / 2, 0);
         // Indica quién escucha y atiende eventos.
         Gdx.input.setInputProcessor(new ProcesadorEntreada());
     }
@@ -63,7 +64,7 @@ public class PantallaJugar extends Pantalla {
 
     private void actualizarObjetos(float delta) {
         fondo.mover(delta * 100);
-        personaje.sprite.setY(personaje.sprite.getY() + 1);
+        personaje.sprite.setY(personaje.sprite.getY());
     }
 
     @Override
@@ -113,7 +114,6 @@ public class PantallaJugar extends Pantalla {
             Vector3 v = new Vector3(screenX, screenY, 0);
             camara.unproject(v);
             personaje.sprite.setX(v.x);
-            camara.update();
             Gdx.app.log("touchDra", "x=" + v.x);
             return true; // Ya se procesó el evento
         }
