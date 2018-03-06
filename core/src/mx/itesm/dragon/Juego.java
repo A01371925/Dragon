@@ -1,6 +1,8 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon;
 
 import com.badlogic.gdx.Game;
+
+import mx.itesm.dragon.Pantallas.PantallaMenuPrincipal;
 
 public class Juego extends Game{
 

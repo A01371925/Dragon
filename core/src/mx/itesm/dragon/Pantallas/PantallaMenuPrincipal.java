@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import mx.itesm.dragon.Juego;
 import mx.itesm.dragon.Objetos.Fondo;
 
 public class PantallaMenuPrincipal extends Pantalla  {

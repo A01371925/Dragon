@@ -3,7 +3,7 @@ package mx.itesm.dragon.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import mx.itesm.dragon.Pantallas.Juego;
+import mx.itesm.dragon.Juego;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Personaje extends Objeto {
 
-
     public Personaje(Texture textura, float x, float y) {
         super(textura, x, y);
     }

@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import mx.itesm.dragon.Objetos.Fondo;
+import mx.itesm.dragon.Juego;
 import mx.itesm.dragon.Objetos.Personaje;
+import mx.itesm.dragon.Objetos.Fondo;
 
 public class PantallaJugar extends Pantalla {
 
@@ -16,9 +16,6 @@ public class PantallaJugar extends Pantalla {
 
     // Fondo.
     private Fondo fondo;
-
-    // Vector.
-    //private Vector3 v;
 
     // Objetos.
     private Personaje dragon;
@@ -29,10 +26,13 @@ public class PantallaJugar extends Pantalla {
 
     @Override
     public void show() {
+        stageJuego();
+    }
+
+    private void stageJuego() {
+        // Creación de los botones a la Pantalla Acerca De.
         fondo = new Fondo(new Texture("fondoNivel1.png"));
-        dragon = new Personaje(new Texture("Dragon.png"),ANCHO * 3f,0);
-        dragon.sprite.setPosition(ANCHO / 2 - dragon.sprite.getWidth() / 2, 0);
-        // Indica quién escucha y atiende eventos.
+        dragon = new Personaje(new Texture("Dragon.png"),ANCHO * .3f,0);
         Gdx.input.setInputProcessor(new ProcesadorEntreada());
     }
 
@@ -49,6 +49,7 @@ public class PantallaJugar extends Pantalla {
             // Dibujar elementos de la pantalla.
             fondo.render(batch);
             dragon.render(batch);
+
         batch.end();
     }
 
@@ -83,10 +84,10 @@ public class PantallaJugar extends Pantalla {
 
     @Override
     public void dispose() {
-
     }
 
     class ProcesadorEntreada implements InputProcessor {
+
 
         @Override
         public boolean keyDown(int keycode) {
@@ -105,11 +106,7 @@ public class PantallaJugar extends Pantalla {
 
         @Override
         public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-            /*Vector3 v = new Vector3(screenX,screenY,0);
-            camara.unproject(v);
-            dragon.sprite.setX(v.x - dragon.sprite.getWidth());
-            Gdx.app.log("touchDra", "x=" + v.x);*/
-            return false;// poner "x" inicial
+            return false;
         }
 
         @Override
