@@ -44,6 +44,9 @@ public class PantallaJugar extends Pantalla {
     private void stageJuego() {
         // Creación de los botones a la Pantalla Acerca De.
         multiplexer = new InputMultiplexer();
+        fondo = new Fondo(new Texture("fondoNivel1.png"));
+        dragon = new Personaje(new Texture("Dragon.png"),ANCHO * .3f,0);
+        botonRegresar = new Boton(new Texture("BotonRegresar.png"), 0, 0);
 
         procesadorDragon = new InputAdapter() {
             @Override
@@ -51,21 +54,22 @@ public class PantallaJugar extends Pantalla {
                 Vector3 v = new Vector3(screenX, screenY, 0);
                 camara.unproject(v);
                 dragon.sprite.setX(v.x - dragon.sprite.getWidth() / 2);
-                return true; // Ya se procesó el evento
+                return true;
             }
         } ;
         processorPausa = new InputAdapter() {
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                juego.setScreen(new PantallaMenuPrincipal(juego));
+                Vector3 v = new Vector3(screenX, screenY, 0);
+                camara.unproject(v);
+                if (botonRegresar.sprite.getY() <= v.y && botonRegresar.sprite.getX() <= v.x) {
+                    juego.setScreen(new PantallaMenuPrincipal(juego));
+                }
                 return true;
             }
         };
         multiplexer.addProcessor(procesadorDragon);
         multiplexer.addProcessor(processorPausa);
-        fondo = new Fondo(new Texture("fondoNivel1.png"));
-        dragon = new Personaje(new Texture("Dragon.png"),ANCHO * .3f,0);
-        botonRegresar = new Boton(new Texture("BotonRegresar.png"), 0, ALTO -60);
         Gdx.input.setInputProcessor(multiplexer);
     }
 
@@ -103,6 +107,7 @@ public class PantallaJugar extends Pantalla {
     private void actualizarObjetos(float delta) {
         fondo.mover(delta * 100);
         dragon.sprite.setY(dragon.sprite.getY());
+        botonRegresar.sprite.setY(ALTO - botonRegresar.sprite.getHeight());
     }
 
     @Override
@@ -117,52 +122,5 @@ public class PantallaJugar extends Pantalla {
 
     @Override
     public void dispose() {
-    }
-
-    class ProcesadorEntreada implements InputProcessor {
-
-
-        @Override
-        public boolean keyDown(int keycode) {
-            return false;
-        }
-
-        @Override
-        public boolean keyUp(int keycode) {
-            return false;
-        }
-
-        @Override
-        public boolean keyTyped(char character) {
-            return false;
-        }
-
-        @Override
-        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-            return false;
-        }
-
-        @Override
-        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-            return false;
-        }
-
-        @Override
-        public boolean touchDragged(int screenX, int screenY, int pointer) {
-            Vector3 v = new Vector3(screenX, screenY, 0);
-            camara.unproject(v);
-            dragon.sprite.setX(v.x - dragon.sprite.getWidth() / 2);
-            return true; // Ya se procesó el evento
-        }
-
-        @Override
-        public boolean mouseMoved(int screenX, int screenY) {
-            return false;
-        }
-
-        @Override
-        public boolean scrolled(int amount) {
-            return false;
-        }
     }
 }
