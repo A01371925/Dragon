@@ -1,11 +1,14 @@
 package mx.itesm.dragon.Pantallas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import mx.itesm.dragon.Juego;
+import mx.itesm.dragon.Objetos.Boton;
+import mx.itesm.dragon.Objetos.Dibujo;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Personaje;
 import mx.itesm.dragon.Objetos.Fondo;
@@ -20,9 +23,14 @@ public class PantallaJugar extends Pantalla {
 
     // Objetos.
     private Personaje dragon;
+    private Boton botonRegresar;
 
     // Multiplexor.
     private InputMultiplexer multiplexer;
+
+    // InputProcessor.
+    private InputProcessor procesadorDragon;
+    private InputProcessor processorPausa;
 
     public PantallaJugar(Juego juego) {
         this.juego = juego;
@@ -36,9 +44,29 @@ public class PantallaJugar extends Pantalla {
     private void stageJuego() {
         // Creación de los botones a la Pantalla Acerca De.
         multiplexer = new InputMultiplexer();
+
+        procesadorDragon = new InputAdapter() {
+            @Override
+            public boolean touchDragged(int screenX, int screenY, int pointer) {
+                Vector3 v = new Vector3(screenX, screenY, 0);
+                camara.unproject(v);
+                dragon.sprite.setX(v.x - dragon.sprite.getWidth() / 2);
+                return true; // Ya se procesó el evento
+            }
+        } ;
+        processorPausa = new InputAdapter() {
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                juego.setScreen(new PantallaMenuPrincipal(juego));
+                return true;
+            }
+        };
+        multiplexer.addProcessor(procesadorDragon);
+        multiplexer.addProcessor(processorPausa);
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         dragon = new Personaje(new Texture("Dragon.png"),ANCHO * .3f,0);
-        Gdx.input.setInputProcessor(new ProcesadorEntreada());
+        botonRegresar = new Boton(new Texture("BotonRegresar.png"), 0, ALTO -60);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
 
@@ -54,6 +82,7 @@ public class PantallaJugar extends Pantalla {
             // Dibujar elementos de la pantalla.
             fondo.render(batch);
             dragon.render(batch);
+            botonRegresar.render(batch);
         batch.end();
     }
 

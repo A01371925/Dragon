@@ -1,19 +1,17 @@
 package mx.itesm.dragon.Objetos;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Personaje extends Dibujo {
+/**
+ * Created by LEDNR on 09/03/18.
+ */
+
+public class Boton extends Dibujo {
 
     private boolean active;
 
-    public Personaje() {
-
-    }
-
-    public Personaje(Texture textura, float x, float y) {
+    public Boton(Texture textura, float x, float y) {
         super(textura, x, y);
         this.active = false;
     }
