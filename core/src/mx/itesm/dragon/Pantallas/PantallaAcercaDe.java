@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import mx.itesm.dragon.Juego;
 import mx.itesm.dragon.Objetos.Fondo;
+import mx.itesm.dragon.Objetos.Pantalla;
 
 public class PantallaAcercaDe extends Pantalla {
 

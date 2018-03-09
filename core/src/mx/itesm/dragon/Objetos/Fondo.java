@@ -4,10 +4,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Fondo extends Objeto{
+public class Fondo extends Dibujo{
     private Sprite imagenA;
     private Sprite imagenB;
 
+    public Fondo() {
+    }
 
     public Fondo(Texture texture) {
         imagenA = new Sprite(texture);
@@ -16,6 +18,12 @@ public class Fondo extends Objeto{
         imagenB.setPosition(0,imagenA.getHeight());
     }
 
+    public Fondo(Texture texturaA, Texture texturaB) {
+        imagenA = new Sprite(texturaA);
+        imagenA.setPosition(0,0);
+        imagenB = new Sprite(texturaB);
+        imagenB.setPosition(0,imagenA.getHeight());
+    }
 
     public void mover(float dy) {
         imagenA.setY(imagenA.getY() - dy);

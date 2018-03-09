@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon.Objetos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public abstract class Pantalla implements Screen{
+public abstract class Pantalla extends Objeto implements Screen{
 
     // Dimensiones.
     public static final float ANCHO = 720;

@@ -1,11 +1,12 @@
 package mx.itesm.dragon.Pantallas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
-
 import mx.itesm.dragon.Juego;
+import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Personaje;
 import mx.itesm.dragon.Objetos.Fondo;
 
@@ -20,6 +21,9 @@ public class PantallaJugar extends Pantalla {
     // Objetos.
     private Personaje dragon;
 
+    // Multiplexor.
+    private InputMultiplexer multiplexer;
+
     public PantallaJugar(Juego juego) {
         this.juego = juego;
     }
@@ -31,6 +35,7 @@ public class PantallaJugar extends Pantalla {
 
     private void stageJuego() {
         // Creación de los botones a la Pantalla Acerca De.
+        multiplexer = new InputMultiplexer();
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         dragon = new Personaje(new Texture("Dragon.png"),ANCHO * .3f,0);
         Gdx.input.setInputProcessor(new ProcesadorEntreada());
@@ -49,7 +54,6 @@ public class PantallaJugar extends Pantalla {
             // Dibujar elementos de la pantalla.
             fondo.render(batch);
             dragon.render(batch);
-
         batch.end();
     }
 

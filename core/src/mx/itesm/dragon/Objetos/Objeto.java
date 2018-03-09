@@ -13,13 +13,30 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Objeto {
     // Sprite que representa gráficamente el objeto
-    public Sprite sprite;
+    private float x;
+    private float y;
 
     public Objeto() {
     }
-    // Constructor para crear el objeto con cierta textura y posición
-    public Objeto(Texture textura, float x, float y) {
-        sprite = new Sprite(textura);
-        sprite.setPosition(x, y);
+
+    public Objeto(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 }
