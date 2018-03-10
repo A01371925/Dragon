@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * Representa un objeto que forma parte del juego (pelota, raqueta, etc.)
  *
- * Created by jorge on 13/02/2018.
  */
 
 public class Objeto {

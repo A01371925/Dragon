@@ -1,10 +1,7 @@
 package mx.itesm.dragon.Objetos;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 
 public class Personaje extends Dibujo {
 
@@ -23,11 +20,4 @@ public class Personaje extends Dibujo {
         sprite.draw(batch);
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }
