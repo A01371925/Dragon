@@ -6,9 +6,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
+
+import mx.itesm.dragon.Estados.Estado;
+import mx.itesm.dragon.Estados.EstadoJuego;
 import mx.itesm.dragon.Juego;
 import mx.itesm.dragon.Objetos.Boton;
-import mx.itesm.dragon.Objetos.Dibujo;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Personaje;
 import mx.itesm.dragon.Objetos.Fondo;
@@ -17,6 +19,8 @@ public class PantallaJugar extends Pantalla {
 
     private static final float ALTO_MAPA = 2560;
     private final Juego juego;
+
+    private EstadoJuego estadoJuego;
 
     // Fondo.
     private Fondo fondo;
@@ -44,9 +48,11 @@ public class PantallaJugar extends Pantalla {
     private void stageJuego() {
         // Creación de los botones a la Pantalla Acerca De.
         multiplexer = new InputMultiplexer();
+        estadoJuego = new EstadoJuego();
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         dragon = new Personaje(new Texture("Dragon.png"),ANCHO * .3f,0);
         botonRegresar = new Boton(new Texture("BotonRegresar.png"), 0, 0);
+
 
         procesadorDragon = new InputAdapter() {
             @Override
@@ -120,15 +126,17 @@ public class PantallaJugar extends Pantalla {
 
     @Override
     public void pause() {
-
+        estadoJuego.setEstado(Estado.PAUSA);
     }
 
     @Override
     public void resume() {
-
+        estadoJuego.setEstado(Estado.JUGANDO);
     }
 
     @Override
     public void dispose() {
+
     }
+
 }
