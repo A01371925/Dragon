@@ -54,6 +54,14 @@ public class PantallaJugar extends Pantalla {
                 Vector3 v = new Vector3(screenX, screenY, 0);
                 camara.unproject(v);
                 dragon.sprite.setX(v.x - dragon.sprite.getWidth() / 2);
+                if (dragon.sprite.getY() <= ALTO / 3){
+                    dragon.sprite.setY(v.y - dragon.sprite.getHeight() / 1.5f);
+                }
+                if (dragon.sprite.getY() >= ALTO / 3){
+                    dragon.sprite.setY(ALTO / 3);
+                }
+
+
                 return true;
             }
         } ;
