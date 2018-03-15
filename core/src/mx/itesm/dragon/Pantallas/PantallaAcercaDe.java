@@ -23,7 +23,7 @@ public class PantallaAcercaDe extends Pantalla {
     // Fondo.
     private Fondo fondo;
 
-    public PantallaAcercaDe(Juego juego) {
+    PantallaAcercaDe(Juego juego) {
         this.juego = juego;
 
     }

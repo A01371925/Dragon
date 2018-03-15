@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public abstract class Pantalla extends Objeto implements Screen{
+public abstract class Pantalla implements Screen{
 
     // Dimensiones.
     public static final float ANCHO = 720;

@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
 import mx.itesm.dragon.Juego;
 import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
@@ -83,7 +82,7 @@ public class PantallaMenuPrincipal extends Pantalla {
                 super.clicked(event, x, y);
                 // Gdx.app.log("ClickedListener","Hizo click el usuario");
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new PantallaJugar(juego)); //
+                juego.setScreen(new PJP(juego));
             }
         });
 

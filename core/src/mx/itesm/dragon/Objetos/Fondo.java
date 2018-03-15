@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Fondo extends Dibujo{
+public class Fondo {
     private Sprite imagenA;
     private Sprite imagenB;
 
