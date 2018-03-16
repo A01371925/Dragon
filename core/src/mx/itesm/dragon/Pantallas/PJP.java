@@ -5,37 +5,40 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.AddAction;
-import com.badlogic.gdx.scenes.scene2d.actions.AddListenerAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import java.util.ArrayList;
+
 import mx.itesm.dragon.Juego;
 import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
+import mx.itesm.dragon.Objetos.Proyectil;
 
 
 public class PJP extends Pantalla {
 
     private final Juego juego;
 
+    private ArrayList<Proyectil> listaProyectil;
+
     private static final float ALTO_MAPA = 2560;
 
     private Stage stageJuego;
 
+    private Texture proyectil;
+
     private Fondo fondo;
 
     private Image dragon;
-
     private ImageButton btnRegresar;
 
     private InputMultiplexer multiplexer;
@@ -51,18 +54,17 @@ public class PJP extends Pantalla {
 
     private void cargarStage() {
         multiplexer = new InputMultiplexer();
+        listaProyectil = new ArrayList<Proyectil>();
         stageJuego = new Stage(vista);
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         btnRegresar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonRegresar.png"))));
         dragon = new Image(new Texture("Dragon.png"));
-        //fuego = new Image(new Texture("BolaFuego.png"));
-
+        proyectil = new Texture("BolaFuego.png");
 
         btnRegresar.setPosition(0,ALTO - btnRegresar.getHeight());
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
-
 
         btnRegresar.addListener(new ClickListener() {
             @Override
@@ -71,16 +73,20 @@ public class PJP extends Pantalla {
             }
         });
 
+
+
         dragon.addListener(new DragListener() {
+
+
+
             @Override
             public void touchDragged (InputEvent event, float x, float y, int pointer) {
+                listaProyectil.add(new Proyectil(proyectil, dragon.getX() + dragon.getWidth() / 2 - proyectil.getWidth() / 2, dragon.getY() + dragon.getHeight()));
                 // example code below for origin and position
                 Vector3 v = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
-
                 camara.unproject(v);
                 if (v.y <= ALTO - btnRegresar.getHeight() - dragon.getImageHeight() / 2) {
                     dragon.setPosition(v.x - dragon.getImageWidth() / 2, v.y - dragon.getImageHeight() / 2);
-
                 } else {
                     dragon.setX(v.x - dragon.getImageWidth() / 2);
                 }
@@ -89,10 +95,8 @@ public class PJP extends Pantalla {
 
 
 
-
         stageJuego.addActor(btnRegresar);
         stageJuego.addActor(dragon);
-        //stageJuego.addActor(proyectil);
 
         multiplexer.addProcessor(stageJuego);
 
@@ -107,7 +111,9 @@ public class PJP extends Pantalla {
         moverCamara();
         batch.begin();
             fondo.render(batch);
-
+            for (Proyectil p: listaProyectil) {
+                p.render(batch);
+            }
         batch.end();
         stageJuego.draw();
     }
@@ -127,7 +133,20 @@ public class PJP extends Pantalla {
     }
 
     private void actualizarObjetos(float delta) {
-        fondo.mover(delta * 100);
+        for (int i = 0; i < listaProyectil.size(); i++) {
+            listaProyectil.get(i).mover(delta);
+        }
+
+        for (int i = 0; i < listaProyectil.size(); i++) {
+            if (listaProyectil.get(i).sprite.getY() >= ALTO) {
+                listaProyectil.remove(i);
+            }
+        }
+
+        System.out.println(listaProyectil.size());
+
+        fondo.mover(delta);
+
     }
 
     @Override
@@ -143,16 +162,6 @@ public class PJP extends Pantalla {
     @Override
     public void dispose() {
         stageJuego.dispose();
+        proyectil.dispose();
     }
 }
-/*
-if (dragon.sprite.getY() <= ALTO / 3){
-                    dragon.sprite.setY(v.y - dragon.sprite.getHeight() / 1.5f);
-                }
-                if (dragon.sprite.getY() >= ALTO / 3){
-                    dragon.sprite.setY(ALTO / 3);
-                }
-
-
-                return true;
- */

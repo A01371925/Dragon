@@ -26,8 +26,8 @@ public class Fondo {
     }
 
     public void mover(float dy) {
-        imagenA.setY(imagenA.getY() - dy);
-        imagenB.setY(imagenB.getY() - dy);
+        imagenA.setY(imagenA.getY() - dy * 100);
+        imagenB.setY(imagenB.getY() - dy * 100);
 
         // Actualizar posiciones.
         if (imagenA.getY() <= -imagenA.getHeight()) {
