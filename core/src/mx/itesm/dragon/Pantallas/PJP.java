@@ -81,7 +81,6 @@ public class PJP extends Pantalla {
 
             @Override
             public void touchDragged (InputEvent event, float x, float y, int pointer) {
-                listaProyectil.add(new Proyectil(proyectil, dragon.getX() + dragon.getWidth() / 2 - proyectil.getWidth() / 2, dragon.getY() + dragon.getHeight()));
                 // example code below for origin and position
                 Vector3 v = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
                 camara.unproject(v);
@@ -111,7 +110,9 @@ public class PJP extends Pantalla {
         moverCamara();
         batch.begin();
             fondo.render(batch);
-            for (Proyectil p: listaProyectil) {
+            listaProyectil.add(new Proyectil(proyectil, dragon.getX() + dragon.getWidth() / 2 - proyectil.getWidth() / 2, dragon.getY() + dragon.getHeight()));
+
+        for (Proyectil p: listaProyectil) {
                 p.render(batch);
             }
         batch.end();
