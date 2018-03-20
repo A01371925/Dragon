@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Fondo {
+public class Fondo implements Actualizar{
     private Sprite imagenA;
     private Sprite imagenB;
 

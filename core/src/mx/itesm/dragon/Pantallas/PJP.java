@@ -31,7 +31,7 @@ public class PJP extends Pantalla {
     private final Juego juego;
 
     private static final float ALTO_MAPA = 2560;
-
+    private static final float HOLA = 1;
     private Stage stageJuego;
     private Stage stagePausa;
 
@@ -64,7 +64,7 @@ public class PJP extends Pantalla {
     }
 
     private void inicializacion() {
-        // INICIALIZACIÃ“N DE COMPONENTES.
+        // INICIALIZACIÓN DE COMPONENTES.
         multiplexer = new InputMultiplexer();
         listaProyectil = new ArrayList<Proyectil>();
         stageJuego = new Stage(vista);
@@ -77,12 +77,7 @@ public class PJP extends Pantalla {
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonRegresar.png"))));
         dragon = new Image(new Texture("Dragon.png"));
-
-
-
         trasparencia = new Image(new Texture("fondoNegro.jpg"));
-        trasparencia.setColor(1,1,1,0.04f);
-
         proyectil = new Texture("BolaFuego.png");
 
         // Se anexan las Escenas al Multiplexor.
@@ -92,8 +87,8 @@ public class PJP extends Pantalla {
     }
 
     public void setStagePausa() {
-
-        // PosisciÃ³n inicial de los elementos
+        trasparencia.setColor(0,0,0,0.05f);
+        // Posisción inicial de los elementos
         trasparencia.setPosition(0,0);
         btnReanudar.setPosition(0,ALTO - btnReanudar.getHeight() - btnReanudar.getHeight());
 
@@ -133,8 +128,6 @@ public class PJP extends Pantalla {
         // Se anexan los Actores a la Escena.
         stageJuego.addActor(btnPausa);
         stageJuego.addActor(dragon);
-
-
     }
 
     @Override
@@ -146,10 +139,10 @@ public class PJP extends Pantalla {
                 actualizarCamara();
                 moverCamara();
                 batch.begin();
-                fondo.render(batch);
-                for (Proyectil p: listaProyectil) {
-                    p.render(batch);
-                }
+                    fondo.render(batch);
+                    for (Proyectil p: listaProyectil) {
+                        p.render(batch);
+                    }
                 batch.end();
                 stageJuego.draw();
 
@@ -170,12 +163,12 @@ public class PJP extends Pantalla {
     }
 
     private void actualizarCamara() {
-        // Depende de la posiciÃ³n del personaje. Siempre sigue al personaje
+        // Depende de la posición del personaje. Siempre sigue al personaje
         float posY = dragon.getImageY();
         // Primera mitad de la pantalla.
         if (posY < ALTO/2 ) {
             camara.position.set(ANCHO / 2, ALTO / 2, 0);
-        } else if (posY > ALTO_MAPA - ANCHO / 2) {   // Ãšltima mitad de la pantalla
+        } else if (posY > ALTO_MAPA - ANCHO / 2) {   // Última mitad de la pantalla
             camara.position.set(camara.position.x,ALTO_MAPA - ANCHO/2,0);
         }
         camara.update();
