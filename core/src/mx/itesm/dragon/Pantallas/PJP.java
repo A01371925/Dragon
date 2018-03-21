@@ -24,6 +24,7 @@ import mx.itesm.dragon.Juego;
 import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Proyectil;
+import mx.itesm.dragon.Objetos.Texto;
 
 
 public class PJP extends Pantalla {
@@ -49,6 +50,12 @@ public class PJP extends Pantalla {
     private Estado estado;
 
     private InputMultiplexer multiplexer;
+
+    //Marcador
+    private int puntosJugador = 0;
+    private String letras = "Score";
+    private Texto puntos;  // Muestra los valores en pantalla
+    private Texto texto;
 
     public PJP(Juego juego) {
         this.juego = juego;
@@ -84,6 +91,12 @@ public class PJP extends Pantalla {
         multiplexer.addProcessor(stageJuego);
         multiplexer.addProcessor(stagePausa);
         Gdx.input.setInputProcessor(multiplexer);
+
+        // Objeto que dibuja al texto
+        puntos = new Texto();
+        texto = new Texto();
+
+
     }
 
     public void setStagePausa() {
@@ -139,16 +152,27 @@ public class PJP extends Pantalla {
                 actualizarCamara();
                 moverCamara();
                 batch.begin();
+                    puntosJugador += 10; // incrementa los puntos del jugagor conforme pasa el tiempo;
                     fondo.render(batch);
+
+                    //Marcador
+                    texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
+                    puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
+
+
                     for (Proyectil p: listaProyectil) {
                         p.render(batch);
                     }
                 batch.end();
                 stageJuego.draw();
 
+
+
                 if (btnPausa.isPressed()) {
                     estado = Estado.PAUSA;
                 }
+
+
 
                 break;
             case PAUSA:
@@ -160,6 +184,8 @@ public class PJP extends Pantalla {
                 }
                 break;
         }
+
+
     }
 
     private void actualizarCamara() {
@@ -187,6 +213,7 @@ public class PJP extends Pantalla {
             }
         }
         fondo.mover(delta);
+
     }
 
 
