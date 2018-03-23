@@ -37,9 +37,9 @@ public class PJP extends Pantalla {
     private ArrayList<Enemigos> listaEnemigos;
 
     private Fondo fondo;
+    private Fondo fondoPausa;
 
     private Image dragon;
-    private Image trasparencia;
     private ImageButton btnPausa;
     private ImageButton btnReanudar;
 
@@ -73,14 +73,15 @@ public class PJP extends Pantalla {
         stageJuego = new Stage(vista);
         stagePausa = new Stage(vista);
         fondo = new Fondo(new Texture("fondoNivel1.png"));
-        btnPausa = new ImageButton(
+        fondoPausa = new Fondo(new Texture("cuadro transp.png"));
+                btnPausa = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonRegresar.png"))));
         btnReanudar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonRegresar.png"))));
         dragon = new Image(new Texture("Dragon.png"));
-        trasparencia = new Image(new Texture("fondoNegro.jpg"));
+
         proyectil = new Texture("BolaFuego.png");
 
         // Se anexan las Escenas al Multiplexor.
@@ -96,13 +97,10 @@ public class PJP extends Pantalla {
     }
 
     public void setStagePausa() {
-        trasparencia.setColor(0,0,0,0.05f);
         // Posisción inicial de los elementos
-        trasparencia.setPosition(0,0);
         btnReanudar.setPosition(0,ALTO - btnReanudar.getHeight() - btnReanudar.getHeight());
 
         // Se anexan los Actores a la Escena.
-        stagePausa.addActor(trasparencia);
         stagePausa.addActor(btnReanudar);
 
     }
@@ -119,14 +117,12 @@ public class PJP extends Pantalla {
 
            @Override
            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-               final Vector3 V = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
-               // example code below for origin and position
-               final float DX = V.x - dragon.getX();
-               final float DY = V.y - dragon.getY();
+
+
                Vector3 v = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
                camara.unproject(v);
                if (v.y <= ALTO - btnPausa.getHeight() - dragon.getImageHeight() / 2) {
-                   dragon.setPosition(V.x - DX ,V.y - DY);
+                   dragon.setPosition(v.x - dragon.getWidth() / 2  ,v.y - dragon.getHeight() / 2);
                } else {
                    dragon.setX(v.x - dragon.getImageWidth() / 2);
                }
@@ -162,17 +158,13 @@ public class PJP extends Pantalla {
                 batch.end();
                 stageJuego.draw();
 
-
-
                 if (btnPausa.isPressed()) {
                     estado = Estado.PAUSA;
                 }
-
-
-
                 break;
             case PAUSA:
                 batch.begin();
+                    fondoPausa.render(batch);
                 batch.end();
                 stagePausa.draw();
                 if (btnReanudar.isPressed()) {
