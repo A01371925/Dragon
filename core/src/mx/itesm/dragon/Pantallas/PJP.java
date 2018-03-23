@@ -5,15 +5,10 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
@@ -21,6 +16,7 @@ import java.util.ArrayList;
 
 import mx.itesm.dragon.Estados.Estado;
 import mx.itesm.dragon.Juego;
+import mx.itesm.dragon.Objetos.Enemigos;
 import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Proyectil;
@@ -32,13 +28,13 @@ public class PJP extends Pantalla {
     private final Juego juego;
 
     private static final float ALTO_MAPA = 2560;
-    private static final float HOLA = 1;
     private Stage stageJuego;
     private Stage stagePausa;
 
     private Texture proyectil;
 
     private ArrayList<Proyectil> listaProyectil;
+    private ArrayList<Enemigos> listaEnemigos;
 
     private Fondo fondo;
 
@@ -105,17 +101,10 @@ public class PJP extends Pantalla {
         trasparencia.setPosition(0,0);
         btnReanudar.setPosition(0,ALTO - btnReanudar.getHeight() - btnReanudar.getHeight());
 
-        btnReanudar.addListener(new ClickListener() {
-            @Override
-            public boolean isPressed() {
-
-                return false;
-            }
-        });
-
         // Se anexan los Actores a la Escena.
         stagePausa.addActor(trasparencia);
         stagePausa.addActor(btnReanudar);
+
     }
 
     public void setStageJuego() {
@@ -125,23 +114,30 @@ public class PJP extends Pantalla {
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
 
         dragon.addListener(new DragListener() {
-            @Override
-            public void touchDragged (InputEvent event, float x, float y, int pointer) {
-                // example code below for origin and position
-                Vector3 v = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
-                camara.unproject(v);
-                if (v.y <= ALTO - btnPausa.getHeight() - dragon.getImageHeight() / 2) {
-                    dragon.setPosition(v.x - dragon.getImageWidth() / 2, v.y - dragon.getImageHeight() / 2);
-                } else {
-                    dragon.setX(v.x - dragon.getImageWidth() / 2);
-                }
-            }
+
+
+
+           @Override
+           public void touchDragged(InputEvent event, float x, float y, int pointer) {
+               final Vector3 V = new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
+               // example code below for origin and position
+               final float DX = V.x - dragon.getX();
+               final float DY = V.y - dragon.getY();
+               Vector3 v = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+               camara.unproject(v);
+               if (v.y <= ALTO - btnPausa.getHeight() - dragon.getImageHeight() / 2) {
+                   dragon.setPosition(V.x - DX ,V.y - DY);
+               } else {
+                   dragon.setX(v.x - dragon.getImageWidth() / 2);
+               }
+           }
         });
 
         // Se anexan los Actores a la Escena.
         stageJuego.addActor(btnPausa);
         stageJuego.addActor(dragon);
     }
+
 
     @Override
     public void render(float delta) {
