@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Timer;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class PJP extends Pantalla {
     private final Juego juego;
 
     private static final float ALTO_MAPA = 2560;
+    private float timer;
     private Stage stageJuego;
     private Stage stagePausa;
 
@@ -68,6 +70,7 @@ public class PJP extends Pantalla {
 
     private void inicializacion() {
         // INICIALIZACIÓN DE COMPONENTES.
+        timer = 0;
         multiplexer = new InputMultiplexer();
         listaProyectil = new ArrayList<Proyectil>();
         stageJuego = new Stage(vista);
@@ -155,6 +158,9 @@ public class PJP extends Pantalla {
                     for (Proyectil p: listaProyectil) {
                         p.render(batch);
                     }
+
+
+
                 batch.end();
                 stageJuego.draw();
 
@@ -189,10 +195,15 @@ public class PJP extends Pantalla {
     }
 
     private void actualizarObjetos(float delta) {
-        listaProyectil.add(new Proyectil(proyectil, dragon.getX() + dragon.getWidth() / 2 - proyectil.getWidth() / 2, dragon.getY() + dragon.getHeight()));
+        timer += delta;
+        if (timer >= 1){
+            listaProyectil.add(new Proyectil(proyectil, dragon.getX() + dragon.getWidth() / 2 - proyectil.getWidth() / 2, dragon.getY() + dragon.getHeight()));
+            timer = 0;
+        }
+
 
         for (int i = 0; i < listaProyectil.size(); i++) {
-            listaProyectil.get(i).mover(delta - 10);
+            listaProyectil.get(i).mover();
         }
 
         for (int i = 0; i < listaProyectil.size(); i++) {
