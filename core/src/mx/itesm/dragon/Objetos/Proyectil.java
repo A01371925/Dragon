@@ -41,8 +41,4 @@ public class Proyectil implements Actualizar{
     public Sprite getSprite() {
         return sprite;
     }
-
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
-    }
 }

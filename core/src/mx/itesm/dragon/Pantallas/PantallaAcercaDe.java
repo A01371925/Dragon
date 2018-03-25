@@ -91,7 +91,6 @@ public class PantallaAcercaDe extends Pantalla {
         stageAcercaDe.addActor(btnJorge);
         stageAcercaDe.addActor(btnLuis);
         stageAcercaDe.addActor(btnMarco);
-
         // Indica quién escucha y atiende eventos.
         Gdx.input.setInputProcessor(stageAcercaDe);
     }
@@ -121,5 +120,6 @@ public class PantallaAcercaDe extends Pantalla {
     @Override
     public void dispose() {
         stageAcercaDe.dispose();
+        batch.dispose();
     }
 }

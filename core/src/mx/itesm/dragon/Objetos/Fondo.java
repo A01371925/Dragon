@@ -3,8 +3,9 @@ package mx.itesm.dragon.Objetos;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Fondo implements Actualizar{
+public class Fondo extends Actor implements Actualizar{
     private Sprite imagenA;
     private Sprite imagenB;
 

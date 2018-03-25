@@ -10,16 +10,25 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 
 public class Texto {
+
     private BitmapFont font;
+    private GlyphLayout glyph;
 
     public Texto(){
         font = new BitmapFont(Gdx.files.internal("fuenteScore.fnt"));
+        glyph = new GlyphLayout();
     }
 
     public void mostrarMensaje(SpriteBatch batch, String mensaje, float x, float y){
-        GlyphLayout glyph = new GlyphLayout();
         glyph.setText(font, mensaje);
-        float anchoTexto =  glyph.width;
-        font.draw(batch, glyph, x-anchoTexto/2, y);
+        font.draw(batch, glyph, x - glyph.width / 2, y);
+    }
+
+    public BitmapFont getFont() {
+        return font;
+    }
+
+    public GlyphLayout getGlyph() {
+        return glyph;
     }
 }

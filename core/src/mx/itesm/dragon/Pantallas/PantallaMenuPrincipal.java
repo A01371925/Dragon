@@ -139,6 +139,7 @@ public class PantallaMenuPrincipal extends Pantalla {
     @Override
     public void dispose() {
         stageMenu.dispose();
+        batch.dispose();
     }
 }
 

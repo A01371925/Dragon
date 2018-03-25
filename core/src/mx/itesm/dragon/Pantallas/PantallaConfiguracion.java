@@ -123,5 +123,6 @@ public class PantallaConfiguracion extends Pantalla {
     @Override
     public void dispose() {
         stageConfiguracion.dispose();
+        batch.dispose();
     }
 }

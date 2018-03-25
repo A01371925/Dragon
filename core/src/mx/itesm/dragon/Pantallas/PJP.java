@@ -26,6 +26,15 @@ import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Proyectil;
 import mx.itesm.dragon.Objetos.Texto;
 
+import static com.badlogic.gdx.graphics.g2d.Batch.X1;
+import static com.badlogic.gdx.graphics.g2d.Batch.X2;
+import static com.badlogic.gdx.graphics.g2d.Batch.X3;
+import static com.badlogic.gdx.graphics.g2d.Batch.X4;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y1;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y2;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y3;
+import static com.badlogic.gdx.graphics.g2d.Batch.Y4;
+
 
 public class PJP extends Pantalla {
 
@@ -130,18 +139,18 @@ public class PJP extends Pantalla {
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
 
         dragon.addListener(new DragListener() {
-           @Override
-           public void touchDragged(InputEvent event, float x, float y, int pointer) {
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
 
 
-               Vector3 v = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-               camara.unproject(v);
-               if (v.y <= ALTO - btnPausa.getHeight() - dragon.getImageHeight() / 2) {
-                   dragon.setPosition(v.x - dragon.getWidth() / 2  ,v.y - dragon.getHeight() / 2);
-               } else {
-                   dragon.setX(v.x - dragon.getImageWidth() / 2);
-               }
-           }
+                Vector3 v = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+                camara.unproject(v);
+                if (v.y <= ALTO - btnPausa.getHeight() - dragon.getImageHeight() / 2) {
+                    dragon.setPosition(v.x - dragon.getWidth() / 2  ,v.y - dragon.getHeight() / 2);
+                } else {
+                    dragon.setX(v.x - dragon.getImageWidth() / 2);
+                }
+            }
         });
 
         // Se anexan los Actores a la Escena.
@@ -159,20 +168,21 @@ public class PJP extends Pantalla {
                 actualizarCamara();
                 moverCamara();
                 batch.begin();
-                    puntosJugador += 10; // incrementa los puntos del jugagor conforme pasa el tiempo;
-                    fondo.render(batch);
+                puntosJugador += 10; // incrementa los puntos del jugagor conforme pasa el tiempo;
+                fondo.render(batch);
 
-                    //Marcador
-                    texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
-                    puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
 
-                    for (Proyectil p: listaProyectil) {
-                        p.render(batch);
-                    }
+                //Marcador
+                texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
 
-                    for (Enemigos e: listaFlechas) {
-                        e.render(batch);
-                    }
+                for (Proyectil p: listaProyectil) {
+                    p.render(batch);
+                }
+
+                for (Enemigos e: listaFlechas) {
+                    e.render(batch);
+                }
                 batch.end();
                 stageJuego.draw();
 
@@ -182,7 +192,7 @@ public class PJP extends Pantalla {
                 break;
             case PAUSA:
                 batch.begin();
-                    fondoPausa.render(batch);
+                fondoPausa.render(batch);
                 batch.end();
                 stagePausa.draw();
                 if (btnReanudar.isPressed()) {
@@ -227,6 +237,15 @@ public class PJP extends Pantalla {
                     listaFlechas.remove(flechas);
                     break;
                 }
+            }
+        }
+        for (int i = 0; i < listaFlechas.size(); i++) {
+            Enemigos flechas = listaFlechas.get(i);
+            Rectangle rectDragon = new Rectangle(dragon.getX(),dragon.getY(),dragon.getWidth(),dragon.getHeight());
+            Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
+            if (rectDragon.overlaps(rectFlechas)) {
+                listaFlechas.remove(i);
+                break;
             }
         }
     }
