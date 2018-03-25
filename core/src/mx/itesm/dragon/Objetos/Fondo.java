@@ -41,4 +41,9 @@ public class Fondo implements Actualizar{
         imagenA.draw(batch);
         imagenB.draw(batch);
     }
+
+    @Override
+    public void mover() {
+
+    }
 }

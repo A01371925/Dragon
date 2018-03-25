@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Proyectil implements Actualizar{
 
-    public Sprite sprite;
-    private static final int SPEED = 50;
+    private Sprite sprite;
+    private static final int SPEED = 20;
 
     public Proyectil() {
         sprite = new Sprite();
@@ -29,12 +29,20 @@ public class Proyectil implements Actualizar{
     }
 
     @Override
-    public void mover(float dy) {
+    public void mover(float delta) {
 
     }
 
-
+    @Override
     public void mover() {
-            sprite.setY(sprite.getY()  + SPEED);
+            sprite.setY(sprite.getY() + SPEED);
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
     }
 }
