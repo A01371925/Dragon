@@ -1,6 +1,8 @@
 package mx.itesm.dragon.Pantallas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -23,6 +25,10 @@ public class PantallaConfiguracion extends Pantalla {
     // Fondo.
     private Fondo fondo;
 
+    // Musica de fondo
+    private Music musica_f;
+    private Sound regresar;
+
     PantallaConfiguracion(Juego juego) {
         this.juego = juego;
     }
@@ -43,7 +49,14 @@ public class PantallaConfiguracion extends Pantalla {
                         new TextureRegion(
                                 new Texture("BotonRegresar.png"))));
 
+        musica_f = Gdx.audio.newMusic(Gdx.files.internal("Kevin MacLeod _ Bumbly March_preconfig.mp3"));
+        regresar = Gdx.audio.newSound(Gdx.files.internal("regresar.wav"));
+
+        musica_f.setVolume(1);
+        musica_f.play();
+        musica_f.setLooping(true);
         /* TODO INCORPORAR LAS TEXTURAS DE LOS BOTONTES DE EFECTOS Y MUSICA.
+
         ImageButton btnSFX = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -64,6 +77,7 @@ public class PantallaConfiguracion extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                regresar.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
                 juego.setScreen(new PantallaMenuPrincipal(juego));
             }
@@ -124,5 +138,7 @@ public class PantallaConfiguracion extends Pantalla {
     public void dispose() {
         stageConfiguracion.dispose();
         batch.dispose();
+        musica_f.dispose();
+        regresar.dispose();
     }
 }

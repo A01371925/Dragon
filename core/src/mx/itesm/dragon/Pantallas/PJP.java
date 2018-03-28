@@ -2,6 +2,8 @@ package mx.itesm.dragon.Pantallas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -67,6 +69,14 @@ public class PJP extends Pantalla {
 
     private InputMultiplexer multiplexer;
 
+    private Music musica_f;
+    private Sound colision;
+    private Sound impacto;
+    private Sound fuego;
+    private Sound flecha_s;
+    private Sound reanudar;
+    private Sound pausa;
+
     // Marcador.
     private int puntosJugador = 0;
     private String letras = "Score";
@@ -94,6 +104,19 @@ public class PJP extends Pantalla {
         listaProyectil = new ArrayList<Proyectil>();
         listaFlechas = new ArrayList<Enemigos>();
         random = new Random();
+
+        // Musica
+        musica_f = Gdx.audio.newMusic(Gdx.files.internal("Hyrule Field - The Legend of Zelda Twilight Princess.mp3"));
+        flecha_s = Gdx.audio.newSound(Gdx.files.internal("flecha.wav"));
+        colision = Gdx.audio.newSound(Gdx.files.internal("colision.wav"));
+        fuego = Gdx.audio.newSound(Gdx.files.internal("fuego.wav"));
+        pausa = Gdx.audio.newSound(Gdx.files.internal("pausa.wav"));
+        reanudar = Gdx.audio.newSound(Gdx.files.internal("reanudar.wav"));
+        impacto = Gdx.audio.newSound(Gdx.files.internal("impacto.wav"));
+
+        musica_f.setVolume(.5f);
+        musica_f.play();
+        musica_f.setLooping(true);
 
         // Objeto que dibuja al texto
         puntos = new Texto();
@@ -168,7 +191,7 @@ public class PJP extends Pantalla {
                 actualizarCamara();
                 moverCamara();
                 batch.begin();
-                puntosJugador += 10; // incrementa los puntos del jugagor conforme pasa el tiempo;
+                puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
                 fondo.render(batch);
 
 
@@ -177,16 +200,19 @@ public class PJP extends Pantalla {
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
 
                 for (Proyectil p: listaProyectil) {
+                    //fuego.play();
                     p.render(batch);
                 }
 
                 for (Enemigos e: listaFlechas) {
+                    //flecha_s.play();
                     e.render(batch);
                 }
                 batch.end();
                 stageJuego.draw();
 
                 if (btnPausa.isPressed()) {
+                    pausa.play();
                     estado = Estado.PAUSA;
                 }
                 break;
@@ -196,6 +222,7 @@ public class PJP extends Pantalla {
                 batch.end();
                 stagePausa.draw();
                 if (btnReanudar.isPressed()) {
+                    reanudar.play();
                     estado = Estado.JUGANDO;
                 }
                 break;
@@ -233,6 +260,7 @@ public class PJP extends Pantalla {
                 Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
                 Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
                 if (rectProyectil.overlaps(rectFlechas)) {
+                    colision.play();
                     listaProyectil.remove(proyectil);
                     listaFlechas.remove(flechas);
                     break;
@@ -244,6 +272,7 @@ public class PJP extends Pantalla {
             Rectangle rectDragon = new Rectangle(dragon.getX(),dragon.getY(),dragon.getWidth(),dragon.getHeight());
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
+                impacto.play();
                 listaFlechas.remove(i);
                 break;
             }
@@ -301,5 +330,13 @@ public class PJP extends Pantalla {
         stageJuego.dispose();
         stagePausa.dispose();
         proyectil.dispose();
+        musica_f.dispose();
+        flecha_s.dispose();
+        colision.dispose();
+        fuego.dispose();
+        pausa.dispose();
+        reanudar.dispose();
+        impacto.dispose();
+
     }
 }

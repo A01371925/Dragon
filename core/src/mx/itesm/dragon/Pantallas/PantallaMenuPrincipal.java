@@ -1,6 +1,8 @@
 package mx.itesm.dragon.Pantallas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -21,6 +23,14 @@ public class PantallaMenuPrincipal extends Pantalla {
     // Fondo.
     private Fondo fondo;
 
+    // Musica de fondo
+    private Music musica_f;
+
+    // Efectos de sonido
+    private Sound jugar;
+    private Sound config;
+    private Sound acerca;
+
     public PantallaMenuPrincipal(Juego juego) {
         this.juego = juego;
     }
@@ -35,6 +45,17 @@ public class PantallaMenuPrincipal extends Pantalla {
 
         // Creacion del fondo.
         fondo = new Fondo(new Texture("FondoMenuPrincipal.png"));
+
+        // Creacion de la musica de fondo y efectos de sonido
+        musica_f = Gdx.audio.newMusic(Gdx.files.internal("premenu.mp3"));
+        jugar = Gdx.audio.newSound(Gdx.files.internal("jugar.wav"));
+        config = Gdx.audio.newSound(Gdx.files.internal("config.wav"));
+        acerca = Gdx.audio.newSound(Gdx.files.internal("acerca.wav"));
+
+        // Reproduccion de la musica de fondo
+        musica_f.setVolume(1);
+        musica_f.play();
+        musica_f.setLooping(true);
 
         // Creación de los botones del menú.
         ImageButton imgDragon = new ImageButton(
@@ -80,6 +101,8 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                jugar.play();
+                //jugar.stop();
                 // Gdx.app.log("ClickedListener","Hizo click el usuario");
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
                 juego.setScreen(new PJP(juego));
@@ -90,6 +113,8 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                acerca.play();
+                //acerca.stop();
                 // Gdx.app.log("ClickedListener","Hizo click el usuario");
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
                 juego.setScreen(new PantallaAcercaDe(juego));
@@ -101,6 +126,8 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                config.play();
+                //config.stop();
                 juego.setScreen(new PantallaConfiguracion(juego));
             }
         });
@@ -140,6 +167,10 @@ public class PantallaMenuPrincipal extends Pantalla {
     public void dispose() {
         stageMenu.dispose();
         batch.dispose();
+        musica_f.dispose();
+        acerca.dispose();
+        jugar.dispose();
+        config.dispose();
     }
 }
 

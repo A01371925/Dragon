@@ -1,6 +1,8 @@
 package mx.itesm.dragon.Pantallas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -23,6 +25,10 @@ public class PantallaAcercaDe extends Pantalla {
     // Fondo.
     private Fondo fondo;
 
+    // Musica de fondo y sonidos
+    private Music musica_f;
+    private Sound regresar;
+
     PantallaAcercaDe(Juego juego) {
         this.juego = juego;
 
@@ -37,6 +43,14 @@ public class PantallaAcercaDe extends Pantalla {
         // Creación escena Acerca De.
         stageAcercaDe = new Stage(vista);
         fondo = new Fondo(new Texture("FondoAcercaDe.png"));
+
+        // Creacion de musica y sonido
+        musica_f =  Gdx.audio.newMusic(Gdx.files.internal("preacerca.mp3"));
+        regresar =  Gdx.audio.newSound(Gdx.files.internal("regresar.wav"));
+
+        musica_f.setVolume(1);
+        musica_f.play();
+        musica_f.setLooping(true);
 
         // Creación de los botones a la Pantalla Acerca De.
         ImageButton btnRegresar = new ImageButton(
@@ -77,6 +91,7 @@ public class PantallaAcercaDe extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                regresar.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
                 juego.setScreen(new PantallaMenuPrincipal(juego));
             }
@@ -121,5 +136,7 @@ public class PantallaAcercaDe extends Pantalla {
     public void dispose() {
         stageAcercaDe.dispose();
         batch.dispose();
+        musica_f.dispose();
+        regresar.dispose();
     }
 }
