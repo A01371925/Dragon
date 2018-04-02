@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Timer;
@@ -167,6 +168,12 @@ public class PJP extends Pantalla {
         btnReanudar.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 2);
         btnMusica.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 3.5f);
 
+        btnMenu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                juego.setScreen(new PantallaMenuPrincipal(juego));
+            }
+        });
 
         // Se anexan los Actores a la Escena.
         stagePausa.addActor(btnMenu);
