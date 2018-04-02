@@ -163,7 +163,7 @@ public class PJP extends Pantalla {
 
     private void setStagePausa() {
         // Posisción inicial de los elementos
-        btnMenu.setPosition(ANCHO/3 - 10,ALTO/ 8);
+        btnMenu.setPosition(ANCHO/3 - 10,ALTO / 8);
         btnReanudar.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 2);
         btnMusica.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 3.5f);
 
@@ -235,8 +235,6 @@ public class PJP extends Pantalla {
                     pausa.play();
                     estado = Estado.PAUSA;
                 }
-                if (btnMenu.isPressed()){
-                    juego.setScreen(new PantallaMenuPrincipal(juego));}
                 break;
             case PAUSA:
                 batch.begin();
