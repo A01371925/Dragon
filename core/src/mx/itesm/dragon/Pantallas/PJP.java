@@ -64,6 +64,8 @@ public class PJP extends Pantalla {
     private Image dragon;
     private ImageButton btnPausa;
     private ImageButton btnReanudar;
+    private ImageButton btnMusica;
+    private ImageButton btnMenu;
 
     private Estado estado;
 
@@ -125,13 +127,25 @@ public class PJP extends Pantalla {
         stageJuego = new Stage(vista);
         stagePausa = new Stage(vista);
         fondo = new Fondo(new Texture("fondoNivel1.png"));
+        //Pausa
         fondoPausa = new Fondo(new Texture("cuadro transp.png"));
         btnPausa = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonRegresar.png"))));
         btnReanudar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonRegresar.png"))));
+                        new Texture("BotonReanudar1.png"))),
+                new TextureRegionDrawable(new TextureRegion(
+                        new Texture("BotonReanudar2.png"))));
+        btnMusica = new ImageButton(
+                new TextureRegionDrawable(new TextureRegion(
+                        new Texture("BotonMusica1.png"))),
+                new TextureRegionDrawable(new TextureRegion(
+                        new Texture("BotonMusica2.png"))));
+        btnMenu = new ImageButton(
+                new TextureRegionDrawable(new TextureRegion(
+                        new Texture("BotonMenu1.png"))));
+
         dragon = new Image(new Sprite(new Texture("Dragon.png")));
 
         proyectil = new Texture("BolaFuego.png");
@@ -149,10 +163,16 @@ public class PJP extends Pantalla {
 
     private void setStagePausa() {
         // Posisción inicial de los elementos
-        btnReanudar.setPosition(0,ALTO - btnReanudar.getHeight() - btnReanudar.getHeight());
+        btnMenu.setPosition(ANCHO/3 - 10,ALTO/ 8);
+        btnReanudar.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 2);
+        btnMusica.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 3.5f);
+
 
         // Se anexan los Actores a la Escena.
+        stagePausa.addActor(btnMenu);
+        stagePausa.addActor(btnMusica);
         stagePausa.addActor(btnReanudar);
+
 
     }
 
@@ -215,6 +235,8 @@ public class PJP extends Pantalla {
                     pausa.play();
                     estado = Estado.PAUSA;
                 }
+                if (btnMenu.isPressed()){
+                    juego.setScreen(new PantallaMenuPrincipal(juego));}
                 break;
             case PAUSA:
                 batch.begin();
@@ -225,6 +247,11 @@ public class PJP extends Pantalla {
                     reanudar.play();
                     estado = Estado.JUGANDO;
                 }
+                if (btnMenu.isPressed()){
+                    juego.setScreen(new PantallaMenuPrincipal(juego));
+
+                }
+
                 break;
         }
     }

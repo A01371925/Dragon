@@ -39,6 +39,11 @@ public abstract class Pantalla implements Screen{
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
+    // Borra la pantalla con el color RGB (r,g,b)
+    protected void borrarPantalla(float r, float g, float b) {
+        Gdx.gl.glClearColor(r,g,b,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
 
     protected void moverCamara() {
         camara.translate(0,1);

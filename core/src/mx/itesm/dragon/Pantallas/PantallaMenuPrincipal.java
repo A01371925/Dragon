@@ -50,7 +50,7 @@ public class PantallaMenuPrincipal extends Pantalla {
         musica_f = Gdx.audio.newMusic(Gdx.files.internal("premenu.mp3"));
         jugar = Gdx.audio.newSound(Gdx.files.internal("jugar.wav"));
         config = Gdx.audio.newSound(Gdx.files.internal("config.wav"));
-        acerca = Gdx.audio.newSound(Gdx.files.internal("acerca.wav"));
+        acerca = Gdx.audio.newSound(Gdx.files.internal("config.wav"));
 
         // Reproduccion de la musica de fondo
         musica_f.setVolume(1);
@@ -105,7 +105,7 @@ public class PantallaMenuPrincipal extends Pantalla {
                 //jugar.stop();
                 // Gdx.app.log("ClickedListener","Hizo click el usuario");
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new PJP(juego));
+                juego.setScreen(new PantallaCargando(juego));
             }
         });
 

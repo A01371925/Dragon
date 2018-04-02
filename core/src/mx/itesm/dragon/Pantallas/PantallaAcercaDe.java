@@ -97,7 +97,7 @@ public class PantallaAcercaDe extends Pantalla {
             }
         });
 
-        //TODO FALTA HABILITAR LOS BOTONES CON SU RESPECTIVA DESCRIPCION.
+        // TODO FALTA HABILITAR LOS BOTONES CON SU RESPECTIVA DESCRIPCION.
 
         // Se agregan elementos a la Pantalla Acerca De.
         stageAcercaDe.addActor(btnRegresar);
