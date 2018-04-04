@@ -188,13 +188,15 @@ public class PJP extends Pantalla {
                 juego.setScreen(new PantallaMenuPrincipal(juego));
             }
         });
-
+        stagePausa.addActor(btnReanudar);
+        stagePausa.addActor(btnMusica);
+        stagePausa.addActor(btnSFX);
+        stagePausa.addActor(btnMenu);
     }
 
     private void setStageJuego() {
         // Posisción inicial de los elementos
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
-
         drake.setPosition(ANCHO / 2 - drake.getWidth() / 2, 0);
 
         drake.addListener(new DragListener() {
@@ -220,63 +222,54 @@ public class PJP extends Pantalla {
 
         switch (estado) {
             case JUGANDO:
-                stageJuego.addActor(btnPausa);
-                drake.act(delta);
-                btnMenu.setPosition(1000,0); // El actor sigue presente pero en una posiciín inaccesible
-                //reanudar.play();
                 actualizarObjetos(delta);
-                actualizarCamara();
-                moverCamara();
+                stagePausa.unfocusAll();
                 batch.begin();
-                puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
-                fondo.render(batch);
+                    puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
+                    fondo.render(batch);
+                    //Marcador
+                    texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
+                    puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
 
+                    for (Proyectil p: listaProyectil) {
+                        //fuego.play();
+                        p.render(batch);
+                    }
 
-                //Marcador
-                texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
-                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
-
-                for (Proyectil p: listaProyectil) {
-                    //fuego.play();
-                    p.render(batch);
-                }
-
-                for (Enemigos e: listaFlechas) {
-                    //flecha_s.play();
-                    e.render(batch);
-                }
+                    for (Enemigos e: listaFlechas) {
+                        //flecha_s.play();
+                        e.render(batch);
+                    }
                 batch.end();
-                stageJuego.draw();
-
                 if (btnPausa.isPressed()) {
                     pausa.play();
                     estado = Estado.PAUSA;
                 }
+                stageJuego.draw();
                 break;
             case PAUSA:
-
-
-                stagePausa.addActor(btnMenu);
-                stagePausa.addActor(btnMusica);
-                stagePausa.addActor(btnReanudar);
-                stagePausa.addActor(btnSFX);
-
-                setStagePausa();
                 batch.begin();
-                fondoPausa.render(batch);
+                    fondoPausa.render(batch);
                 batch.end();
                 stagePausa.draw();
                 if (btnReanudar.isPressed()) {
                     reanudar.play();
                     estado = Estado.JUGANDO;
                 }
-                if (btnMenu.isPressed()){
-                    juego.setScreen(new PantallaMenuPrincipal(juego));
-
-                }
-
+                stagePausa.draw();
                 break;
         }
+    }
+
+
+
+    private void actualizarObjetos(float delta) {
+        actualizarFondo(delta);
+        actualizarProyectiles(delta);
+        actualizarEnemigos(delta);
+        actualizarColisiones(delta);
+        actualizarPersonaje(delta);
+        actualizarCamara();
     }
 
     private void actualizarCamara() {
@@ -289,13 +282,11 @@ public class PJP extends Pantalla {
             camara.position.set(camara.position.x,ALTO_MAPA - ANCHO/2,0);
         }
         camara.update();
+        moverCamara();
     }
 
-    private void actualizarObjetos(float delta) {
-        actualizarFondo(delta);
-        actualizarProyectiles(delta);
-        actualizarEnemigos(delta);
-        actualizarColisiones(delta);
+    private void actualizarPersonaje(float delta) {
+        drake.act(delta);
     }
 
     private void actualizarFondo(float delta) {
@@ -389,7 +380,5 @@ public class PJP extends Pantalla {
         pausa.dispose();
         reanudar.dispose();
         impacto.dispose();
-
-
     }
 }
