@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Dragon {
 
     private static final int TILEWIDTH = 384;
-
-
     private static final int TILEHEIGHT = 202;
 
     private Sprite dragon;
