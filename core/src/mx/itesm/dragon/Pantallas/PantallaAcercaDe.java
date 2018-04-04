@@ -56,15 +56,18 @@ public class PantallaAcercaDe extends Pantalla {
         ImageButton btnRegresar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonRegresar.png"))));
+                                new Texture("BotonRegresar.png"))),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonRegresar2.png"))));
         ImageButton btnAna = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de Charlotte.png"))));
+                                new Texture("Boton Acerca de Ana.png"))));
         ImageButton btnCharlotte = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de Ana.png"))));
+                                new Texture("Boton Acerca de Charlotte.png"))));
         ImageButton btnJorge = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -79,12 +82,12 @@ public class PantallaAcercaDe extends Pantalla {
                                 new Texture("Boton Acerca de Marco.png"))));
 
         // Posición de los botones.
-        btnRegresar.setPosition(0,ALTO - btnRegresar.getHeight());
-        btnAna.setPosition(220,400);
-        btnCharlotte.setPosition(220,800);
-        btnJorge.setPosition(120,200);
-        btnLuis.setPosition(120,1000);
-        btnMarco.setPosition(120,600);
+        btnLuis.setPosition(85,900);
+        btnCharlotte.setPosition(350,650);
+        btnJorge.setPosition(85,400); //120,200
+        btnAna.setPosition(350,200); //220,400
+        btnMarco.setPosition(85,50); //120,600
+        btnRegresar.setPosition(ANCHO - btnRegresar.getWidth() - 20,20);
 
         // Detecta si el usuario hace click en algún actor.
         btnRegresar.addListener(new ClickListener() {
@@ -106,6 +109,7 @@ public class PantallaAcercaDe extends Pantalla {
         stageAcercaDe.addActor(btnJorge);
         stageAcercaDe.addActor(btnLuis);
         stageAcercaDe.addActor(btnMarco);
+
         // Indica quién escucha y atiende eventos.
         Gdx.input.setInputProcessor(stageAcercaDe);
     }

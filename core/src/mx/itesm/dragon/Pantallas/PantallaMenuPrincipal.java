@@ -44,7 +44,7 @@ public class PantallaMenuPrincipal extends Pantalla {
         stageMenu = new Stage(vista);
 
         // Creacion del fondo.
-        fondo = new Fondo(new Texture("FondoMenuPrincipal.png"));
+        fondo = new Fondo(new Texture("FondoMenuPrincipal.jpg"));
 
         // Creacion de la musica de fondo y efectos de sonido
         musica_f = Gdx.audio.newMusic(Gdx.files.internal("premenu.mp3"));

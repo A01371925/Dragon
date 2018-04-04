@@ -47,7 +47,31 @@ public class PantallaConfiguracion extends Pantalla {
         ImageButton btnRegresar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonRegresar.png"))));
+                                new Texture("BotonRegresar.png"))),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonRegresar2.png"))));
+        ImageButton btnSFX = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("Boton SFX.png"))),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("Boton SFX Presionado.png"))));
+        ImageButton btnMusic = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonMusica1.png"))),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonMusica2.png"))));
+        ImageButton btnReset = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonReset.png"))),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonResetPresionado.png"))));
 
         musica_f = Gdx.audio.newMusic(Gdx.files.internal("Kevin MacLeod _ Bumbly March_preconfig.mp3"));
         regresar = Gdx.audio.newSound(Gdx.files.internal("regresar.wav"));
@@ -55,22 +79,13 @@ public class PantallaConfiguracion extends Pantalla {
         musica_f.setVolume(1);
         musica_f.play();
         musica_f.setLooping(true);
-        /* TODO INCORPORAR LAS TEXTURAS DE LOS BOTONTES DE EFECTOS Y MUSICA.
 
-        ImageButton btnSFX = new ImageButton(
-                new TextureRegionDrawable(
-                        new TextureRegion(
-                                new Texture(""))));
-        ImageButton btnMusic = new ImageButton(
-                new TextureRegionDrawable(
-                        new TextureRegion(
-                                new Texture(""))));
-        */
 
         // Posición de los botones.
-        btnRegresar.setPosition(0,ALTO - btnRegresar.getHeight());
-        // TODO btnSFX.setPosition(); POR DEFINIR.
-        // TODO btnMusic.setPosition(); POR DEFINIR.
+        btnReset.setPosition(ANCHO / 2 - btnReset.getWidth() / 2, ALTO / 2 + btnReset.getHeight() / 2);
+        btnRegresar.setPosition(ANCHO - btnRegresar.getWidth() - 20,20);
+        btnMusic.setPosition(40, ALTO / 3.5f);
+        btnSFX.setPosition(ANCHO - btnSFX.getWidth() * 1.3f, btnMusic.getY());
 
         // Detecta si el usuario hace click en algún actor.
         btnRegresar.addListener(new ClickListener() {
@@ -83,7 +98,7 @@ public class PantallaConfiguracion extends Pantalla {
             }
         });
 
-        /* TODO FALTA HABILITAR LOS BOTONES DE EFECTOS Y MUSICA.
+
         btnSFX.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -98,15 +113,22 @@ public class PantallaConfiguracion extends Pantalla {
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
             }
         });
-        */
+
+        btnReset.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
+            }
+        });
 
         // Se agregan elementos a la Pantalla Configuración.
         stageConfiguracion.addActor(btnRegresar);
-
-        /* TODO DESCOMENTE SOLO CUANDO SE TENGA LA POSICION Y TEXTURA DEL BOTON.
         stageConfiguracion.addActor(btnSFX);
         stageConfiguracion.addActor(btnMusic);
-        */
+        stageConfiguracion.addActor(btnMusic);
+        stageConfiguracion.addActor(btnReset);
+
 
         // Indica quién escucha y atiende eventos.
         Gdx.input.setInputProcessor(stageConfiguracion);

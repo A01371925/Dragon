@@ -67,6 +67,7 @@ public class PJP extends Pantalla {
     private ImageButton btnReanudar;
     private ImageButton btnMusica;
     private ImageButton btnMenu;
+    private ImageButton btnSFX;
 
     private Estado estado;
 
@@ -95,7 +96,7 @@ public class PJP extends Pantalla {
     public void show() {
         borrarPantalla();
         inicializacion();
-        setStagePausa();
+        //setStagePausa();
         setStageJuego();
     }
 
@@ -129,10 +130,10 @@ public class PJP extends Pantalla {
         stagePausa = new Stage(vista);
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         //Pausa
-        fondoPausa = new Fondo(new Texture("cuadro transp.png"));
+        fondoPausa = new Fondo(new Texture("FondoPausa.png"));
         btnPausa = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonRegresar.png"))));
+                        new Texture("BotonPausa.png"))));
         btnReanudar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonReanudar1.png"))),
@@ -143,6 +144,13 @@ public class PJP extends Pantalla {
                         new Texture("BotonMusica1.png"))),
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonMusica2.png"))));
+        btnSFX = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("Boton SFX.png"))),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("Boton SFX Presionado.png"))));
         btnMenu = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonMenu1.png"))));
@@ -164,9 +172,10 @@ public class PJP extends Pantalla {
 
     private void setStagePausa() {
         // Posisción inicial de los elementos
-        btnMenu.setPosition(ANCHO/3 - 10,ALTO / 8);
-        btnReanudar.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 2);
-        btnMusica.setPosition(ANCHO/3,ALTO - btnReanudar.getHeight() * 3.5f);
+        btnReanudar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f);
+        btnMusica.setPosition(ANCHO / 8,btnReanudar.getY() - 300);
+        btnSFX.setPosition(btnMusica.getX() + 330, btnMusica.getY());
+        btnMenu.setPosition(ANCHO / 3,ALTO / 6);
 
         btnMenu.addListener(new ClickListener(){
             @Override
@@ -174,12 +183,6 @@ public class PJP extends Pantalla {
                 juego.setScreen(new PantallaMenuPrincipal(juego));
             }
         });
-
-        // Se anexan los Actores a la Escena.
-        stagePausa.addActor(btnMenu);
-        stagePausa.addActor(btnMusica);
-        stagePausa.addActor(btnReanudar);
-
 
     }
 
@@ -214,6 +217,9 @@ public class PJP extends Pantalla {
 
         switch (estado) {
             case JUGANDO:
+                stageJuego.addActor(btnPausa);
+                btnMenu.setPosition(1000,0); // El actor sigue presente pero en una posiciín inaccesible
+                //reanudar.play();
                 actualizarObjetos(delta);
                 actualizarCamara();
                 moverCamara();
@@ -244,6 +250,14 @@ public class PJP extends Pantalla {
                 }
                 break;
             case PAUSA:
+
+
+                stagePausa.addActor(btnMenu);
+                stagePausa.addActor(btnMusica);
+                stagePausa.addActor(btnReanudar);
+                stagePausa.addActor(btnSFX);
+
+                setStagePausa();
                 batch.begin();
                 fondoPausa.render(batch);
                 batch.end();
@@ -347,6 +361,8 @@ public class PJP extends Pantalla {
         }
     }
 
+
+
     @Override
     public void pause() {
         estado = Estado.PAUSA;
@@ -369,6 +385,7 @@ public class PJP extends Pantalla {
         pausa.dispose();
         reanudar.dispose();
         impacto.dispose();
+
 
     }
 }
