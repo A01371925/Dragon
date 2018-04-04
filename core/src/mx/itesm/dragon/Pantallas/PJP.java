@@ -310,7 +310,7 @@ public class PJP extends Pantalla {
         }
         for (int i = 0; i < listaFlechas.size(); i++) {
             Enemigos flechas = listaFlechas.get(i);
-            Rectangle rectDragon = new Rectangle(drake.getX(),drake.getY(),drake.getWidth(),drake.getHeight());
+            Rectangle rectDragon = new Rectangle(drake.getX(),drake.getY(),drake.getWidth(),drake.getHeight() * 3 / 4);
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
                 impacto.play();
