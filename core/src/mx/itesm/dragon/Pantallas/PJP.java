@@ -23,6 +23,8 @@ import java.util.Random;
 
 import mx.itesm.dragon.Estados.Estado;
 import mx.itesm.dragon.Juego;
+import mx.itesm.dragon.Objetos.AnimatedImage;
+import mx.itesm.dragon.Objetos.Dragon;
 import mx.itesm.dragon.Objetos.Enemigos;
 import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
@@ -61,8 +63,9 @@ public class PJP extends Pantalla {
 
     private Fondo fondo;
     private Fondo fondoPausa;
+    private Dragon dragonAnimado;
 
-    private Image dragon;
+    private AnimatedImage drake;
     private ImageButton btnPausa;
     private ImageButton btnReanudar;
     private ImageButton btnMusica;
@@ -96,12 +99,15 @@ public class PJP extends Pantalla {
     public void show() {
         borrarPantalla();
         inicializacion();
-        //setStagePausa();
+        setStagePausa();
         setStageJuego();
     }
 
     private void inicializacion() {
         // INICIALIZACIÓN DE COMPONENTES.
+        stageJuego = new Stage(vista);
+        stagePausa = new Stage(vista);
+
         timerProyectil = 0;
         timerFlecha = 0;
         multiplexer = new InputMultiplexer();
@@ -127,8 +133,10 @@ public class PJP extends Pantalla {
         puntos = new Texto();
         texto = new Texto();
 
-        stageJuego = new Stage(vista);
-        stagePausa = new Stage(vista);
+        dragonAnimado = new Dragon(new Texture("framesDragon.png"),0,0);
+        drake = new AnimatedImage(dragonAnimado.animacion());
+
+
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         //Pausa
         fondoPausa = new Fondo(new Texture("FondoPausa.png"));
@@ -156,7 +164,7 @@ public class PJP extends Pantalla {
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonMenu1.png"))));
 
-        dragon = new Image(new Sprite(new Texture("Dragon.png")));
+
 
         proyectil = new Texture("BolaFuego.png");
         flecha = new Texture("Flecha.png");
@@ -165,10 +173,6 @@ public class PJP extends Pantalla {
         multiplexer.addProcessor(stageJuego);
         multiplexer.addProcessor(stagePausa);
         Gdx.input.setInputProcessor(multiplexer);
-
-
-
-
     }
 
     private void setStagePausa() {
@@ -190,26 +194,24 @@ public class PJP extends Pantalla {
     private void setStageJuego() {
         // Posisción inicial de los elementos
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
-        dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
 
-        dragon.addListener(new DragListener() {
+        drake.setPosition(ANCHO / 2 - drake.getWidth() / 2, 0);
+
+        drake.addListener(new DragListener() {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
-
-
                 Vector3 v = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
                 camara.unproject(v);
-                if (v.y <= ALTO - btnPausa.getHeight() - dragon.getImageHeight() / 2) {
-                    dragon.setPosition(v.x - dragon.getWidth() / 2  ,v.y - dragon.getHeight() / 2);
+                if (v.y <= ALTO - btnPausa.getHeight() - drake.getImageHeight() / 2) {
+                    drake.setPosition(v.x - drake.getWidth() / 2  ,v.y - drake.getHeight() / 2);
                 } else {
-                    dragon.setX(v.x - dragon.getImageWidth() / 2);
+                    drake.setX(v.x - drake.getImageWidth() / 2);
                 }
             }
         });
-
         // Se anexan los Actores a la Escena.
         stageJuego.addActor(btnPausa);
-        stageJuego.addActor(dragon);
+        stageJuego.addActor(drake);
     }
 
 
@@ -219,6 +221,7 @@ public class PJP extends Pantalla {
         switch (estado) {
             case JUGANDO:
                 stageJuego.addActor(btnPausa);
+                drake.act(delta);
                 btnMenu.setPosition(1000,0); // El actor sigue presente pero en una posiciín inaccesible
                 //reanudar.play();
                 actualizarObjetos(delta);
@@ -278,7 +281,7 @@ public class PJP extends Pantalla {
 
     private void actualizarCamara() {
         // Depende de la posición del personaje. Siempre sigue al personaje
-        float y = dragon.getImageY();
+        float y = drake.getImageY();
         // Primera mitad de la pantalla.
         if (y < ALTO/2 ) {
             camara.position.set(ANCHO / 2, ALTO / 2, 0);
@@ -316,7 +319,7 @@ public class PJP extends Pantalla {
         }
         for (int i = 0; i < listaFlechas.size(); i++) {
             Enemigos flechas = listaFlechas.get(i);
-            Rectangle rectDragon = new Rectangle(dragon.getX(),dragon.getY(),dragon.getWidth(),dragon.getHeight());
+            Rectangle rectDragon = new Rectangle(drake.getX(),drake.getY(),drake.getWidth(),drake.getHeight());
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
                 impacto.play();
@@ -349,7 +352,7 @@ public class PJP extends Pantalla {
     private void actualizarProyectiles(float delta) {
         timerProyectil += delta;
         if (timerProyectil >= .150f){
-            listaProyectil.add(new Proyectil(proyectil, dragon.getX() + dragon.getWidth() / 2 - proyectil.getWidth() / 2, dragon.getY() + dragon.getHeight()));
+            listaProyectil.add(new Proyectil(proyectil, drake.getX() + drake.getWidth() / 2 - proyectil.getWidth() / 2, drake.getY() + drake.getHeight()));
             timerProyectil = 0;
         }
         for (int i = 0; i < listaProyectil.size(); i++) {

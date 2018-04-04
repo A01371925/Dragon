@@ -40,8 +40,4 @@ public class Enemigos implements Actualizar{
     public Sprite getSprite() {
         return sprite;
     }
-
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
-    }
 }

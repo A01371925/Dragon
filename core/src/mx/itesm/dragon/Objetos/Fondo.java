@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Fondo extends Actor implements Actualizar{
+public class Fondo implements Actualizar{
     private Sprite imagenA;
     private Sprite imagenB;
 
