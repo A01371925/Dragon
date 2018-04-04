@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
@@ -27,8 +28,7 @@ import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Proyectil;
 import mx.itesm.dragon.Objetos.Texto;
-
-
+import mx.itesm.dragon.Objetos.Vida;
 
 public class PJP extends Pantalla {
 
@@ -52,9 +52,12 @@ public class PJP extends Pantalla {
 
     private Fondo fondo;
     private Fondo fondoPausa;
+    private Vida vida;
     private Dragon dragonAnimado;
 
     private AnimatedImage dragon;
+    private Image barraVida;
+    private Image v1,v2,v3,v4;
     private ImageButton btnPausa;
     private ImageButton btnReanudar;
     private ImageButton btnMusica;
@@ -119,9 +122,7 @@ public class PJP extends Pantalla {
     private void initPausa() {
         stagePausa = new Stage(vista);
         fondoPausa = new Fondo(new Texture("FondoPausa.png"));
-        btnPausa = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(
-                        new Texture("botonPausa.png"))));
+
         btnReanudar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonReanudar1.png"))),
@@ -154,6 +155,7 @@ public class PJP extends Pantalla {
         multiplexer = new InputMultiplexer();
         listaProyectil = new ArrayList<Proyectil>();
         listaFlechas = new ArrayList<Enemigos>();
+        vida = new Vida();
         random = new Random();
 
         // Objeto que dibuja al texto
@@ -161,7 +163,16 @@ public class PJP extends Pantalla {
         puntos = new Texto();
         texto = new Texto();
 
-        dragonAnimado = new Dragon(new Texture("framesDragon.png"),0,0);
+        barraVida = new Image(new Texture("barraVida.png"));
+        v1 = new Image(new Texture("Vida.png"));
+        v2 = new Image(new Texture("Vida.png"));
+        v3 = new Image(new Texture("Vida.png"));
+        v4 = new Image(new Texture("Vida.png"));
+        btnPausa = new ImageButton(
+                new TextureRegionDrawable(new TextureRegion(
+                        new Texture("botonPausa.png"))));
+
+        dragonAnimado = new Dragon("framesDragon.png");
         dragon = new AnimatedImage(dragonAnimado.animacion());
 
         fondo = new Fondo(new Texture("fondoNivel1.png"));
@@ -194,7 +205,12 @@ public class PJP extends Pantalla {
     private void setStageJuego() {
         // Posisción inicial de los elementos
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
+        barraVida.setPosition( ANCHO / 2 - barraVida.getWidth() / 2, ALTO - barraVida.getHeight() - barraVida.getHeight() / 2);
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
+        v1.setPosition(barraVida.getX(),barraVida.getY());
+        v2.setPosition(barraVida.getX() + v1.getWidth() + 8, barraVida.getY());
+        v3.setPosition(v2.getX() + v2.getWidth() + 8, barraVida.getY());
+        v4.setPosition(v3.getX() + v3.getWidth() + 8, barraVida.getY());
 
         dragon.addListener(new DragListener() {
             @Override
@@ -210,6 +226,11 @@ public class PJP extends Pantalla {
         });
         // Se anexan los Actores a la Escena.
         stageJuego.addActor(btnPausa);
+        stageJuego.addActor(barraVida);
+        stageJuego.addActor(v1);
+        stageJuego.addActor(v2);
+        stageJuego.addActor(v3);
+        stageJuego.addActor(v4);
         stageJuego.addActor(dragon);
     }
 
@@ -306,10 +327,28 @@ public class PJP extends Pantalla {
         }
         for (int i = 0; i < listaFlechas.size(); i++) {
             Enemigos flechas = listaFlechas.get(i);
-            Rectangle rectDragon = new Rectangle(dragon.getX(),dragon.getY(),dragon.getWidth(),dragon.getHeight() * 3 / 4);
+            Rectangle rectDragon = new Rectangle(dragon.getX() + dragon.getWidth() / 4,dragon.getY(),dragon.getWidth() - 1 / 2,dragon.getHeight() / 2);
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
                 impacto.play();
+                switch (vida.getVidas()) {
+                    case 1:
+                        vida.setVidas(vida.getVidas() - 1);
+                        v1.setVisible(false);
+                        break;
+                    case 2:
+                        vida.setVidas(vida.getVidas() - 1);
+                        v2.setVisible(false);
+                        break;
+                    case 3:
+                        vida.setVidas(vida.getVidas() - 1);
+                        v3.setVisible(false);
+                        break;
+                    case 4:
+                        vida.setVidas(vida.getVidas() - 1);
+                        v4.setVisible(false);
+                        break;
+                }
                 listaFlechas.remove(i);
                 break;
             }
@@ -319,16 +358,13 @@ public class PJP extends Pantalla {
     private void actualizarEnemigos(float delta) {
         timerFlecha += delta;
         int randomX = random.nextInt((int) ANCHO - flecha.getWidth());
-
         if (timerFlecha >= .75f) {
             listaFlechas.add(new Enemigos(flecha, randomX, ALTO));
             timerFlecha = 0;
         }
-
         for (int i = 0; i < listaFlechas.size(); i++) {
             listaFlechas.get(i).mover();
         }
-
         for (int i = 0; i < listaFlechas.size(); i++) {
             if (listaFlechas.get(i).getSprite().getHeight() <= 0) {
                 listaFlechas.remove(i);
