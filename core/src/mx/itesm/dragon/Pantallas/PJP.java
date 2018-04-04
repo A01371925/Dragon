@@ -118,6 +118,7 @@ public class PJP extends Pantalla {
         reanudar = Gdx.audio.newSound(Gdx.files.internal("reanudar.wav"));
         impacto = Gdx.audio.newSound(Gdx.files.internal("impacto.wav"));
 
+        // Reproducir música de fondo
         musica_f.setVolume(.5f);
         musica_f.play();
         musica_f.setLooping(true);
@@ -133,7 +134,7 @@ public class PJP extends Pantalla {
         fondoPausa = new Fondo(new Texture("FondoPausa.png"));
         btnPausa = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonPausa.png"))));
+                        new Texture("botonPausa.png"))));
         btnReanudar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonReanudar1.png"))),
