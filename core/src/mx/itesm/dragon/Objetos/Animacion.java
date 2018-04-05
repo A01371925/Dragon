@@ -9,7 +9,7 @@ public class Animacion {
 
     private Texture textura;
     private TextureRegion[] frames;
-    private Animation animacion;
+    private Animation<TextureRegion> animacion;
     private int tileWidth, tileHeight, textureRegion;
     private float speed;
 
@@ -21,13 +21,13 @@ public class Animacion {
         this.speed = speed;
     }
 
-    public Animation animacion() {
+    public Animation<TextureRegion> animacion() {
         TextureRegion[][] tmp = TextureRegion.split(textura, tileWidth, tileHeight);
         frames = new TextureRegion[textureRegion];
         for (int i = 0; i < frames.length; i++) {
             frames[i] = tmp[0][i];
         }
-        animacion = new Animation(speed, frames);
+        animacion = new Animation<TextureRegion>(speed, frames);
         return animacion;
     }
 }
