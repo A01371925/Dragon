@@ -331,7 +331,7 @@ public class PJP extends Pantalla {
                     estado = Estado.PAUSA;
                 }
                 stageJuego.draw();
-                if(vida.getVidas() == 2){
+                if(vida.getVidas() == 0){
                     estado = Estado.PERDER;
                 }
                 break;
@@ -497,8 +497,6 @@ public class PJP extends Pantalla {
         pausa.dispose();
         reanudar.dispose();
         impacto.dispose();
-        if (vida.getVidas() == 0) {
-            stageJuego.dispose();
-        }
+
     }
 }
