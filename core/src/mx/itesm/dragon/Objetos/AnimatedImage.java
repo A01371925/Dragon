@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class AnimatedImage extends Image {
+
     protected Animation animation = null;
     private float stateTime = 0;
 

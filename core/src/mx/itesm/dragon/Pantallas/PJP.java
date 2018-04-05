@@ -242,21 +242,21 @@ public class PJP extends Pantalla {
                 actualizarObjetos(delta);
                 stagePausa.unfocusAll();
                 batch.begin();
-                    puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
-                    fondo.render(batch);
-                    //Marcador
-                    texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
-                    puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
+                puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
+                fondo.render(batch);
+                //Marcador
+                texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
 
-                    for (Proyectil p: listaProyectil) {
-                        //fuego.play();
-                        p.render(batch);
-                    }
+                for (Proyectil p: listaProyectil) {
+                    //fuego.play();
+                    p.render(batch);
+                }
 
-                    for (Enemigos e: listaFlechas) {
-                        //flecha_s.play();
-                        e.render(batch);
-                    }
+                for (Enemigos e: listaFlechas) {
+                    //flecha_s.play();
+                    e.render(batch);
+                }
                 batch.end();
                 if (btnPausa.isPressed()) {
                     pausa.play();
@@ -266,7 +266,7 @@ public class PJP extends Pantalla {
                 break;
             case PAUSA:
                 batch.begin();
-                    fondoPausa.render(batch);
+                fondoPausa.render(batch);
                 batch.end();
                 stagePausa.draw();
                 if (btnReanudar.isPressed()) {

@@ -40,7 +40,7 @@ public class Proyectil {
     }
 
     public void mover() {
-            sprite.setY(sprite.getY() + SPEED);
+        sprite.setY(sprite.getY() + SPEED);
     }
 
     public void animacion() {
