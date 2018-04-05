@@ -13,6 +13,7 @@ public class Texto {
 
     private BitmapFont font;
     private GlyphLayout glyph;
+    private String mensaje;
 
     public Texto(){
         font = new BitmapFont(Gdx.files.internal("fuenteScore.fnt"));
@@ -21,7 +22,9 @@ public class Texto {
 
     public void mostrarMensaje(SpriteBatch batch, String mensaje, float x, float y){
         glyph.setText(font, mensaje);
+        this.mensaje = mensaje;
         font.draw(batch, glyph, x - glyph.width / 2, y);
+
     }
 
     public BitmapFont getFont() {
@@ -31,4 +34,6 @@ public class Texto {
     public GlyphLayout getGlyph() {
         return glyph;
     }
+
+
 }

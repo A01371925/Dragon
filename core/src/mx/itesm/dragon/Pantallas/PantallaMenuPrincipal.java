@@ -74,10 +74,10 @@ public class PantallaMenuPrincipal extends Pantalla {
         ImageButton btnInfo = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de 1.png"))),
+                                new Texture("Boton Acerca de 2.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de 2.png"))));
+                                new Texture("Boton Acerca de 1.png"))));
 
         ImageButton btnConfig = new ImageButton(
                 new TextureRegionDrawable(

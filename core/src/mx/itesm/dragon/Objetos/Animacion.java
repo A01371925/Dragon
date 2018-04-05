@@ -27,7 +27,7 @@ public class Animacion {
         for (int i = 0; i < frames.length; i++) {
             frames[i] = tmp[0][i];
         }
-        animacion = new Animation<>(speed, frames);
+        animacion = new Animation(speed, frames);
         return animacion;
     }
 }
