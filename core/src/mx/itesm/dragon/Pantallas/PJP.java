@@ -594,7 +594,5 @@ public class PJP extends Pantalla {
         pausa.dispose();
         reanudar.dispose();
         impacto.dispose();
-
-
     }
 }
