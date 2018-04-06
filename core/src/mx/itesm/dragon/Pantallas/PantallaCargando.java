@@ -2,7 +2,12 @@ package mx.itesm.dragon.Pantallas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+
 import mx.itesm.dragon.Juego;
+import mx.itesm.dragon.Objetos.AnimatedImage;
+import mx.itesm.dragon.Objetos.Dragon;
+import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
 
 /**
@@ -13,7 +18,11 @@ class PantallaCargando extends Pantalla
 {
     private Juego juego;
     private float tiempo;   // Tiempo transcurrido
-    private Texture texturaReloj;   // Imagen que se muestra
+
+    private Stage stage;
+    private Dragon framesDragon;
+    private Fondo fondo;
+    private AnimatedImage dragon;
 
     public PantallaCargando(Juego juego) {
         this.juego = juego;
@@ -22,24 +31,28 @@ class PantallaCargando extends Pantalla
     // Se ejecuta cuando esta pantalla es la principal del juego
     @Override
     public void show() {
+        stage = new Stage(vista);
+        fondo = new Fondo(new Texture("fondoCargando.jpg"));
+        framesDragon = new Dragon("framesLoading.png", 448, 179, 6, 0.2f);
+        dragon = new AnimatedImage(framesDragon.animacion());
         tiempo = 0;
-        texturaReloj = new Texture("reloj.png");
+        dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 50);
+        stage.addActor(dragon);
     }
 
     @Override
     public void render(float delta) {
-        borrarPantalla(0.6f, 0.7f, 0.3f);
-        // Dibuja
-        batch.setProjectionMatrix(camara.combined);
+        borrarPantalla();
+        dragon.act(delta);
         batch.begin();
-        batch.draw(texturaReloj, Pantalla.ANCHO/2-texturaReloj.getWidth()/2,
-                Pantalla.ALTO/2-texturaReloj.getHeight()/2);
+            fondo.render(batch);
         batch.end();
         // Actualiza
-        tiempo += Gdx.graphics.getDeltaTime();  // Acumula tiempo
-        if (tiempo>=1) {
+        tiempo += delta;  // Acumula tiempo
+        if (tiempo>=5) {
             juego.setScreen(new PJP(juego));
         }
+        stage.draw();
     }
 
     @Override
@@ -54,6 +67,6 @@ class PantallaCargando extends Pantalla
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }

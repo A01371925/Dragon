@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -517,7 +516,6 @@ public class PJP extends Pantalla {
             Enemigos flechas = listaFlechas.get(i);
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
-
             if (rectDragon.overlaps(rectFlechas)) {
                 impacto.play();
                 switch (vida.getVidas()) {

@@ -18,6 +18,11 @@ public class Dragon {
         animacion = new Animacion(dragon, TILEWIDTH, TILEHEIGHT, TEXTURE_REGION, SPEED);
     }
 
+    public Dragon(String textura, int tileWidth, int tileHeight, int textureRegion, float speed) {
+        dragon = new Texture(textura);
+        animacion = new Animacion(dragon, tileWidth, tileHeight, textureRegion, speed);
+
+    }
     public Animation animacion() {
         return animacion.animacionHorizontal();
     }
