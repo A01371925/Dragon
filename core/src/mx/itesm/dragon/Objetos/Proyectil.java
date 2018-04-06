@@ -12,6 +12,7 @@ public class Proyectil {
     private static final int TILEWIDTH = 38;
     private static final int TILEHEIGHT = 76;
     private static final int SPEED = 20;
+    private static final int SPEED_PROYECTIL = 40;
 
     private Sprite sprite;
     private TextureRegion[] frames;
@@ -37,7 +38,7 @@ public class Proyectil {
     }
 
     public void moverAbajo() {
-        sprite.setY(sprite.getY() - SPEED);
+        sprite.setY(sprite.getY() - SPEED_PROYECTIL);
     }
 
     /*public void animacion() {

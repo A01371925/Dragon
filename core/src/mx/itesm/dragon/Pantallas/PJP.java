@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -509,6 +510,19 @@ public class PJP extends Pantalla {
         }
         for (int i = 0; i < listaProyectil.size(); i++) {
             Proyectil proyectil = listaProyectil.get(i);
+            for (int j = 0; j < listaProyectilJefe.size(); j++) {
+                Proyectil proyectilJefe = listaProyectilJefe.get(j);
+                Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
+                Rectangle rectProyectilJefe = proyectilJefe.getSprite().getBoundingRectangle();
+                if (rectProyectil.overlaps(rectProyectilJefe)) {
+                    colision.play();
+                    listaProyectil.remove(proyectil);
+                }
+            }
+
+        }
+        for (int i = 0; i < listaProyectil.size(); i++) {
+            Proyectil proyectil = listaProyectil.get(i);
             for (int j = 0; j < listaFlechas.size(); j++) {
                 Enemigos flechas = listaFlechas.get(j);
                 Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
@@ -584,7 +598,7 @@ public class PJP extends Pantalla {
                 listaProyectil.remove(i);
             }
         }
-        if (timerProyectilJefeFinal >= .250f) {
+        if (timerProyectilJefeFinal >= .600f) {
             listaProyectilJefe.add(new Proyectil(proyectilJefeFinal,jefeFinal.getX() + jefeFinal.getWidth() / 2 - proyectilJefeFinal.getWidth() / 2, jefeFinal.getY()));
             timerProyectilJefeFinal = 0;
         }
