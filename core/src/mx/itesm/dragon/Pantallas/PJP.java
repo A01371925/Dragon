@@ -49,10 +49,12 @@ public class PJP extends Pantalla {
     private Stage stagePerder;
 
     private Texture proyectil;
+    private Texture proyectilJefeFinal;
     private Texture flecha;
     private Texture pocima;
 
     private ArrayList<Proyectil> listaProyectil;
+    private ArrayList<Proyectil> listaProyectilJefe;
     private ArrayList<Enemigos> listaFlechas;
     private ArrayList<Vida> listaVidas;
 
@@ -97,6 +99,7 @@ public class PJP extends Pantalla {
     private Texto puntos;  // Muestra los valores en pantalla
     private Texto texto;
     private float timerVida;
+    private float timerProyectilJefeFinal;
 
 
 
@@ -178,10 +181,12 @@ public class PJP extends Pantalla {
         timerFlecha = 0;
         timerVida = 0;
         timerJefeFinal = 0;
+        timerProyectilJefeFinal = 0;
         multiplexer = new InputMultiplexer();
         listaProyectil = new ArrayList<Proyectil>();
         listaFlechas = new ArrayList<Enemigos>();
         listaVidas = new ArrayList<Vida>();
+        listaProyectilJefe = new ArrayList<Proyectil>();
         random = new Random();
 
         // Objeto que dibuja al texto
@@ -205,6 +210,7 @@ public class PJP extends Pantalla {
 
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         proyectil = new Texture("BolaFuego.png");
+        proyectilJefeFinal = new Texture("roca.png");
         flecha = new Texture("Flecha.png");
         pocima = new Texture("Pocima.png");
         vida = new Vida(pocima,0,0);
@@ -362,6 +368,9 @@ public class PJP extends Pantalla {
                 for (Proyectil p: listaProyectil) {
                     //fuego.play();
                     p.render(batch);
+                }
+                for (Proyectil pjf: listaProyectilJefe) {
+                    pjf.render(batch);
                 }
                 for (Vida v : listaVidas){
                     v.render(batch);
@@ -562,6 +571,7 @@ public class PJP extends Pantalla {
 
     private void actualizarProyectiles(float delta) {
         timerProyectil += delta;
+        timerProyectilJefeFinal += delta;
         if (timerProyectil >= .350f){
             listaProyectil.add(new Proyectil(proyectil, dragon.getX() + dragon.getWidth() / 2 - proyectil.getWidth() / 2, dragon.getY() + dragon.getHeight()));
             timerProyectil = 0;
@@ -572,6 +582,18 @@ public class PJP extends Pantalla {
         for (int i = 0; i < listaProyectil.size(); i++) {
             if (listaProyectil.get(i).getSprite().getY() >= ALTO) {
                 listaProyectil.remove(i);
+            }
+        }
+        if (timerProyectilJefeFinal >= .250f) {
+            listaProyectilJefe.add(new Proyectil(proyectilJefeFinal,jefeFinal.getX() + jefeFinal.getWidth() / 2 - proyectilJefeFinal.getWidth() / 2, jefeFinal.getY()));
+            timerProyectilJefeFinal = 0;
+        }
+        for (int i = 0; i < listaProyectilJefe.size(); i++) {
+            listaProyectilJefe.get(i).moverAbajo();
+        }
+        for (int i = 0; i < listaProyectilJefe.size(); i++) {
+            if (listaProyectilJefe.get(i).getSprite().getY() <= 0) {
+                listaProyectilJefe.remove(i);
             }
         }
     }

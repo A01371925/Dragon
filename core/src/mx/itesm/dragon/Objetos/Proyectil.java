@@ -36,6 +36,10 @@ public class Proyectil {
         sprite.setY(sprite.getY() + SPEED);
     }
 
+    public void moverAbajo() {
+        sprite.setY(sprite.getY() - SPEED);
+    }
+
     /*public void animacion() {
         TextureRegion[][] tmp = TextureRegion.split(sprite.getTexture(),TILEWIDTH,TILEHEIGHT);
         frames = new TextureRegion[3];
