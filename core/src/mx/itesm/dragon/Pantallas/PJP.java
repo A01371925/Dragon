@@ -117,6 +117,7 @@ public class PJP extends Pantalla {
         initPausa();
         initMusica();
         initPerder();
+        initGanar();
         Gdx.input.setInputProcessor(multiplexer);
     }
 
@@ -215,13 +216,13 @@ public class PJP extends Pantalla {
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 new Texture("BotonResetPresionado.png"))));*/
-        btnMenuPerder = new ImageButton(
+        btnMenuGanar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonMenu1.png"))),
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("BotonMenu2.png"))));
 
-        multiplexer.addProcessor(stagePerder);
+        multiplexer.addProcessor(stageGanar);
 
     }
 
@@ -374,9 +375,11 @@ public class PJP extends Pantalla {
                 if(vida.getVidas() == 0){
                     estado = Estado.PERDER;
                 }
+                /*
                 if(vidaBoss == 0){
                     estado = Estado.GANAR;
-                }
+
+                }*/
                 break;
             case PAUSA:
                 batch.begin();
@@ -394,7 +397,7 @@ public class PJP extends Pantalla {
                 texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 50);
                 batch.end();
-                stageJuego.clear();
+
                 stagePerder.draw();
                 break;
             case GANAR:
@@ -403,7 +406,7 @@ public class PJP extends Pantalla {
                 texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 50);
                 batch.end();
-                stageJuego.clear();
+
                 stageGanar.draw();
                 break;
         }
