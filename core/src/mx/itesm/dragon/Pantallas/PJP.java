@@ -219,7 +219,7 @@ public class PJP extends Pantalla {
 
     private void initGanar(){
         stageGanar = new Stage(vista);
-        fondoGanar = new Fondo(new Texture("fondoNegro.jpg"));
+        fondoGanar = new Fondo(new Texture("fondoPasado.png"));
         /*btnSigNivel = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -234,12 +234,11 @@ public class PJP extends Pantalla {
                         new Texture("BotonMenu2.png"))));
 
         multiplexer.addProcessor(stageGanar);
-
     }
 
     private void initPerder(){
         stagePerder = new Stage(vista);
-        fondoPerder = new Fondo(new Texture("fondoNegro.jpg"));
+        fondoPerder = new Fondo(new Texture("fondoGameOver.png"));
         btnReiniciar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -254,9 +253,6 @@ public class PJP extends Pantalla {
                         new Texture("BotonMenu2.png"))));
 
         multiplexer.addProcessor(stagePerder);
-
-
-
     }
 
     private void setStagePausa() {
@@ -276,8 +272,6 @@ public class PJP extends Pantalla {
         stagePausa.addActor(btnMusica);
         stagePausa.addActor(btnSFX);
         stagePausa.addActor(btnMenu);
-
-
     }
 
     private void setStageJuego() {
@@ -317,23 +311,20 @@ public class PJP extends Pantalla {
 
     private void setStageGanar(){
         //btnSigNivel.setPosition();
-        btnMenuGanar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight());
+        btnMenuGanar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50);
         btnMenuGanar.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 juego.setScreen(new PantallaMenuPrincipal(juego));
             }
         });
-
-
         stageGanar.addActor(btnMenuGanar);
-
     }
 
     private void setStagePerder(){
         //btnReiniciar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f);
 
-        btnMenuPerder.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight());
+        btnMenuPerder.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50);
 
         btnMenuPerder.addListener(new ClickListener(){
             @Override
@@ -406,8 +397,8 @@ public class PJP extends Pantalla {
             case PERDER:
                 batch.begin();
                 fondoPerder.render(batch);
-                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4);
-                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 50);
+                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 100);
                 batch.end();
 
                 stagePerder.draw();
@@ -415,8 +406,8 @@ public class PJP extends Pantalla {
             case GANAR:
                 batch.begin();
                 fondoGanar.render(batch);
-                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4);
-                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 50);
+                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 100);
                 batch.end();
                 stageGanar.draw();
                 break;

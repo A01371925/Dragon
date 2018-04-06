@@ -12,7 +12,7 @@ public class Proyectil {
     private static final int TILEWIDTH = 38;
     private static final int TILEHEIGHT = 76;
     private static final int SPEED = 20;
-    private static final int SPEED_PROYECTIL = 40;
+    private static final int SPEED_PROYECTIL = 10;
 
     private Sprite sprite;
     private TextureRegion[] frames;
