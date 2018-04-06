@@ -49,7 +49,7 @@ class PantallaCargando extends Pantalla
         batch.end();
         // Actualiza
         tiempo += delta;  // Acumula tiempo
-        if (tiempo>=5) {
+        if (tiempo>=3) {
             juego.setScreen(new PJP(juego));
         }
         stage.draw();

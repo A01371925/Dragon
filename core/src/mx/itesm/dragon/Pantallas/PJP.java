@@ -222,7 +222,7 @@ public class PJP extends Pantalla {
 
     private void initGanar(){
         stageGanar = new Stage(vista);
-        fondoGanar = new Fondo(new Texture("fondoNegro.jpg"));
+        fondoGanar = new Fondo(new Texture("FondoGanar.png"));
         /*btnSigNivel = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -242,7 +242,7 @@ public class PJP extends Pantalla {
 
     private void initPerder(){
         stagePerder = new Stage(vista);
-        fondoPerder = new Fondo(new Texture("fondoNegro.jpg"));
+        fondoPerder = new Fondo(new Texture("FondoPerder.png"));
         btnReiniciar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -456,7 +456,7 @@ public class PJP extends Pantalla {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         jefeFinal.act(delta);
-        if (timerJefeFinal >= 5) {
+        if (timerJefeFinal >= 10) {
             if (jefeFinal.getX() >= ANCHO / 2 - jefeFinal.getImageWidth() / 2){
                 jefeFinal.setPosition(jefeFinal.getX(), jefeFinal.getY());
             } else {
