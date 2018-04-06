@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,6 +26,7 @@ import mx.itesm.dragon.Objetos.AnimatedImage;
 import mx.itesm.dragon.Objetos.Dragon;
 import mx.itesm.dragon.Objetos.Enemigos;
 import mx.itesm.dragon.Objetos.Fondo;
+import mx.itesm.dragon.Objetos.JefeFinal;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Proyectil;
 import mx.itesm.dragon.Objetos.Texto;
@@ -38,6 +40,7 @@ public class PJP extends Pantalla {
 
     private float timerProyectil;
     private float timerFlecha;
+    private float timerJefeFinal;
 
     private Random random;
 
@@ -60,10 +63,11 @@ public class PJP extends Pantalla {
     private Fondo fondoPerder;
 
     private Vida vida;
-
-    private Dragon dragonAnimado;
+    private JefeFinal framesJefeFinal;
+    private Dragon framesDragon;
 
     private AnimatedImage dragon;
+    private AnimatedImage jefeFinal;
     private Image barraVida;
     private Image v1,v2,v3,v4;
     private ImageButton btnPausa;
@@ -94,6 +98,7 @@ public class PJP extends Pantalla {
     private Texto puntos;  // Muestra los valores en pantalla
     private Texto texto;
     private float timerVida;
+
 
 
     public PJP(Juego juego) {
@@ -173,6 +178,7 @@ public class PJP extends Pantalla {
         timerProyectil = 0;
         timerFlecha = 0;
         timerVida = 0;
+        timerJefeFinal = 0;
         multiplexer = new InputMultiplexer();
         listaProyectil = new ArrayList<Proyectil>();
         listaFlechas = new ArrayList<Enemigos>();
@@ -193,8 +199,10 @@ public class PJP extends Pantalla {
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("botonPausa.png"))));
 
-        dragonAnimado = new Dragon("framesDragon.png");
-        dragon = new AnimatedImage(dragonAnimado.animacion());
+        framesDragon = new Dragon("framesDragon.png");
+        dragon = new AnimatedImage(framesDragon.animacion());
+        framesJefeFinal = new JefeFinal("framesJefeFinal.png");
+        jefeFinal = new AnimatedImage(framesJefeFinal.animacion());
 
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         proyectil = new Texture("BolaFuego.png");
@@ -274,6 +282,7 @@ public class PJP extends Pantalla {
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
         barraVida.setPosition( ANCHO / 2 - barraVida.getWidth() / 2, ALTO - barraVida.getHeight() - barraVida.getHeight() / 2);
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
+        jefeFinal.setPosition(0 - jefeFinal.getWidth(), ALTO);
         v1.setPosition(barraVida.getX(),barraVida.getY());
         v2.setPosition(barraVida.getX() + v1.getWidth() + 8, barraVida.getY());
         v3.setPosition(v2.getX() + v2.getWidth() + 8, barraVida.getY());
@@ -299,9 +308,7 @@ public class PJP extends Pantalla {
         stageJuego.addActor(v3);
         stageJuego.addActor(v4);
         stageJuego.addActor(dragon);
-
-
-
+        stageJuego.addActor(jefeFinal);
     }
 
     private void setStageGanar(){
@@ -340,7 +347,6 @@ public class PJP extends Pantalla {
 
     }
 
-
     @Override
     public void render(float delta) {
         switch (estado) {
@@ -375,11 +381,10 @@ public class PJP extends Pantalla {
                 if(vida.getVidas() == 0){
                     estado = Estado.PERDER;
                 }
-                /*
-                if(vidaBoss == 0){
-                    estado = Estado.GANAR;
 
-                }*/
+                if(framesJefeFinal.getVida() == 0){
+                    estado = Estado.GANAR;
+                }
                 break;
             case PAUSA:
                 batch.begin();
@@ -406,7 +411,6 @@ public class PJP extends Pantalla {
                 texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 50);
                 batch.end();
-
                 stageGanar.draw();
                 break;
         }
@@ -418,6 +422,7 @@ public class PJP extends Pantalla {
         actualizarEnemigos(delta);
         actualizarColisiones(delta);
         actualizarPersonaje(delta);
+        actualizarJefeFinal(delta);
         actualizarCamara();
         actualizarVida(delta);
     }
@@ -439,11 +444,35 @@ public class PJP extends Pantalla {
         dragon.act(delta);
     }
 
+    private void actualizarJefeFinal(float delta) {
+        timerJefeFinal += delta;
+        jefeFinal.act(delta);
+        if (timerJefeFinal >= 5) {
+            if (jefeFinal.getX() >= ANCHO / 2 - jefeFinal.getImageWidth() / 2){
+                jefeFinal.setPosition(jefeFinal.getX(), jefeFinal.getY());
+            } else {
+                jefeFinal.setPosition(jefeFinal.getX()  + 3, jefeFinal.getY() - 3);
+            }
+
+        }
+
+    }
+
     private void actualizarFondo(float delta) {
         fondo.mover(delta);
     }
 
     private void actualizarColisiones(float delta) {
+        for (int i = 0; i < listaProyectil.size(); i++) {
+            Proyectil proyectil = listaProyectil.get(i);
+            Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
+            Rectangle rectJefeFinal = new Rectangle(jefeFinal.getX(), jefeFinal.getY(), jefeFinal.getImageWidth(), jefeFinal.getImageHeight());
+            if (rectJefeFinal.overlaps(rectProyectil)) {
+                colision.play();
+                listaProyectil.remove(i);
+                framesJefeFinal.setVida(framesJefeFinal.getVida() - 1);
+            }
+        }
         for (int i = 0; i < listaVidas.size(); i++) {
             Vida pocima = listaVidas.get(i);
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
@@ -468,8 +497,6 @@ public class PJP extends Pantalla {
                     default:
                         break;
                 }
-
-
             }
         }
         for (int i = 0; i < listaProyectil.size(); i++) {

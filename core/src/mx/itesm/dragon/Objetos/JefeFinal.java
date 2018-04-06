@@ -9,6 +9,7 @@ public class JefeFinal {
     private static final int TILEHEIGHT = 366;
     private static final int TEXTURE_REGION = 3;
     private static final float SPEED = 0.125f;
+    private int vida = 5;
 
     private Texture jefeFinal;
     private Animacion animacion;
@@ -22,6 +23,11 @@ public class JefeFinal {
         return animacion.animacionVertical();
     }
 
+    public int getVida() {
+        return vida;
+    }
 
-
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
 }
