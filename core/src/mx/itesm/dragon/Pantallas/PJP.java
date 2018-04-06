@@ -25,7 +25,6 @@ import mx.itesm.dragon.Objetos.AnimatedImage;
 import mx.itesm.dragon.Objetos.Dragon;
 import mx.itesm.dragon.Objetos.Enemigos;
 import mx.itesm.dragon.Objetos.Fondo;
-import mx.itesm.dragon.Objetos.JefeFinal;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Proyectil;
 import mx.itesm.dragon.Objetos.Texto;
@@ -39,7 +38,6 @@ public class PJP extends Pantalla {
 
     private float timerProyectil;
     private float timerFlecha;
-    private float timerVida;
 
     private Random random;
 
@@ -63,11 +61,9 @@ public class PJP extends Pantalla {
 
     private Vida vida;
 
-    private Dragon framesDragon;
-    private JefeFinal framesJefeFinal;
+    private Dragon dragonAnimado;
 
     private AnimatedImage dragon;
-    private AnimatedImage jefeFinal;
     private Image barraVida;
     private Image v1,v2,v3,v4;
     private ImageButton btnPausa;
@@ -77,6 +73,8 @@ public class PJP extends Pantalla {
     private ImageButton btnSFX;
     private ImageButton btnReiniciar;
     private ImageButton btnMenuPerder;
+    private ImageButton btnMenuGanar;
+    private ImageButton btnSigNivel;
 
     private Estado estado;
 
@@ -95,6 +93,8 @@ public class PJP extends Pantalla {
     private String letras;
     private Texto puntos;  // Muestra los valores en pantalla
     private Texto texto;
+    private float timerVida;
+
 
     public PJP(Juego juego) {
         this.juego = juego;
@@ -108,6 +108,7 @@ public class PJP extends Pantalla {
         setStagePausa();
         setStageJuego();
         setStagePerder();
+        setStageGanar();
     }
 
     private void inicializacion() {
@@ -191,10 +192,8 @@ public class PJP extends Pantalla {
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("botonPausa.png"))));
 
-        framesJefeFinal = new JefeFinal("framesJefeFinal.png");
-        jefeFinal = new AnimatedImage(framesJefeFinal.animacion());
-        framesDragon = new Dragon("framesDragon.png");
-        dragon = new AnimatedImage(framesDragon.animacion());
+        dragonAnimado = new Dragon("framesDragon.png");
+        dragon = new AnimatedImage(dragonAnimado.animacion());
 
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         proyectil = new Texture("BolaFuego.png");
@@ -207,6 +206,22 @@ public class PJP extends Pantalla {
     }
 
     private void initGanar(){
+        stageGanar = new Stage(vista);
+        fondoGanar = new Fondo(new Texture("fondoNegro.jpg"));
+        /*btnSigNivel = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonReset.png"))),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("BotonResetPresionado.png"))));*/
+        btnMenuPerder = new ImageButton(
+                new TextureRegionDrawable(new TextureRegion(
+                        new Texture("BotonMenu1.png"))),
+                new TextureRegionDrawable(new TextureRegion(
+                        new Texture("BotonMenu2.png"))));
+
+        multiplexer.addProcessor(stagePerder);
 
     }
 
@@ -258,7 +273,6 @@ public class PJP extends Pantalla {
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
         barraVida.setPosition( ANCHO / 2 - barraVida.getWidth() / 2, ALTO - barraVida.getHeight() - barraVida.getHeight() / 2);
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
-        jefeFinal.setPosition( jefeFinal.getWidth(), ALTO - jefeFinal.getWidth() - barraVida.getHeight());
         v1.setPosition(barraVida.getX(),barraVida.getY());
         v2.setPosition(barraVida.getX() + v1.getWidth() + 8, barraVida.getY());
         v3.setPosition(v2.getX() + v2.getWidth() + 8, barraVida.getY());
@@ -284,10 +298,23 @@ public class PJP extends Pantalla {
         stageJuego.addActor(v3);
         stageJuego.addActor(v4);
         stageJuego.addActor(dragon);
-        stageJuego.addActor(jefeFinal);
+
+
+
     }
 
     private void setStageGanar(){
+        //btnSigNivel.setPosition();
+        btnMenuGanar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight());
+        btnMenuGanar.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                juego.setScreen(new PantallaMenuPrincipal(juego));
+            }
+        });
+
+
+        stageGanar.addActor(btnMenuGanar);
 
     }
 
@@ -311,6 +338,7 @@ public class PJP extends Pantalla {
 
 
     }
+
 
     @Override
     public void render(float delta) {
@@ -346,6 +374,9 @@ public class PJP extends Pantalla {
                 if(vida.getVidas() == 0){
                     estado = Estado.PERDER;
                 }
+                if(vidaBoss == 0){
+                    estado = Estado.GANAR;
+                }
                 break;
             case PAUSA:
                 batch.begin();
@@ -366,6 +397,15 @@ public class PJP extends Pantalla {
                 stageJuego.clear();
                 stagePerder.draw();
                 break;
+            case GANAR:
+                batch.begin();
+                fondoGanar.render(batch);
+                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4);
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 50);
+                batch.end();
+                stageJuego.clear();
+                stageGanar.draw();
+                break;
         }
     }
 
@@ -375,13 +415,8 @@ public class PJP extends Pantalla {
         actualizarEnemigos(delta);
         actualizarColisiones(delta);
         actualizarPersonaje(delta);
-        actualizarJefeFinal(delta);
         actualizarCamara();
         actualizarVida(delta);
-    }
-
-    private void actualizarJefeFinal(float delta) {
-        jefeFinal.act(delta);
     }
 
     private void actualizarCamara() {
@@ -529,6 +564,8 @@ public class PJP extends Pantalla {
         }
     }
 
+
+
     @Override
     public void pause() {
         estado = Estado.PAUSA;
@@ -543,6 +580,8 @@ public class PJP extends Pantalla {
     public void dispose() {
         stageJuego.dispose();
         stagePausa.dispose();
+        stagePerder.dispose();
+        stageGanar.dispose();
         proyectil.dispose();
         flecha.dispose();
         musica_f.dispose();
@@ -552,6 +591,7 @@ public class PJP extends Pantalla {
         pausa.dispose();
         reanudar.dispose();
         impacto.dispose();
+
 
     }
 }
