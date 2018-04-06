@@ -48,9 +48,11 @@ public class PJP extends Pantalla {
 
     private Texture proyectil;
     private Texture flecha;
+    private Texture pocima;
 
     private ArrayList<Proyectil> listaProyectil;
     private ArrayList<Enemigos> listaFlechas;
+    private ArrayList<Vida> listaVidas;
 
     private Fondo fondo;
     private Fondo fondoPausa;
@@ -89,6 +91,8 @@ public class PJP extends Pantalla {
     private String letras;
     private Texto puntos;  // Muestra los valores en pantalla
     private Texto texto;
+    private float timerVida;
+
 
     public PJP(Juego juego) {
         this.juego = juego;
@@ -164,10 +168,11 @@ public class PJP extends Pantalla {
         stageJuego = new Stage(vista);
         timerProyectil = 0;
         timerFlecha = 0;
+        timerVida = 0;
         multiplexer = new InputMultiplexer();
         listaProyectil = new ArrayList<Proyectil>();
         listaFlechas = new ArrayList<Enemigos>();
-        vida = new Vida();
+        listaVidas = new ArrayList<Vida>();
         random = new Random();
 
         // Objeto que dibuja al texto
@@ -190,6 +195,8 @@ public class PJP extends Pantalla {
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         proyectil = new Texture("BolaFuego.png");
         flecha = new Texture("Flecha.png");
+        pocima = new Texture("Pocima.png");
+        vida = new Vida(pocima,0,0);
 
         // Se anexan las Escenas al Multiplexor.
         multiplexer.addProcessor(stageJuego);
@@ -320,6 +327,9 @@ public class PJP extends Pantalla {
                     //fuego.play();
                     p.render(batch);
                 }
+                for (Vida v : listaVidas){
+                    v.render(batch);
+                }
 
                 for (Enemigos e: listaFlechas) {
                     //flecha_s.play();
@@ -371,6 +381,7 @@ public class PJP extends Pantalla {
         actualizarColisiones(delta);
         actualizarPersonaje(delta);
         actualizarCamara();
+        actualizarVida(delta);
     }
 
     private void actualizarCamara() {
@@ -395,6 +406,34 @@ public class PJP extends Pantalla {
     }
 
     private void actualizarColisiones(float delta) {
+        for (int i = 0; i < listaVidas.size(); i++) {
+            Vida pocima = listaVidas.get(i);
+            Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
+            Rectangle rectPocima = pocima.getSprite().getBoundingRectangle();
+
+            if (rectDragon.overlaps(rectPocima)) {
+                listaVidas.remove(pocima);
+
+                switch (vida.getVidas()){
+                    case 1:
+                        vida.setVidas(vida.getVidas()+1);
+                        v2.setVisible(true);
+                        break;
+                    case 2:
+                        vida.setVidas(vida.getVidas()+1);
+                        v3.setVisible(true);
+                        break;
+                    case 3:
+                        vida.setVidas(vida.getVidas()+1);
+                        v4.setVisible(true);
+                        break;
+                    default:
+                        break;
+                }
+
+
+            }
+        }
         for (int i = 0; i < listaProyectil.size(); i++) {
             Proyectil proyectil = listaProyectil.get(i);
             for (int j = 0; j < listaFlechas.size(); j++) {
@@ -411,8 +450,9 @@ public class PJP extends Pantalla {
         }
         for (int i = 0; i < listaFlechas.size(); i++) {
             Enemigos flechas = listaFlechas.get(i);
-            Rectangle rectDragon = new Rectangle(dragon.getX() + dragon.getWidth() / 4,dragon.getY(),dragon.getWidth() - 1 / 2,dragon.getHeight() / 2);
+            Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
+
             if (rectDragon.overlaps(rectFlechas)) {
                 impacto.play();
                 switch (vida.getVidas()) {
@@ -468,6 +508,23 @@ public class PJP extends Pantalla {
         for (int i = 0; i < listaProyectil.size(); i++) {
             if (listaProyectil.get(i).getSprite().getY() >= ALTO) {
                 listaProyectil.remove(i);
+            }
+        }
+    }
+
+    private void actualizarVida(float delta){
+        timerVida += delta;
+        int randomX = random.nextInt((int) ANCHO - pocima.getWidth());
+        if (timerVida >= 5){
+            listaVidas.add(new Vida(pocima,  randomX, ALTO));
+            timerVida = 0;
+        }
+        for (int i = 0; i < listaVidas.size(); i++) {
+            listaVidas.get(i).mover();
+        }
+        for (int i = 0; i < listaVidas.size(); i++) {
+            if (listaVidas.get(i).getSprite().getY() >= ALTO) {
+                listaVidas.remove(i);
             }
         }
     }

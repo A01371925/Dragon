@@ -84,9 +84,9 @@ public class PantallaAcercaDe extends Pantalla {
         // Posición de los botones.
         btnLuis.setPosition(85,900);
         btnCharlotte.setPosition(350,650);
-        btnJorge.setPosition(85,400); //120,200
-        btnAna.setPosition(350,200); //220,400
-        btnMarco.setPosition(85,50); //120,600
+        btnJorge.setPosition(85,400);
+        btnAna.setPosition(350,200);
+        btnMarco.setPosition(85,50);
         btnRegresar.setPosition(ANCHO - btnRegresar.getWidth() - 20,20);
 
         // Detecta si el usuario hace click en algún actor.
