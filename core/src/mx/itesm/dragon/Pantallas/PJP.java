@@ -314,6 +314,7 @@ public class PJP extends Pantalla {
         stageJuego.addActor(jefeFinal);
     }
 
+
     private void setStageGanar(){
         //btnSigNivel.setPosition();
         btnMenuGanar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight());
