@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.sun.org.apache.regexp.internal.RE;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -101,8 +100,6 @@ public class PJP extends Pantalla {
     private Texto texto;
     private float timerVida;
     private float timerProyectilJefeFinal;
-
-
 
     public PJP(Juego juego) {
         this.juego = juego;
@@ -222,7 +219,7 @@ public class PJP extends Pantalla {
 
     private void initGanar(){
         stageGanar = new Stage(vista);
-        fondoGanar = new Fondo(new Texture("FondoGanar.png"));
+        fondoGanar = new Fondo(new Texture("fondoNegro.jpg"));
         /*btnSigNivel = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -242,7 +239,7 @@ public class PJP extends Pantalla {
 
     private void initPerder(){
         stagePerder = new Stage(vista);
-        fondoPerder = new Fondo(new Texture("FondoPerder.png"));
+        fondoPerder = new Fondo(new Texture("fondoNegro.jpg"));
         btnReiniciar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -456,15 +453,13 @@ public class PJP extends Pantalla {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         jefeFinal.act(delta);
-        if (timerJefeFinal >= 10) {
+        if (timerJefeFinal >= 30) {
             if (jefeFinal.getX() >= ANCHO / 2 - jefeFinal.getImageWidth() / 2){
                 jefeFinal.setPosition(jefeFinal.getX(), jefeFinal.getY());
             } else {
                 jefeFinal.setPosition(jefeFinal.getX()  + 3, jefeFinal.getY() - 3);
             }
-
         }
-
     }
 
     private void actualizarFondo(float delta) {
@@ -482,11 +477,11 @@ public class PJP extends Pantalla {
                 framesJefeFinal.setVida(framesJefeFinal.getVida() - 1);
             }
         }
+
         for (int i = 0; i < listaVidas.size(); i++) {
             Vida pocima = listaVidas.get(i);
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
             Rectangle rectPocima = pocima.getSprite().getBoundingRectangle();
-
             if (rectDragon.overlaps(rectPocima)) {
                 listaVidas.remove(pocima);
 
@@ -507,6 +502,7 @@ public class PJP extends Pantalla {
                         break;
                 }
             }
+
         }
         for (int i = 0; i < listaProyectil.size(); i++) {
             Proyectil proyectil = listaProyectil.get(i);
@@ -519,8 +515,8 @@ public class PJP extends Pantalla {
                     listaProyectil.remove(proyectil);
                 }
             }
-
         }
+
         for (int i = 0; i < listaProyectil.size(); i++) {
             Proyectil proyectil = listaProyectil.get(i);
             for (int j = 0; j < listaFlechas.size(); j++) {
@@ -538,6 +534,7 @@ public class PJP extends Pantalla {
         for (int i = 0; i < listaFlechas.size(); i++) {
             Enemigos flechas = listaFlechas.get(i);
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
+            Rectangle rectJefeFinal = new Rectangle(jefeFinal.getX(), jefeFinal.getY(), jefeFinal.getImageWidth(), jefeFinal.getImageHeight());
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
                 impacto.play();
@@ -561,6 +558,35 @@ public class PJP extends Pantalla {
                         break;
                 }
                 listaFlechas.remove(i);
+                break;
+            }
+        }
+        for (int i = 0; i < listaProyectilJefe.size(); i++) {
+            Proyectil proyectilJefe = listaProyectilJefe.get(i);
+            Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
+            Rectangle rectJefeFinal = proyectilJefe.getSprite().getBoundingRectangle();
+            if (rectDragon.overlaps(rectJefeFinal)) {
+                impacto.play();
+                switch (vida.getVidas()) {
+                    case 1:
+                        vida.setVidas(vida.getVidas() - 1);
+                        v1.setVisible(false);
+                        break;
+                    case 2:
+                        vida.setVidas(vida.getVidas() - 1);
+                        v2.setVisible(false);
+                        break;
+                    case 3:
+
+                        vida.setVidas(vida.getVidas() - 1);
+                        v3.setVisible(false);
+                        break;
+                    case 4:
+                        vida.setVidas(vida.getVidas() - 1);
+                        v4.setVisible(false);
+                        break;
+                }
+                listaProyectilJefe.remove(i);
                 break;
             }
         }
@@ -598,7 +624,7 @@ public class PJP extends Pantalla {
                 listaProyectil.remove(i);
             }
         }
-        if (timerProyectilJefeFinal >= .600f) {
+        if (timerProyectilJefeFinal >= 1f) {
             listaProyectilJefe.add(new Proyectil(proyectilJefeFinal,jefeFinal.getX() + jefeFinal.getWidth() / 2 - proyectilJefeFinal.getWidth() / 2, jefeFinal.getY()));
             timerProyectilJefeFinal = 0;
         }
