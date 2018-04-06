@@ -530,6 +530,7 @@ public class PJP extends Pantalla {
                         v2.setVisible(false);
                         break;
                     case 3:
+
                         vida.setVidas(vida.getVidas() - 1);
                         v3.setVisible(false);
                         break;
