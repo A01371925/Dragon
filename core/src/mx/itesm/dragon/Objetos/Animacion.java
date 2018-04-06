@@ -21,11 +21,21 @@ public class Animacion {
         this.speed = speed;
     }
 
-    public Animation<TextureRegion> animacion() {
+    public Animation<TextureRegion> animacionHorizontal() {
         TextureRegion[][] tmp = TextureRegion.split(textura, tileWidth, tileHeight);
         frames = new TextureRegion[textureRegion];
         for (int i = 0; i < frames.length; i++) {
             frames[i] = tmp[0][i];
+        }
+        animacion = new Animation<TextureRegion>(speed, frames);
+        return animacion;
+    }
+
+    public Animation<TextureRegion> animacionVertical() {
+        TextureRegion[][] tmp = TextureRegion.split(textura, tileWidth, tileHeight);
+        frames = new TextureRegion[textureRegion];
+        for (int i = 0; i < frames.length; i++) {
+            frames[i] = tmp[i][0];
         }
         animacion = new Animation<TextureRegion>(speed, frames);
         return animacion;

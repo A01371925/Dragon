@@ -19,7 +19,7 @@ public class Dragon {
     }
 
     public Animation animacion() {
-        return animacion.animacion();
+        return animacion.animacionHorizontal();
     }
 
 }

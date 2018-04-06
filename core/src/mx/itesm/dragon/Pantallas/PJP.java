@@ -25,6 +25,7 @@ import mx.itesm.dragon.Objetos.AnimatedImage;
 import mx.itesm.dragon.Objetos.Dragon;
 import mx.itesm.dragon.Objetos.Enemigos;
 import mx.itesm.dragon.Objetos.Fondo;
+import mx.itesm.dragon.Objetos.JefeFinal;
 import mx.itesm.dragon.Objetos.Pantalla;
 import mx.itesm.dragon.Objetos.Proyectil;
 import mx.itesm.dragon.Objetos.Texto;
@@ -38,6 +39,7 @@ public class PJP extends Pantalla {
 
     private float timerProyectil;
     private float timerFlecha;
+    private float timerVida;
 
     private Random random;
 
@@ -61,9 +63,11 @@ public class PJP extends Pantalla {
 
     private Vida vida;
 
-    private Dragon dragonAnimado;
+    private Dragon framesDragon;
+    private JefeFinal framesJefeFinal;
 
     private AnimatedImage dragon;
+    private AnimatedImage jefeFinal;
     private Image barraVida;
     private Image v1,v2,v3,v4;
     private ImageButton btnPausa;
@@ -91,8 +95,6 @@ public class PJP extends Pantalla {
     private String letras;
     private Texto puntos;  // Muestra los valores en pantalla
     private Texto texto;
-    private float timerVida;
-
 
     public PJP(Juego juego) {
         this.juego = juego;
@@ -189,8 +191,10 @@ public class PJP extends Pantalla {
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("botonPausa.png"))));
 
-        dragonAnimado = new Dragon("framesDragon.png");
-        dragon = new AnimatedImage(dragonAnimado.animacion());
+        framesJefeFinal = new JefeFinal("framesJefeFinal.png");
+        jefeFinal = new AnimatedImage(framesJefeFinal.animacion());
+        framesDragon = new Dragon("framesDragon.png");
+        dragon = new AnimatedImage(framesDragon.animacion());
 
         fondo = new Fondo(new Texture("fondoNivel1.png"));
         proyectil = new Texture("BolaFuego.png");
@@ -254,6 +258,7 @@ public class PJP extends Pantalla {
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
         barraVida.setPosition( ANCHO / 2 - barraVida.getWidth() / 2, ALTO - barraVida.getHeight() - barraVida.getHeight() / 2);
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
+        jefeFinal.setPosition( jefeFinal.getWidth(), ALTO - jefeFinal.getWidth() - barraVida.getHeight());
         v1.setPosition(barraVida.getX(),barraVida.getY());
         v2.setPosition(barraVida.getX() + v1.getWidth() + 8, barraVida.getY());
         v3.setPosition(v2.getX() + v2.getWidth() + 8, barraVida.getY());
@@ -279,9 +284,7 @@ public class PJP extends Pantalla {
         stageJuego.addActor(v3);
         stageJuego.addActor(v4);
         stageJuego.addActor(dragon);
-
-
-
+        stageJuego.addActor(jefeFinal);
     }
 
     private void setStageGanar(){
@@ -308,7 +311,6 @@ public class PJP extends Pantalla {
 
 
     }
-
 
     @Override
     public void render(float delta) {
@@ -356,7 +358,6 @@ public class PJP extends Pantalla {
                 stagePausa.draw();
                 break;
             case PERDER:
-
                 batch.begin();
                 fondoPerder.render(batch);
                 texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4);
@@ -364,15 +365,9 @@ public class PJP extends Pantalla {
                 batch.end();
                 stageJuego.clear();
                 stagePerder.draw();
-
-
-
-
                 break;
         }
     }
-
-
 
     private void actualizarObjetos(float delta) {
         actualizarFondo(delta * 5);
@@ -380,8 +375,13 @@ public class PJP extends Pantalla {
         actualizarEnemigos(delta);
         actualizarColisiones(delta);
         actualizarPersonaje(delta);
+        actualizarJefeFinal(delta);
         actualizarCamara();
         actualizarVida(delta);
+    }
+
+    private void actualizarJefeFinal(float delta) {
+        jefeFinal.act(delta);
     }
 
     private void actualizarCamara() {
@@ -528,8 +528,6 @@ public class PJP extends Pantalla {
             }
         }
     }
-
-
 
     @Override
     public void pause() {
