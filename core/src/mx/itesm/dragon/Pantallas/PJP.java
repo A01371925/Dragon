@@ -324,7 +324,8 @@ public class PJP extends Pantalla {
     private void setStagePerder(){
         //btnReiniciar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f);
 
-        btnMenuPerder.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50);
+        btnMenuPerder.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50
+        );
 
         btnMenuPerder.addListener(new ClickListener(){
             @Override

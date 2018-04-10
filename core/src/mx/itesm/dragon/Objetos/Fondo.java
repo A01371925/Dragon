@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Fondo implements Actualizar{
+public class Fondo {
     private Sprite imagenA;
     private Sprite imagenB;
 
@@ -41,10 +41,5 @@ public class Fondo implements Actualizar{
     public void render(SpriteBatch batch) {
         imagenA.draw(batch);
         imagenB.draw(batch);
-    }
-
-    @Override
-    public void mover() {
-
     }
 }

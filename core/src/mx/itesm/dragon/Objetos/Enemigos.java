@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Enemigos implements Actualizar{
+public class Enemigos {
 
     private Sprite sprite;
     private static final int SPEED = 10;
@@ -22,19 +22,12 @@ public class Enemigos implements Actualizar{
         sprite.setPosition(x,y);
     }
 
-    @Override
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
     }
 
-    @Override
     public void mover() {
         sprite.setY(sprite.getY() - SPEED);
-    }
-
-    @Override
-    public void mover(float delta) {
-
     }
 
     public Sprite getSprite() {
