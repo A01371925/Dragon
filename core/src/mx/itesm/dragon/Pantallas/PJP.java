@@ -41,6 +41,10 @@ public class PJP extends Pantalla {
     private float timerFlecha;
     private float timerJefeFinal;
 
+    // determinan el movimiemto del jefe final
+    private boolean jefePos = false;
+    private int direccion = 1;
+
     private Random random;
 
     private Stage stageJuego;
@@ -100,6 +104,7 @@ public class PJP extends Pantalla {
     private Texto texto;
     private float timerVida;
     private float timerProyectilJefeFinal;
+
 
     public PJP(Juego juego) {
         this.juego = juego;
@@ -278,7 +283,7 @@ public class PJP extends Pantalla {
         // Posisción inicial de los elementos
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
         barraVida.setPosition( ANCHO / 2 - barraVida.getWidth() / 2, ALTO - barraVida.getHeight() - barraVida.getHeight() / 2);
-        dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 0);
+        dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, dragon.getY() + dragon.getHeight());
         jefeFinal.setPosition(0 - jefeFinal.getWidth(), ALTO);
         v1.setPosition(barraVida.getX(),barraVida.getY());
         v2.setPosition(barraVida.getX() + v1.getWidth() + 8, barraVida.getY());
@@ -333,7 +338,6 @@ public class PJP extends Pantalla {
                 juego.setScreen(new PantallaMenuPrincipal(juego));
             }
         });
-
 
         stagePerder.addActor(btnMenuPerder);
         //stagePerder.addActor(btnReiniciar);
@@ -407,8 +411,8 @@ public class PJP extends Pantalla {
             case GANAR:
                 batch.begin();
                 fondoGanar.render(batch);
-                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
-                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 100);
+                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4 - 50);
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO / 4 - 100);
                 batch.end();
                 stageGanar.draw();
                 break;
@@ -446,13 +450,28 @@ public class PJP extends Pantalla {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         jefeFinal.act(delta);
-        if (timerJefeFinal >= 30) {
-            if (jefeFinal.getX() >= ANCHO / 2 - jefeFinal.getImageWidth() / 2){
-                jefeFinal.setPosition(jefeFinal.getX(), jefeFinal.getY());
-            } else {
-                jefeFinal.setPosition(jefeFinal.getX()  + 3, jefeFinal.getY() - 3);
+        if (timerJefeFinal >= 5){
+            if (jefePos) {
+                jefeFinal.setPosition(jefeFinal.getX() + (3 * direccion), jefeFinal.getY());
+
+                if (jefeFinal.getX() + jefeFinal.getWidth() >= ANCHO) {
+                    direccion = -1;
+                }
+                if (jefeFinal.getX() <= 0) {
+                    direccion = 1;
+                }
+            }
+            else {
+                if (jefeFinal.getX() >= ANCHO / 2 - jefeFinal.getImageWidth() / 2) {
+                    //jefeFinal.setPosition(jefeFinal.getX(), jefeFinal.getY());
+                    jefePos = true;
+                } else {
+                    jefeFinal.setPosition(jefeFinal.getX() + 3, jefeFinal.getY() - 3);
+                }
             }
         }
+
+
     }
 
     private void actualizarFondo(float delta) {
@@ -469,7 +488,7 @@ public class PJP extends Pantalla {
                 listaProyectil.remove(i);
                 framesJefeFinal.setVida(framesJefeFinal.getVida() - 1);
             }
-        }
+         }
 
         for (int i = 0; i < listaVidas.size(); i++) {
             Vida pocima = listaVidas.get(i);
