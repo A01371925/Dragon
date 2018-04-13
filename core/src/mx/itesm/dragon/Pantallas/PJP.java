@@ -45,6 +45,9 @@ public class PJP extends Pantalla {
     private boolean jefePos = false;
     private int direccion = 1;
 
+    private float xDragon;
+    private float yDragon;
+
     private Random random;
 
     private Stage stageJuego;
@@ -351,6 +354,9 @@ public class PJP extends Pantalla {
     public void render(float delta) {
         switch (estado) {
             case JUGANDO:
+                if (xDragon != 0 ){ // solución temporal
+                    dragon.setPosition(xDragon, yDragon);
+                }
                 actualizarObjetos(delta);
                 stagePausa.unfocusAll();
                 batch.begin();
@@ -377,6 +383,9 @@ public class PJP extends Pantalla {
                 }
                 batch.end();
                 if (btnPausa.isPressed()) {
+                    xDragon = dragon.getX();
+                    yDragon = dragon.getY();
+                    dragon.setPosition(-1000, -1000);
                     pausa.play();
                     estado = Estado.PAUSA;
                 }
@@ -450,7 +459,7 @@ public class PJP extends Pantalla {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         jefeFinal.act(delta);
-        if (timerJefeFinal >= 40){
+        if (timerJefeFinal >= 30){
             if (jefePos) {
                 jefeFinal.setPosition(jefeFinal.getX() + (3 * direccion), jefeFinal.getY());
 
