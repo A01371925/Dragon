@@ -450,7 +450,7 @@ public class PJP extends Pantalla {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         jefeFinal.act(delta);
-        if (timerJefeFinal >= 5){
+        if (timerJefeFinal >= 40){
             if (jefePos) {
                 jefeFinal.setPosition(jefeFinal.getX() + (3 * direccion), jefeFinal.getY());
 
