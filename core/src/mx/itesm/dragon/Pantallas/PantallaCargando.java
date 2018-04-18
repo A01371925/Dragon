@@ -32,8 +32,8 @@ class PantallaCargando extends Pantalla
     @Override
     public void show() {
         stage = new Stage(vista);
-        fondo = new Fondo(new Texture("fondoCargando.jpg"));
-        framesDragon = new Dragon("framesLoading.png", 448, 179, 6, 0.2f);
+        fondo = new Fondo(new Texture("backgrounds/loading.jpg"));
+        framesDragon = new Dragon("frames/loading.png", 448, 179, 6, 0.2f);
         dragon = new AnimatedImage(framesDragon.animacion());
         tiempo = 0;
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 50);
@@ -47,7 +47,7 @@ class PantallaCargando extends Pantalla
         batch.begin();
             fondo.render(batch);
         batch.end();
-        // Actualiza
+        // TTL loading screen
         tiempo += delta;  // Acumula tiempo
         if (tiempo>=3) {
             juego.setScreen(new PJP(juego));

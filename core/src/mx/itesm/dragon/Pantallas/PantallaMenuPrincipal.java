@@ -44,13 +44,13 @@ public class PantallaMenuPrincipal extends Pantalla {
         stageMenu = new Stage(vista);
 
         // Creacion del fondo.
-        fondo = new Fondo(new Texture("FondoMenuPrincipal.jpg"));
+        fondo = new Fondo(new Texture("backgrounds/mainMenu.jpg"));
 
         // Creacion de la musica de fondo y efectos de sonido
-        musica_f = Gdx.audio.newMusic(Gdx.files.internal("premenu.mp3"));
-        jugar = Gdx.audio.newSound(Gdx.files.internal("jugar.wav"));
-        config = Gdx.audio.newSound(Gdx.files.internal("config.wav"));
-        acerca = Gdx.audio.newSound(Gdx.files.internal("config.wav"));
+        musica_f = Gdx.audio.newMusic(Gdx.files.internal("music/premenu.mp3"));
+        jugar = Gdx.audio.newSound(Gdx.files.internal("music/jugar.wav"));
+        config = Gdx.audio.newSound(Gdx.files.internal("music/config.wav"));
+        acerca = Gdx.audio.newSound(Gdx.files.internal("music/config.wav"));
 
         // Reproduccion de la musica de fondo
         musica_f.setVolume(1);
@@ -61,31 +61,31 @@ public class PantallaMenuPrincipal extends Pantalla {
         ImageButton imgDragon = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonPlayDragon1.png"))));
+                                new Texture("textures/dragonPlay1.png"))));
 
         ImageButton btnPlay = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonPlay1.png"))),
+                                new Texture("buttons/play.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonPlay2.png"))));
+                                new Texture("buttons/playPressed.png"))));
 
         ImageButton btnInfo = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de 2.png"))),
+                                new Texture("buttons/about.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de 1.png"))));
+                                new Texture("buttons/aboutPressed.png"))));
 
         ImageButton btnConfig = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonConfiguracion2.png"))),
+                                new Texture("buttons/settings.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonConfiguracion1.png"))));
+                                new Texture("buttons/settingsPressed.png"))));
 
         // Posición de los botones.
         imgDragon.setPosition((ANCHO / 2) - imgDragon.getWidth() / 2,ALTO * 0.15F);

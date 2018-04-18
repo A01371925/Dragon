@@ -16,7 +16,7 @@ public class Texto {
     private String mensaje;
 
     public Texto(){
-        font = new BitmapFont(Gdx.files.internal("fuenteScore.fnt"));
+        font = new BitmapFont(Gdx.files.internal("fonts/fuenteScore.fnt"));
         glyph = new GlyphLayout();
     }
 

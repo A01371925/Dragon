@@ -41,40 +41,40 @@ public class PantallaConfiguracion extends Pantalla {
     private void crearConfiguracion() {
         // Creación escena Pantalla configuración.
         stageConfiguracion = new Stage(vista);
-        fondo = new Fondo(new Texture("FondoConfiguracion.png"));
+        fondo = new Fondo(new Texture("backgrounds/settings.png"));
 
         // Creación de los botones a la Pantalla Acerca De.
         ImageButton btnRegresar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonRegresar.png"))),
+                                new Texture("buttons/return.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonRegresar2.png"))));
+                                new Texture("buttons/returnPressed.png"))));
         ImageButton btnSFX = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton SFX.png"))),
+                                new Texture("buttons/sfx.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton SFX Presionado.png"))));
+                                new Texture("buttons/sfxPressed.png"))));
         ImageButton btnMusic = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonMusica1.png"))),
+                                new Texture("buttons/music.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonMusica2.png"))));
+                                new Texture("buttons/musicPressed.png"))));
         ImageButton btnReset = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonReset.png"))),
+                                new Texture("buttons/reset.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonResetPresionado.png"))));
+                                new Texture("buttons/resetPressed.png"))));
 
-        musica_f = Gdx.audio.newMusic(Gdx.files.internal("Kevin MacLeod _ Bumbly March_preconfig.mp3"));
-        regresar = Gdx.audio.newSound(Gdx.files.internal("regresar.wav"));
+        musica_f = Gdx.audio.newMusic(Gdx.files.internal("music/Kevin MacLeod _ Bumbly March_preconfig.mp3"));
+        regresar = Gdx.audio.newSound(Gdx.files.internal("music/regresar.wav"));
 
         musica_f.setVolume(1);
         musica_f.play();
@@ -118,7 +118,7 @@ public class PantallaConfiguracion extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
+                // Cambia de pantalla, solo puede hacerlo 'juego'.
             }
         });
 

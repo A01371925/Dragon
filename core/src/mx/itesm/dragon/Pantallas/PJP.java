@@ -136,13 +136,13 @@ public class PJP extends Pantalla {
 
     private void initMusica() {
         // Música y SFX
-        musica_f = Gdx.audio.newMusic(Gdx.files.internal("Hyrule Field - The Legend of Zelda Twilight Princess.mp3"));
-        flecha_s = Gdx.audio.newSound(Gdx.files.internal("flecha.wav"));
-        colision = Gdx.audio.newSound(Gdx.files.internal("colision.wav"));
-        fuego = Gdx.audio.newSound(Gdx.files.internal("fuego.wav"));
-        pausa = Gdx.audio.newSound(Gdx.files.internal("pausa.wav"));
-        reanudar = Gdx.audio.newSound(Gdx.files.internal("reanudar.wav"));
-        impacto = Gdx.audio.newSound(Gdx.files.internal("impacto.wav"));
+        musica_f = Gdx.audio.newMusic(Gdx.files.internal("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3"));
+        flecha_s = Gdx.audio.newSound(Gdx.files.internal("music/flecha.wav"));
+        colision = Gdx.audio.newSound(Gdx.files.internal("music/colision.wav"));
+        fuego = Gdx.audio.newSound(Gdx.files.internal("music/fuego.wav"));
+        pausa = Gdx.audio.newSound(Gdx.files.internal("music/pausa.wav"));
+        reanudar = Gdx.audio.newSound(Gdx.files.internal("music/reanudar.wav"));
+        impacto = Gdx.audio.newSound(Gdx.files.internal("music/impacto.wav"));
 
         // Reproducir música de fondo
         musica_f.setVolume(.5f);
@@ -152,30 +152,30 @@ public class PJP extends Pantalla {
 
     private void initPausa() {
         stagePausa = new Stage(vista);
-        fondoPausa = new Fondo(new Texture("FondoPausa.png"));
+        fondoPausa = new Fondo(new Texture("backgrounds/pause.png"));
 
         btnReanudar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonReanudar1.png"))),
+                        new Texture("buttons/resume.png"))),
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonReanudar2.png"))));
+                        new Texture("buttons/resumePressed.png"))));
         btnMusica = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMusica1.png"))),
+                        new Texture("buttons/music.png"))),
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMusica2.png"))));
+                        new Texture("buttons/musicPressed.png"))));
         btnSFX = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton SFX.png"))),
+                                new Texture("buttons/sfx.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton SFX Presionado.png"))));
+                                new Texture("buttons/sfxPressed.png"))));
         btnMenu = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMenu1.png"))),
+                        new Texture("buttons/mainMenu.png"))),
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMenu2.png"))));
+                        new Texture("buttons/mainMenuPressed.png"))));
 
         // Se anexan las Escenas al Multiplexor.
         multiplexer.addProcessor(stagePausa);
@@ -200,25 +200,26 @@ public class PJP extends Pantalla {
         puntos = new Texto();
         texto = new Texto();
 
-        barraVida = new Image(new Texture("barraVida.png"));
-        v1 = new Image(new Texture("Vida.png"));
-        v2 = new Image(new Texture("Vida.png"));
-        v3 = new Image(new Texture("Vida.png"));
-        v4 = new Image(new Texture("Vida.png"));
+        barraVida = new Image(new Texture("textures/healthBar.png"));
+        v1 = new Image(new Texture("textures/heart.png"));
+        v2 = new Image(new Texture("textures/heart.png"));
+        v3 = new Image(new Texture("textures/heart.png"));
+        v4 = new Image(new Texture("textures/heart.png"));
         btnPausa = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("botonPausa.png"))));
+                        new Texture("buttons/pause.png"))));
 
-        framesDragon = new Dragon("framesDragon.png");
+        framesDragon = new Dragon("frames/dragon.png");
         dragon = new AnimatedImage(framesDragon.animacion());
-        framesJefeFinal = new JefeFinal("framesJefeFinal.png");
+        framesJefeFinal = new JefeFinal("frames/finalBoss1.png");
         jefeFinal = new AnimatedImage(framesJefeFinal.animacion());
 
-        fondo = new Fondo(new Texture("fondoNivel1.png"));
-        proyectil = new Texture("BolaFuego.png");
-        proyectilJefeFinal = new Texture("roca.png");
-        flecha = new Texture("Flecha.png");
-        pocima = new Texture("Pocima.png");
+        fondo = new Fondo(new Texture("backgrounds/level1.png"));
+
+        proyectil = new Texture("textures/fireBall.png");
+        proyectilJefeFinal = new Texture("textures/rock.png");
+        flecha = new Texture("textures/arrow.png");
+        pocima = new Texture("textures/potion.png");
         vida = new Vida(pocima,0,0);
 
         // Se anexan las Escenas al Multiplexor.
@@ -227,7 +228,7 @@ public class PJP extends Pantalla {
 
     private void initGanar(){
         stageGanar = new Stage(vista);
-        fondoGanar = new Fondo(new Texture("fondoPasado.png"));
+        fondoGanar = new Fondo(new Texture("backgrounds/win.png"));
         /*btnSigNivel = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -237,28 +238,30 @@ public class PJP extends Pantalla {
                                 new Texture("BotonResetPresionado.png"))));*/
         btnMenuGanar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMenu1.png"))),
+                        new Texture("buttons/mainMenu.png"))),
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMenu2.png"))));
+                        new Texture("buttons/mainMenuPressed.png"))));
 
         multiplexer.addProcessor(stageGanar);
     }
 
     private void initPerder(){
         stagePerder = new Stage(vista);
-        fondoPerder = new Fondo(new Texture("fondoGameOver.png"));
+        fondoPerder = new Fondo(new Texture("backgrounds/gameOver.png"));
+
         btnReiniciar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonReset.png"))),
+                                new Texture("buttons/reset.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonResetPresionado.png"))));
+                                new Texture("buttons/resetPressed.png"))));
+
         btnMenuPerder = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMenu1.png"))),
+                        new Texture("buttons/mainMenu.png"))),
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture("BotonMenu2.png"))));
+                        new Texture("buttons/mainMenuPressed.png"))));
 
         multiplexer.addProcessor(stagePerder);
     }
@@ -332,8 +335,7 @@ public class PJP extends Pantalla {
     private void setStagePerder(){
         //btnReiniciar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f);
 
-        btnMenuPerder.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50
-        );
+        btnMenuPerder.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50);
 
         btnMenuPerder.addListener(new ClickListener(){
             @Override
@@ -354,9 +356,6 @@ public class PJP extends Pantalla {
     public void render(float delta) {
         switch (estado) {
             case JUGANDO:
-                if (xDragon != 0 ){ // solución temporal
-                    dragon.setPosition(xDragon, yDragon);
-                }
                 actualizarObjetos(delta);
                 stagePausa.unfocusAll();
                 batch.begin();
@@ -404,6 +403,7 @@ public class PJP extends Pantalla {
                 batch.end();
                 if (btnReanudar.isPressed()) {
                     reanudar.play();
+                    dragon.setPosition(xDragon, yDragon);
                     estado = Estado.JUGANDO;
                 }
                 stagePausa.draw();
@@ -426,6 +426,7 @@ public class PJP extends Pantalla {
                 stageGanar.draw();
                 break;
         }
+        // Gdx.app.log("render", "fps="+Gdx.graphics.getFramesPerSecond());
     }
 
     private void actualizarObjetos(float delta) {

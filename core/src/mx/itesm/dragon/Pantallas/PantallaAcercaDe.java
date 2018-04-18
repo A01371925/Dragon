@@ -42,11 +42,11 @@ public class PantallaAcercaDe extends Pantalla {
     private void crearAcercaDe() {
         // Creación escena Acerca De.
         stageAcercaDe = new Stage(vista);
-        fondo = new Fondo(new Texture("FondoAcercaDe.png"));
+        fondo = new Fondo(new Texture("backgrounds/about.png"));
 
         // Creacion de musica y sonido
-        musica_f =  Gdx.audio.newMusic(Gdx.files.internal("preacerca.mp3"));
-        regresar =  Gdx.audio.newSound(Gdx.files.internal("regresar.wav"));
+        musica_f =  Gdx.audio.newMusic(Gdx.files.internal("music/preacerca.mp3"));
+        regresar =  Gdx.audio.newSound(Gdx.files.internal("music/regresar.wav"));
 
         musica_f.setVolume(1);
         musica_f.play();
@@ -56,30 +56,30 @@ public class PantallaAcercaDe extends Pantalla {
         ImageButton btnRegresar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonRegresar.png"))),
+                                new Texture("buttons/return.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonRegresar2.png"))));
+                                new Texture("buttons/returnPressed.png"))));
         ImageButton btnAna = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de Ana.png"))));
+                                new Texture("buttons/aboutAna.png"))));
         ImageButton btnCharlotte = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de Charlotte.png"))));
+                                new Texture("buttons/aboutCharlotte.png"))));
         ImageButton btnJorge = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de Jorge.png"))));
+                                new Texture("buttons/aboutJorge.png"))));
         ImageButton btnLuis = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de Luis.png"))));
+                                new Texture("buttons/aboutLuis.png"))));
         ImageButton btnMarco = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("Boton Acerca de Marco.png"))));
+                                new Texture("buttons/aboutMarco.png"))));
 
         // Posición de los botones.
         btnLuis.setPosition(85,900);
