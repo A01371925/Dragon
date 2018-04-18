@@ -16,7 +16,6 @@ import mx.itesm.dragon.Objetos.Pantalla;
 
 class PantallaCargando extends Pantalla
 {
-    private Juego juego;
     private float tiempo;   // Tiempo transcurrido
 
     private Stage stage;
@@ -25,7 +24,7 @@ class PantallaCargando extends Pantalla
     private AnimatedImage dragon;
 
     public PantallaCargando(Juego juego) {
-        this.juego = juego;
+        super(juego);
     }
 
     // Se ejecuta cuando esta pantalla es la principal del juego

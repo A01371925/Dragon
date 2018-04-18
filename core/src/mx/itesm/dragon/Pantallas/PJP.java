@@ -33,8 +33,6 @@ import mx.itesm.dragon.Objetos.Vida;
 
 public class PJP extends Pantalla {
 
-    private final Juego juego;
-
     private static final float ALTO_MAPA = 2560;
 
     private float timerProyectil;
@@ -110,7 +108,7 @@ public class PJP extends Pantalla {
 
 
     public PJP(Juego juego) {
-        this.juego = juego;
+        super(juego);
         estado = Estado.JUGANDO;
     }
 
@@ -344,8 +342,10 @@ public class PJP extends Pantalla {
             }
         });
 
+
+
         stagePerder.addActor(btnMenuPerder);
-        //stagePerder.addActor(btnReiniciar);
+        stagePerder.addActor(btnReiniciar);
 
 
 

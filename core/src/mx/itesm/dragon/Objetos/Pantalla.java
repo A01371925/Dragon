@@ -2,14 +2,19 @@ package mx.itesm.dragon.Objetos;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import mx.itesm.dragon.Juego;
+
 public abstract class Pantalla implements Screen{
 
+    protected final Juego juego;
+    protected  final AssetManager assetManager;
     // Dimensiones.
     public static final float ANCHO = 720;
     public static final float ALTO = 1280;
@@ -22,7 +27,9 @@ public abstract class Pantalla implements Screen{
     // Todas las pantallas dibujan.
     protected SpriteBatch batch;
 
-    public Pantalla() {
+    public Pantalla(Juego juego) {
+        this.juego = juego;
+        this.assetManager = juego.getAssetManager();
         // Crea la cámara con las dimensiones del mundo.
         camara = new OrthographicCamera(ANCHO, ALTO);
         camara.position.set(ANCHO / 2, ALTO /2,0);
@@ -40,8 +47,8 @@ public abstract class Pantalla implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
     // Borra la pantalla con el color RGB (r,g,b)
-    protected void borrarPantalla(float r, float g, float b) {
-        Gdx.gl.glClearColor(r,g,b,1);
+    protected void borrarPantalla(float r, float g, float b, float a) {
+        Gdx.gl.glClearColor(r,g,b,a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 

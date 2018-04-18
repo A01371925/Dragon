@@ -15,7 +15,6 @@ import mx.itesm.dragon.Objetos.Fondo;
 import mx.itesm.dragon.Objetos.Pantalla;
 
 public class PantallaMenuPrincipal extends Pantalla {
-    private final Juego juego;
 
     // Escena para el menu.
     private Stage stageMenu;
@@ -23,16 +22,8 @@ public class PantallaMenuPrincipal extends Pantalla {
     // Fondo.
     private Fondo fondo;
 
-    // Musica de fondo
-    private Music musica_f;
-
-    // Efectos de sonido
-    private Sound jugar;
-    private Sound config;
-    private Sound acerca;
-
     public PantallaMenuPrincipal(Juego juego) {
-        this.juego = juego;
+        super(juego);
     }
 
     public void show() {
@@ -44,55 +35,59 @@ public class PantallaMenuPrincipal extends Pantalla {
         stageMenu = new Stage(vista);
 
         // Creacion del fondo.
-        fondo = new Fondo(new Texture("backgrounds/mainMenu.jpg"));
+        Texture mainMenu = assetManager.get("backgrounds/mainMenu.jpg");
+        fondo = new Fondo(mainMenu);
 
-        // Creacion de la musica de fondo y efectos de sonido
-        musica_f = Gdx.audio.newMusic(Gdx.files.internal("music/premenu.mp3"));
-        jugar = Gdx.audio.newSound(Gdx.files.internal("music/jugar.wav"));
-        config = Gdx.audio.newSound(Gdx.files.internal("music/config.wav"));
-        acerca = Gdx.audio.newSound(Gdx.files.internal("music/config.wav"));
+        // Creacion de la musica de fondo.
+        Music musicMenu = assetManager.get("music/premenu.mp3");
 
         // Reproduccion de la musica de fondo
-        musica_f.setVolume(1);
-        musica_f.play();
-        musica_f.setLooping(true);
+        musicMenu.setVolume(1);
+        musicMenu.play();
+        musicMenu.setLooping(true);
 
         // Creación de los botones del menú.
+        Texture textureDragon = assetManager.get("textures/dragonPlay1.png");
+        Texture textureBtnPlay = assetManager.get("buttons/play.png");
+        Texture textureBtnPressPlay = assetManager.get("buttons/playPressed.png");
+        Texture textureBtnAU = assetManager.get("buttons/about.png");
+        Texture textureBtnPressAU = assetManager.get("buttons/aboutPressed.png");
+        Texture textureBtnSettings = assetManager.get("buttons/settings.png");
+        Texture textureBtnPressSettings = assetManager.get("buttons/settingsPressed.png");
         ImageButton imgDragon = new ImageButton(
                 new TextureRegionDrawable(
-                        new TextureRegion(
-                                new Texture("textures/dragonPlay1.png"))));
+                        new TextureRegion(textureDragon)));
 
         ImageButton btnPlay = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/play.png"))),
+                                textureBtnPlay)),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/playPressed.png"))));
+                                textureBtnPressPlay)));
 
-        ImageButton btnInfo = new ImageButton(
+        ImageButton btnAU = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/about.png"))),
+                                textureBtnAU)),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/aboutPressed.png"))));
+                                textureBtnPressAU)));
 
         ImageButton btnConfig = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/settings.png"))),
+                                textureBtnSettings)),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/settingsPressed.png"))));
+                                textureBtnPressSettings)));
 
         // Posición de los botones.
         imgDragon.setPosition((ANCHO / 2) - imgDragon.getWidth() / 2,ALTO * 0.15F);
 
         btnPlay.setPosition((ANCHO / 2) - btnPlay.getWidth() / 2,imgDragon.getHeight() * 0.53f );
 
-        btnInfo.setPosition(ANCHO - btnInfo.getWidth()-10,ALTO - btnInfo.getHeight()-20);
+        btnAU.setPosition(ANCHO - btnAU.getWidth()-10,ALTO - btnAU.getHeight()-20);
 
         btnConfig.setPosition(ANCHO - btnConfig.getWidth()-20,btnConfig.getHeight()/4);
 
@@ -101,21 +96,19 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                jugar.play();
-                //jugar.stop();
-                // Gdx.app.log("ClickedListener","Hizo click el usuario");
+                Sound soundPlay = assetManager.get("music/jugar.wav");
+                soundPlay.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
                 juego.setScreen(new PantallaCargando(juego));
             }
         });
 
-        btnInfo.addListener(new ClickListener() {
+        btnAU.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                acerca.play();
-                //acerca.stop();
-                // Gdx.app.log("ClickedListener","Hizo click el usuario");
+                Sound soundAU = assetManager.get("music/config.wav");
+                soundAU.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
                 juego.setScreen(new PantallaAcercaDe(juego));
             }
@@ -126,8 +119,8 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                config.play();
-                //config.stop();
+                Sound soundSettings = assetManager.get("music/config.wav");
+                soundSettings.play();
                 juego.setScreen(new PantallaConfiguracion(juego));
             }
         });
@@ -135,7 +128,7 @@ public class PantallaMenuPrincipal extends Pantalla {
         // Se agregan elementos al menú.
         stageMenu.addActor(imgDragon);
         stageMenu.addActor(btnPlay);
-        stageMenu.addActor(btnInfo);
+        stageMenu.addActor(btnAU);
         stageMenu.addActor(btnConfig);
 
         // Indica quién escucha y atiende eventos.
@@ -167,10 +160,17 @@ public class PantallaMenuPrincipal extends Pantalla {
     public void dispose() {
         stageMenu.dispose();
         batch.dispose();
-        musica_f.dispose();
-        acerca.dispose();
-        jugar.dispose();
-        config.dispose();
+        assetManager.unload("backgrounds/mainMenu.jpg");
+        assetManager.unload("textures/dragonPlay1.png");
+        assetManager.unload("buttons/play.png");
+        assetManager.unload("buttons/playPressed.png");
+        assetManager.unload("buttons/about.png");
+        assetManager.unload("buttons/aboutPressed.png");
+        assetManager.unload("buttons/settings.png");
+        assetManager.unload("buttons/settingsPressed.png");
+        assetManager.unload("music/premenu.mp3");
+        assetManager.unload("music/jugar.wav");
+        assetManager.unload("music/config.wav");
     }
 }
 

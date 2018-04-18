@@ -17,8 +17,6 @@ import mx.itesm.dragon.Objetos.Pantalla;
 
 public class PantallaConfiguracion extends Pantalla {
 
-    private final Juego juego;
-
     // Escena para el menu.
     private Stage stageConfiguracion;
 
@@ -30,7 +28,7 @@ public class PantallaConfiguracion extends Pantalla {
     private Sound regresar;
 
     PantallaConfiguracion(Juego juego) {
-        this.juego = juego;
+        super(juego);
     }
 
     @Override
