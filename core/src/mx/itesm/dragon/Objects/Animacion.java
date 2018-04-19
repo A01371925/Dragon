@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Objetos;
+package mx.itesm.dragon.Objects;
 
 
 import com.badlogic.gdx.graphics.Texture;

@@ -1,20 +1,21 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
-import mx.itesm.dragon.Juego;
-import mx.itesm.dragon.Objetos.Pantalla;
+import mx.itesm.dragon.States.ScreenState;
+import mx.itesm.dragon.Main;
+import mx.itesm.dragon.Levels.LevelOne;
 
-public class LoadingScreen extends Pantalla {
+public class LoadingScreen extends GenericScreen {
 
-    private GameState gameState;
+    private ScreenState gameState;
 
     private Texture loadingTexture;
 
-    public LoadingScreen(Juego juego, GameState gameState) {
-        super(juego);
+    public LoadingScreen(Main game, ScreenState gameState) {
+        super(game);
         this.gameState = gameState;
     }
 
@@ -60,7 +61,7 @@ public class LoadingScreen extends Pantalla {
                 break;
             case LVL_TWO:
                 break;
-            case LVL_TRES:
+            case LVL_THREE:
                 break;
             default:
         }
@@ -79,24 +80,24 @@ public class LoadingScreen extends Pantalla {
         if (assetManager.update()) {
             switch (gameState) {
                 case MENU:
-                    juego.setScreen(new PantallaMenuPrincipal(juego));
+                    game.setScreen(new MenuScreen(game));
                     break;
                 case SETTINGS:
-                    juego.setScreen(new PantallaConfiguracion(juego));
+                    game.setScreen(new SettingsScreen(game));
                     break;
                 case ABOUT:
-                    juego.setScreen(new PantallaAcercaDe(juego));
+                    game.setScreen(new AboutScreen(game));
                     break;
                 case LEVELS:
                     // TODO
                     break;
                 case LVL_ONE:
-                    juego.setScreen(new LevelOne(juego));
+                    game.setScreen(new LevelOne(game));
                     break;
                 case LVL_TWO:
                     // TODO
                     break;
-                case LVL_TRES:
+                case LVL_THREE:
                     // TODO
                     break;
                 default:

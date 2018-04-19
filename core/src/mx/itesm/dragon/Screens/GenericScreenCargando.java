@@ -1,37 +1,36 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon.Screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import mx.itesm.dragon.Juego;
-import mx.itesm.dragon.Objetos.AnimatedImage;
-import mx.itesm.dragon.Objetos.Dragon;
-import mx.itesm.dragon.Objetos.Fondo;
-import mx.itesm.dragon.Objetos.Pantalla;
+import mx.itesm.dragon.Main;
+import mx.itesm.dragon.Levels.LevelOne;
+import mx.itesm.dragon.Utils.AnimatedImage;
+import mx.itesm.dragon.Objects.Dragon;
+import mx.itesm.dragon.Utils.BackGround;
 
 /**
  * Muestra una pantalla inicial durante cierto tiempo.
  */
 
-class PantallaCargando extends Pantalla
+class GenericScreenCargando extends GenericScreen
 {
     private float tiempo;   // Tiempo transcurrido
 
     private Stage stage;
     private Dragon framesDragon;
-    private Fondo fondo;
+    private BackGround backGround;
     private AnimatedImage dragon;
 
-    public PantallaCargando(Juego juego) {
-        super(juego);
+    public GenericScreenCargando(Main game) {
+        super(game);
     }
 
-    // Se ejecuta cuando esta pantalla es la principal del juego
+    // Se ejecuta cuando esta pantalla es la principal del game
     @Override
     public void show() {
         stage = new Stage(vista);
-        fondo = new Fondo(new Texture("backgrounds/loading.jpg"));
+        backGround = new BackGround(new Texture("backgrounds/loading.jpg"));
         framesDragon = new Dragon("frames/loading.png", 448, 179, 6, 0.2f);
         dragon = new AnimatedImage(framesDragon.animacion());
         tiempo = 0;
@@ -44,12 +43,12 @@ class PantallaCargando extends Pantalla
         borrarPantalla();
         dragon.act(delta);
         batch.begin();
-            fondo.render(batch);
+            backGround.render(batch);
         batch.end();
         // TTL loading screen
         tiempo += delta;  // Acumula tiempo
         if (tiempo>=3) {
-            juego.setScreen(new PJP(juego));
+            game.setScreen(new LevelOne(game));
         }
         stage.draw();
     }

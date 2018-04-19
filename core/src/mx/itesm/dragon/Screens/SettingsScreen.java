@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -11,20 +11,37 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-import mx.itesm.dragon.Juego;
-import mx.itesm.dragon.Objetos.Fondo;
-import mx.itesm.dragon.Objetos.Pantalla;
+import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.ScreenState;
+import mx.itesm.dragon.Utils.BackGround;
 
-public class PantallaConfiguracion extends Pantalla {
+public class SettingsScreen extends GenericScreen {
 
     // Escena para el menu.
     private Stage stageConfiguracion;
 
-    // Fondo.
-    private Fondo fondo;
+    private ImageButton btnRegresar;
+    private ImageButton btnSFX;
+    private ImageButton btnMusic;
+    private ImageButton btnReset;
 
-    PantallaConfiguracion(Juego juego) {
-        super(juego);
+    // BackGround.
+    private BackGround backGround;
+    private Texture textureBackground;
+
+    private Texture textureBtnReturn;
+    private Texture textureBtnPressReturn;
+    private Texture textureBtnSFX;
+    private Texture textureBtnPressSFX;
+    private Texture textureBtnMusic;
+    private Texture textureBtnPressMusic;
+    private Texture textureBtnReset;
+    private Texture textureBtnPressReset;
+    private Music musicSettings;
+    private Sound soundReturn;
+
+    SettingsScreen(Main game) {
+        super(game);
     }
 
     @Override
@@ -33,53 +50,55 @@ public class PantallaConfiguracion extends Pantalla {
     }
 
     private void crearConfiguracion() {
-        // Creación escena Pantalla configuración.
+        // Creación escena GenericScreen configuración.
         stageConfiguracion = new Stage(vista);
 
-        Texture textureBackground = assetManager.get("backgrounds/settings.png");
-        fondo = new Fondo(textureBackground);
-        // Creación de los botones a la Pantalla Acerca De.
-        Texture textureBtnReturn = assetManager.get("buttons/return.png");
-        Texture textureBtnPressReturn = assetManager.get("buttons/returnPressed.png");
-        Texture textureBtnSFX = assetManager.get("buttons/sfx.png");
-        Texture textureBtnPressSFX = assetManager.get("buttons/sfxPressed.png");
-        Texture textureBtnMusic = assetManager.get("buttons/music.png");
-        Texture textureBtnPressMusic = assetManager.get("buttons/musicPressed.png");
-        Texture textureBtnReset = assetManager.get("buttons/reset.png");
-        Texture textureBtnPressReset = assetManager.get("buttons/resetPressed.png");
-        ImageButton btnRegresar = new ImageButton(
+        //
+        textureBackground = assetManager.get("backgrounds/settings.png");
+        backGround = new BackGround(textureBackground);
+        textureBtnReturn = assetManager.get("buttons/return.png");
+        textureBtnPressReturn = assetManager.get("buttons/returnPressed.png");
+        textureBtnSFX = assetManager.get("buttons/sfx.png");
+        textureBtnPressSFX = assetManager.get("buttons/sfxPressed.png");
+        textureBtnMusic = assetManager.get("buttons/music.png");
+        textureBtnPressMusic = assetManager.get("buttons/musicPressed.png");
+        textureBtnReset = assetManager.get("buttons/reset.png");
+        textureBtnPressReset = assetManager.get("buttons/resetPressed.png");
+
+        btnRegresar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnReturn)),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressReturn)));
-        ImageButton btnSFX = new ImageButton(
+        btnSFX = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnSFX)),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressSFX)));
-        ImageButton btnMusic = new ImageButton(
+        btnMusic = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnMusic)),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressMusic)));
-        ImageButton btnReset = new ImageButton(
+        btnReset = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnReset)),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressReset)));
-        Music musicSettings = assetManager.get("music/Kevin MacLeod _ Bumbly March_preconfig.mp3");
+
+        musicSettings = assetManager.get("music/Kevin MacLeod _ Bumbly March_preconfig.mp3");
+        soundReturn = assetManager.get("music/regresar.wav");
         musicSettings.setVolume(1);
         musicSettings.play();
         musicSettings.setLooping(true);
-
 
         // Posición de los botones.
         btnReset.setPosition(ANCHO / 2 - btnReset.getWidth() / 2, ALTO / 2 + btnReset.getHeight() / 2);
@@ -92,10 +111,9 @@ public class PantallaConfiguracion extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Sound soundReturn = assetManager.get("music/regresar.wav");
                 soundReturn.play();
-                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new LoadingScreen(juego, GameState.MENU));
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+                game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
         });
 
@@ -104,14 +122,14 @@ public class PantallaConfiguracion extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
             }
         });
         btnMusic.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
             }
         });
 
@@ -119,11 +137,11 @@ public class PantallaConfiguracion extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                // Cambia de pantalla, solo puede hacerlo 'juego'.
+                // Cambia de pantalla, solo puede hacerlo 'game'.
             }
         });
 
-        // Se agregan elementos a la Pantalla Configuración.
+        // Se agregan elementos a la GenericScreen Configuración.
         stageConfiguracion.addActor(btnRegresar);
         stageConfiguracion.addActor(btnSFX);
         stageConfiguracion.addActor(btnMusic);
@@ -142,7 +160,7 @@ public class PantallaConfiguracion extends Pantalla {
         borrarPantalla();
         batch.begin();
             // Dibujar elementos de la pantalla.
-            fondo.render(batch);
+            backGround.render(batch);
         batch.end();
         stageConfiguracion.draw();
     }

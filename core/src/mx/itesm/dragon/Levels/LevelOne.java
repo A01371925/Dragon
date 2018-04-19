@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon.Levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -19,19 +19,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import mx.itesm.dragon.Estados.Estado;
-import mx.itesm.dragon.Juego;
-import mx.itesm.dragon.Objetos.AnimatedImage;
-import mx.itesm.dragon.Objetos.Dragon;
-import mx.itesm.dragon.Objetos.Enemigos;
-import mx.itesm.dragon.Objetos.Fondo;
-import mx.itesm.dragon.Objetos.JefeFinal;
-import mx.itesm.dragon.Objetos.Pantalla;
-import mx.itesm.dragon.Objetos.Proyectil;
-import mx.itesm.dragon.Objetos.Texto;
-import mx.itesm.dragon.Objetos.Vida;
+import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.GameState;
+import mx.itesm.dragon.Screens.MenuScreen;
+import mx.itesm.dragon.Utils.AnimatedImage;
+import mx.itesm.dragon.Objects.Dragon;
+import mx.itesm.dragon.Objects.Enemigos;
+import mx.itesm.dragon.Utils.BackGround;
+import mx.itesm.dragon.Objects.JefeFinal;
+import mx.itesm.dragon.Screens.GenericScreen;
+import mx.itesm.dragon.Objects.Proyectil;
+import mx.itesm.dragon.Utils.Text;
+import mx.itesm.dragon.Objects.Vida;
 
-public class PJP extends Pantalla {
+public class LevelOne extends GenericScreen {
 
     private static final float ALTO_MAPA = 2560;
 
@@ -63,10 +64,10 @@ public class PJP extends Pantalla {
     private ArrayList<Enemigos> listaFlechas;
     private ArrayList<Vida> listaVidas;
 
-    private Fondo fondo;
-    private Fondo fondoPausa;
-    private Fondo fondoGanar;
-    private Fondo fondoPerder;
+    private BackGround backGround;
+    private BackGround backGroundPausa;
+    private BackGround backGroundGanar;
+    private BackGround backGroundPerder;
 
     private Vida vida;
     private JefeFinal framesJefeFinal;
@@ -86,7 +87,7 @@ public class PJP extends Pantalla {
     private ImageButton btnMenuGanar;
     private ImageButton btnSigNivel;
 
-    private Estado estado;
+    private GameState gameState;
 
     private InputMultiplexer multiplexer;
 
@@ -101,15 +102,15 @@ public class PJP extends Pantalla {
     // Marcador.
     private int puntosJugador = 0;
     private String letras;
-    private Texto puntos;  // Muestra los valores en pantalla
-    private Texto texto;
+    private Text puntos;  // Muestra los valores en pantalla
+    private Text text;
     private float timerVida;
     private float timerProyectilJefeFinal;
 
 
-    public PJP(Juego juego) {
-        super(juego);
-        estado = Estado.JUGANDO;
+    public LevelOne(Main game) {
+        super(game);
+        gameState = GameState.JUGANDO;
     }
 
     @Override
@@ -142,7 +143,7 @@ public class PJP extends Pantalla {
         reanudar = Gdx.audio.newSound(Gdx.files.internal("music/reanudar.wav"));
         impacto = Gdx.audio.newSound(Gdx.files.internal("music/impacto.wav"));
 
-        // Reproducir música de fondo
+        // Reproducir música de backGround
         musica_f.setVolume(.5f);
         musica_f.play();
         musica_f.setLooping(true);
@@ -150,7 +151,7 @@ public class PJP extends Pantalla {
 
     private void initPausa() {
         stagePausa = new Stage(vista);
-        fondoPausa = new Fondo(new Texture("backgrounds/pause.png"));
+        backGroundPausa = new BackGround(new Texture("backgrounds/pause.png"));
 
         btnReanudar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
@@ -193,10 +194,10 @@ public class PJP extends Pantalla {
         listaProyectilJefe = new ArrayList<Proyectil>();
         random = new Random();
 
-        // Objeto que dibuja al texto
+        // Objeto que dibuja al text
         letras = "Score";
-        puntos = new Texto();
-        texto = new Texto();
+        puntos = new Text();
+        text = new Text();
 
         barraVida = new Image(new Texture("textures/healthBar.png"));
         v1 = new Image(new Texture("textures/heart.png"));
@@ -212,7 +213,7 @@ public class PJP extends Pantalla {
         framesJefeFinal = new JefeFinal("frames/finalBoss1.png");
         jefeFinal = new AnimatedImage(framesJefeFinal.animacion());
 
-        fondo = new Fondo(new Texture("backgrounds/level1.png"));
+        backGround = new BackGround(new Texture("backgrounds/level1.png"));
 
         proyectil = new Texture("textures/fireBall.png");
         proyectilJefeFinal = new Texture("textures/rock.png");
@@ -226,7 +227,7 @@ public class PJP extends Pantalla {
 
     private void initGanar(){
         stageGanar = new Stage(vista);
-        fondoGanar = new Fondo(new Texture("backgrounds/win.png"));
+        backGroundGanar = new BackGround(new Texture("backgrounds/win.png"));
         /*btnSigNivel = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
@@ -245,7 +246,7 @@ public class PJP extends Pantalla {
 
     private void initPerder(){
         stagePerder = new Stage(vista);
-        fondoPerder = new Fondo(new Texture("backgrounds/gameOver.png"));
+        backGroundPerder = new BackGround(new Texture("backgrounds/gameOver.png"));
 
         btnReiniciar = new ImageButton(
                 new TextureRegionDrawable(
@@ -274,7 +275,7 @@ public class PJP extends Pantalla {
         btnMenu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                juego.setScreen(new PantallaMenuPrincipal(juego));
+                game.setScreen(new MenuScreen(game));
             }
         });
         stagePausa.addActor(btnReanudar);
@@ -324,7 +325,7 @@ public class PJP extends Pantalla {
         btnMenuGanar.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                juego.setScreen(new PantallaMenuPrincipal(juego));
+                game.setScreen(new MenuScreen(game));
             }
         });
         stageGanar.addActor(btnMenuGanar);
@@ -338,7 +339,7 @@ public class PJP extends Pantalla {
         btnMenuPerder.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                juego.setScreen(new PantallaMenuPrincipal(juego));
+                game.setScreen(new MenuScreen(game));
             }
         });
 
@@ -354,15 +355,15 @@ public class PJP extends Pantalla {
 
     @Override
     public void render(float delta) {
-        switch (estado) {
+        switch (gameState) {
             case JUGANDO:
                 actualizarObjetos(delta);
                 stagePausa.unfocusAll();
                 batch.begin();
                 puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
-                fondo.render(batch);
+                backGround.render(batch);
                 //Marcador
-                texto.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
+                text.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO - ANCHO/8, ALTO-50);
 
                 for (Proyectil p: listaProyectil) {
@@ -386,32 +387,32 @@ public class PJP extends Pantalla {
                     yDragon = dragon.getY();
                     dragon.setPosition(-1000, -1000);
                     pausa.play();
-                    estado = Estado.PAUSA;
+                    gameState = GameState.PAUSA;
                 }
                 stageJuego.draw();
                 if(vida.getVidas() == 0){
-                    estado = Estado.PERDER;
+                    gameState = GameState.PERDER;
                 }
 
                 if(framesJefeFinal.getVida() == 0){
-                    estado = Estado.GANAR;
+                    gameState = GameState.GANAR;
                 }
                 break;
             case PAUSA:
                 batch.begin();
-                fondoPausa.render(batch);
+                backGroundPausa.render(batch);
                 batch.end();
                 if (btnReanudar.isPressed()) {
                     reanudar.play();
                     dragon.setPosition(xDragon, yDragon);
-                    estado = Estado.JUGANDO;
+                    gameState = GameState.JUGANDO;
                 }
                 stagePausa.draw();
                 break;
             case PERDER:
                 batch.begin();
-                fondoPerder.render(batch);
-                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
+                backGroundPerder.render(batch);
+                text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 100);
                 batch.end();
 
@@ -419,8 +420,8 @@ public class PJP extends Pantalla {
                 break;
             case GANAR:
                 batch.begin();
-                fondoGanar.render(batch);
-                texto.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4 - 50);
+                backGroundGanar.render(batch);
+                text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4 - 50);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO / 4 - 100);
                 batch.end();
                 stageGanar.draw();
@@ -485,7 +486,7 @@ public class PJP extends Pantalla {
     }
 
     private void actualizarFondo(float delta) {
-        fondo.mover(delta);
+        backGround.mover(delta);
     }
 
     private void actualizarColisiones(float delta) {
@@ -681,12 +682,12 @@ public class PJP extends Pantalla {
 
     @Override
     public void pause() {
-        estado = Estado.PAUSA;
+        gameState = GameState.PAUSA;
     }
 
     @Override
     public void resume() {
-        estado = Estado.PAUSA;
+        gameState = GameState.PAUSA;
     }
 
     @Override

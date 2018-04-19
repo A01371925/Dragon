@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -10,20 +10,41 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import mx.itesm.dragon.Juego;
-import mx.itesm.dragon.Objetos.Fondo;
-import mx.itesm.dragon.Objetos.Pantalla;
 
-public class PantallaMenuPrincipal extends Pantalla {
+import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.ScreenState;
+import mx.itesm.dragon.Utils.BackGround;
+
+public class MenuScreen extends GenericScreen {
 
     // Escena para el menu.
     private Stage stageMenu;
 
-    // Fondo.
-    private Fondo fondo;
+    private ImageButton imgDragon;
+    private ImageButton btnPlay;
+    private ImageButton btnAU;
+    private ImageButton btnConfig;
 
-    public PantallaMenuPrincipal(Juego juego) {
-        super(juego);
+    // BackGround.
+    private BackGround backGround;
+    private Texture textureBackground;
+
+    //
+    private Texture textureDragon;
+    private Texture textureBtnPlay;
+    private Texture textureBtnPressPlay;
+    private Texture textureBtnAU;
+    private Texture textureBtnPressAU;
+    private Texture textureBtnSettings;
+    private Texture textureBtnPressSettings;
+
+    private Music musicMenu;
+    private Sound soundAU;
+    private Sound soundPlay;
+    private Sound soundSettings;
+
+    public MenuScreen(Main game) {
+        super(game);
     }
 
     public void show() {
@@ -34,53 +55,54 @@ public class PantallaMenuPrincipal extends Pantalla {
         // Creación escena menú.
         stageMenu = new Stage(vista);
 
-        // Creacion del fondo.
-        Texture textureBackground = assetManager.get("backgrounds/mainMenu.jpg");
-        fondo = new Fondo(textureBackground);
-
-        // Creacion de la musica de fondo.
-        Music musicMenu = assetManager.get("music/premenu.mp3");
-
-        // Reproduccion de la musica de fondo
-        musicMenu.setVolume(1);
-        musicMenu.play();
-        musicMenu.setLooping(true);
+        // Creacion del backGround.
+        textureBackground = assetManager.get("backgrounds/mainMenu.jpg");
+        backGround = new BackGround(textureBackground);
 
         // Creación de los botones del menú.
-        Texture textureDragon = assetManager.get("textures/dragonPlay1.png");
-        Texture textureBtnPlay = assetManager.get("buttons/play.png");
-        Texture textureBtnPressPlay = assetManager.get("buttons/playPressed.png");
-        Texture textureBtnAU = assetManager.get("buttons/about.png");
-        Texture textureBtnPressAU = assetManager.get("buttons/aboutPressed.png");
-        Texture textureBtnSettings = assetManager.get("buttons/settings.png");
-        Texture textureBtnPressSettings = assetManager.get("buttons/settingsPressed.png");
-        ImageButton imgDragon = new ImageButton(
+        textureDragon = assetManager.get("textures/dragonPlay1.png");
+        textureBtnPlay = assetManager.get("buttons/play.png");
+        textureBtnPressPlay = assetManager.get("buttons/playPressed.png");
+        textureBtnAU = assetManager.get("buttons/about.png");
+        textureBtnPressAU = assetManager.get("buttons/aboutPressed.png");
+        textureBtnSettings = assetManager.get("buttons/settings.png");
+        textureBtnPressSettings = assetManager.get("buttons/settingsPressed.png");
+        imgDragon = new ImageButton(
                 new TextureRegionDrawable(
-                        new TextureRegion(textureDragon)));
-
-        ImageButton btnPlay = new ImageButton(
+                        new TextureRegion(
+                                textureDragon)));
+        btnPlay = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPlay)),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressPlay)));
-
-        ImageButton btnAU = new ImageButton(
+        btnAU = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnAU)),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressAU)));
-
-        ImageButton btnConfig = new ImageButton(
+        btnConfig = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnSettings)),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressSettings)));
+
+        // Creacion de la musica de backGround.
+        musicMenu = assetManager.get("music/premenu.mp3");
+        soundAU = assetManager.get("music/config.wav");
+        soundPlay = assetManager.get("music/jugar.wav");
+        soundSettings = assetManager.get("music/config.wav");
+
+        // Reproduccion de la musica de backGround
+        musicMenu.setVolume(1);
+        musicMenu.play();
+        musicMenu.setLooping(true);
 
         // Posición de los botones.
         imgDragon.setPosition((ANCHO / 2) - imgDragon.getWidth() / 2,ALTO * 0.15F);
@@ -96,10 +118,9 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Sound soundPlay = assetManager.get("music/jugar.wav");
                 soundPlay.play();
-                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new PantallaCargando(juego));
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+                game.setScreen(new GenericScreenCargando(game));
             }
         });
 
@@ -107,10 +128,9 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Sound soundAU = assetManager.get("music/config.wav");
                 soundAU.play();
-                // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new PantallaAcercaDe(juego));
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+                game.setScreen(new AboutScreen(game));
             }
         });
 
@@ -119,9 +139,8 @@ public class PantallaMenuPrincipal extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                Sound soundSettings = assetManager.get("music/config.wav");
                 soundSettings.play();
-                juego.setScreen(new LoadingScreen(juego, GameState.SETTINGS));
+                game.setScreen(new LoadingScreen(game, ScreenState.SETTINGS));
             }
         });
 
@@ -141,7 +160,7 @@ public class PantallaMenuPrincipal extends Pantalla {
         borrarPantalla();
         batch.begin();
             // Dibujar elementos de la pantalla.
-            fondo.render(batch);
+            backGround.render(batch);
         batch.end();
         stageMenu.draw();
     }

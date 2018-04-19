@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Objetos;
+package mx.itesm.dragon.Utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,13 +9,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Created by jorge on 10/02/2018.
  */
 
-public class Texto {
+public class Text {
 
     private BitmapFont font;
     private GlyphLayout glyph;
     private String mensaje;
 
-    public Texto(){
+    public Text(){
         font = new BitmapFont(Gdx.files.internal("fonts/fuenteScore.fnt"));
         glyph = new GlyphLayout();
     }

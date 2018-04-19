@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Objetos;
+package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,11 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import mx.itesm.dragon.Juego;
+import mx.itesm.dragon.Main;
 
-public abstract class Pantalla implements Screen{
+public abstract class GenericScreen implements Screen{
 
-    protected final Juego juego;
+    protected final Main game;
     protected  final AssetManager assetManager;
     // Dimensiones.
     public static final float ANCHO = 720;
@@ -27,9 +27,9 @@ public abstract class Pantalla implements Screen{
     // Todas las pantallas dibujan.
     protected SpriteBatch batch;
 
-    public Pantalla(Juego juego) {
-        this.juego = juego;
-        this.assetManager = juego.getAssetManager();
+    public GenericScreen(Main game) {
+        this.game = game;
+        this.assetManager = game.getAssetManager();
         // Crea la cámara con las dimensiones del mundo.
         camara = new OrthographicCamera(ANCHO, ALTO);
         camara.position.set(ANCHO / 2, ALTO /2,0);

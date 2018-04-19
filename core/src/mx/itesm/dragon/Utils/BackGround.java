@@ -1,25 +1,26 @@
-package mx.itesm.dragon.Objetos;
+package mx.itesm.dragon.Utils;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Fondo {
+public class BackGround {
     private Sprite imagenA;
     private Sprite imagenB;
 
-    public Fondo() {
+    public BackGround() {
     }
 
-    public Fondo(Texture texture) {
+    public BackGround(Texture texture) {
         imagenA = new Sprite(texture);
         imagenA.setPosition(0,0);
         imagenB = new Sprite(texture);
         imagenB.setPosition(0,imagenA.getHeight());
     }
 
-    public Fondo(Texture texturaA, Texture texturaB) {
+    public BackGround(Texture texturaA, Texture texturaB) {
         imagenA = new Sprite(texturaA);
         imagenA.setPosition(0,0);
         imagenB = new Sprite(texturaB);
@@ -41,5 +42,13 @@ public class Fondo {
     public void render(SpriteBatch batch) {
         imagenA.draw(batch);
         imagenB.draw(batch);
+    }
+
+    public Sprite getImagenA() {
+        return imagenA;
+    }
+
+    public Sprite getImagenB() {
+        return imagenB;
     }
 }

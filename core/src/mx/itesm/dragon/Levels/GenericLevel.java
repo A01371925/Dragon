@@ -1,16 +1,16 @@
-package mx.itesm.dragon.Niveles;
+package mx.itesm.dragon.Levels;
 
-import mx.itesm.dragon.Juego;
-import mx.itesm.dragon.Objetos.Pantalla;
+import mx.itesm.dragon.Main;
+import mx.itesm.dragon.Screens.GenericScreen;
 
 /**
  * Created by LEDNR on 19/04/18.
  */
 
-public class GenericLevel extends Pantalla {
+public class GenericLevel extends GenericScreen {
 
-    public GenericLevel(Juego juego) {
-        super(juego);
+    public GenericLevel(Main game) {
+        super(game);
     }
 
     @Override

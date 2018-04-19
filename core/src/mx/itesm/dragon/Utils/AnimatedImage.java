@@ -1,4 +1,4 @@
-package mx.itesm.dragon.Objetos;
+package mx.itesm.dragon.Utils;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

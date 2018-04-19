@@ -1,23 +1,22 @@
-package mx.itesm.dragon.Pantallas;
+package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
-import mx.itesm.dragon.Juego;
-import mx.itesm.dragon.Objetos.Pantalla;
+import mx.itesm.dragon.Main;
 
-public class LoadingIntroScreen extends Pantalla {
+public class LoadingIntroScreen extends GenericScreen {
 
-    private Texture loadingTexture;
+    private Texture textureLogo;
 
-    public LoadingIntroScreen(Juego juego) {
-        super(juego);
+    public LoadingIntroScreen(Main game) {
+        super(game);
     }
 
     @Override
     public void show() {
-        loadingTexture = new Texture("tecLogo.jpg");
+        textureLogo = new Texture("textures/tecLogo.jpg");
         loadResources();
     }
 
@@ -33,6 +32,7 @@ public class LoadingIntroScreen extends Pantalla {
         assetManager.load("music/premenu.mp3", Music.class);
         assetManager.load("music/jugar.wav", Sound.class);
         assetManager.load("music/config.wav", Sound.class);
+
     }
 
 
@@ -41,14 +41,13 @@ public class LoadingIntroScreen extends Pantalla {
         borrarPantalla(1,1,1,1);
         updateLoad();
         batch.begin();
-            batch.draw(loadingTexture, ANCHO / 2 - loadingTexture.getWidth() / 2, ALTO / 2 - loadingTexture.getHeight() / 2);
-
+            batch.draw(textureLogo, ANCHO / 2 - textureLogo.getWidth() / 2, ALTO / 2 - textureLogo.getHeight() / 2);
         batch.end();
     }
 
     private void updateLoad() {
         if (assetManager.update()) {
-            juego.setScreen(new PantallaMenuPrincipal(juego));
+            game.setScreen(new MenuScreen(game));
         }
     }
 
@@ -64,7 +63,6 @@ public class LoadingIntroScreen extends Pantalla {
 
     @Override
     public void dispose() {
-
-
+        textureLogo.dispose();
     }
 }
