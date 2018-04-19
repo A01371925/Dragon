@@ -35,8 +35,8 @@ public class PantallaMenuPrincipal extends Pantalla {
         stageMenu = new Stage(vista);
 
         // Creacion del fondo.
-        Texture mainMenu = assetManager.get("backgrounds/mainMenu.jpg");
-        fondo = new Fondo(mainMenu);
+        Texture textureBackground = assetManager.get("backgrounds/mainMenu.jpg");
+        fondo = new Fondo(textureBackground);
 
         // Creacion de la musica de fondo.
         Music musicMenu = assetManager.get("music/premenu.mp3");
@@ -121,7 +121,7 @@ public class PantallaMenuPrincipal extends Pantalla {
                 super.clicked(event, x, y);
                 Sound soundSettings = assetManager.get("music/config.wav");
                 soundSettings.play();
-                juego.setScreen(new PantallaConfiguracion(juego));
+                juego.setScreen(new LoadingScreen(juego, GameState.SETTINGS));
             }
         });
 

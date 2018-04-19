@@ -23,10 +23,6 @@ public class PantallaConfiguracion extends Pantalla {
     // Fondo.
     private Fondo fondo;
 
-    // Musica de fondo
-    private Music musica_f;
-    private Sound regresar;
-
     PantallaConfiguracion(Juego juego) {
         super(juego);
     }
@@ -39,44 +35,50 @@ public class PantallaConfiguracion extends Pantalla {
     private void crearConfiguracion() {
         // Creación escena Pantalla configuración.
         stageConfiguracion = new Stage(vista);
-        fondo = new Fondo(new Texture("backgrounds/settings.png"));
 
+        Texture textureBackground = assetManager.get("backgrounds/settings.png");
+        fondo = new Fondo(textureBackground);
         // Creación de los botones a la Pantalla Acerca De.
+        Texture textureBtnReturn = assetManager.get("buttons/return.png");
+        Texture textureBtnPressReturn = assetManager.get("buttons/returnPressed.png");
+        Texture textureBtnSFX = assetManager.get("buttons/sfx.png");
+        Texture textureBtnPressSFX = assetManager.get("buttons/sfxPressed.png");
+        Texture textureBtnMusic = assetManager.get("buttons/music.png");
+        Texture textureBtnPressMusic = assetManager.get("buttons/musicPressed.png");
+        Texture textureBtnReset = assetManager.get("buttons/reset.png");
+        Texture textureBtnPressReset = assetManager.get("buttons/resetPressed.png");
         ImageButton btnRegresar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/return.png"))),
+                                textureBtnReturn)),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/returnPressed.png"))));
+                                textureBtnPressReturn)));
         ImageButton btnSFX = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/sfx.png"))),
+                                textureBtnSFX)),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/sfxPressed.png"))));
+                                textureBtnPressSFX)));
         ImageButton btnMusic = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/music.png"))),
+                                textureBtnMusic)),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/musicPressed.png"))));
+                                textureBtnPressMusic)));
         ImageButton btnReset = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/reset.png"))),
+                                textureBtnReset)),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/resetPressed.png"))));
-
-        musica_f = Gdx.audio.newMusic(Gdx.files.internal("music/Kevin MacLeod _ Bumbly March_preconfig.mp3"));
-        regresar = Gdx.audio.newSound(Gdx.files.internal("music/regresar.wav"));
-
-        musica_f.setVolume(1);
-        musica_f.play();
-        musica_f.setLooping(true);
+                                textureBtnPressReset)));
+        Music musicSettings = assetManager.get("music/Kevin MacLeod _ Bumbly March_preconfig.mp3");
+        musicSettings.setVolume(1);
+        musicSettings.play();
+        musicSettings.setLooping(true);
 
 
         // Posición de los botones.
@@ -90,9 +92,10 @@ public class PantallaConfiguracion extends Pantalla {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                regresar.play();
+                Sound soundReturn = assetManager.get("music/regresar.wav");
+                soundReturn.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'juego'.
-                juego.setScreen(new PantallaMenuPrincipal(juego));
+                juego.setScreen(new LoadingScreen(juego, GameState.MENU));
             }
         });
 
@@ -158,7 +161,16 @@ public class PantallaConfiguracion extends Pantalla {
     public void dispose() {
         stageConfiguracion.dispose();
         batch.dispose();
-        musica_f.dispose();
-        regresar.dispose();
+        assetManager.unload("backgrounds/settings.png");
+        assetManager.unload("buttons/return.png");
+        assetManager.unload("buttons/returnPressed.png");
+        assetManager.unload("buttons/sfx.png");
+        assetManager.unload("buttons/sfxPressed.png");
+        assetManager.unload("buttons/music.png");
+        assetManager.unload("buttons/musicPressed.png");
+        assetManager.unload("buttons/reset.png");
+        assetManager.unload("buttons/resetPressed.png");
+        assetManager.unload("music/Kevin MacLeod _ Bumbly March_preconfig.mp3");
+        assetManager.unload("music/regresar.wav");
     }
 }

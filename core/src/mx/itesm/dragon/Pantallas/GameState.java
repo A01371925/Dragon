@@ -5,5 +5,11 @@ package mx.itesm.dragon.Pantallas;
  */
 
 public enum GameState {
-    MENU
+    MENU,
+    SETTINGS,
+    ABOUT,
+    LEVELS,
+    LVL_ONE,
+    LVL_TWO,
+    LVL_TRES
 }
