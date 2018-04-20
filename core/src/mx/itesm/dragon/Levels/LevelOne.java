@@ -48,6 +48,7 @@ public class LevelOne extends GenericScreen {
 
     private float xDragon;
     private float yDragon;
+    private boolean pause = false;
 
     private Random random;
 
@@ -84,7 +85,7 @@ public class LevelOne extends GenericScreen {
     private ImageButton btnMusica;
     private ImageButton btnMenu;
     private ImageButton btnSFX;
-    private ImageButton btnReiniciar;
+    //private ImageButton btnReiniciar;
     private ImageButton btnMenuPerder;
     private ImageButton btnMenuGanar;
     private ImageButton btnSigNivel;
@@ -250,14 +251,14 @@ public class LevelOne extends GenericScreen {
         stagePerder = new Stage(vista);
         backGroundPerder = new BackGround(new Texture("backgrounds/gameOver.png"));
 
-        btnReiniciar = new ImageButton(
+        /*btnReiniciar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 new Texture("buttons/reset.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 new Texture("buttons/resetPressed.png"))));
-
+        */
         btnMenuPerder = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture("buttons/mainMenu.png"))),
@@ -323,7 +324,7 @@ public class LevelOne extends GenericScreen {
 
     private void setStageGanar(){
         //btnSigNivel.setPosition();
-        btnMenuGanar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50);
+        btnMenuGanar.setPosition(-1000,-1000);
         btnMenuGanar.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -336,7 +337,7 @@ public class LevelOne extends GenericScreen {
     private void setStagePerder(){
         //btnReiniciar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f);
 
-        btnMenuPerder.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50);
+        btnMenuPerder.setPosition(-1000,-1000);
 
         btnMenuPerder.addListener(new ClickListener(){
             @Override
@@ -348,10 +349,7 @@ public class LevelOne extends GenericScreen {
 
 
         stagePerder.addActor(btnMenuPerder);
-        stagePerder.addActor(btnReiniciar);
-
-
-
+        //stagePerder.addActor(btnReiniciar);
 
     }
 
@@ -405,6 +403,7 @@ public class LevelOne extends GenericScreen {
                 backGroundPausa.render(batch);
                 batch.end();
                 if (btnReanudar.isPressed()) {
+                    pause = false;
                     reanudar.play();
                     dragon.setPosition(xDragon, yDragon);
                     gameState = GameState.JUGANDO;
@@ -412,6 +411,8 @@ public class LevelOne extends GenericScreen {
                 stagePausa.draw();
                 break;
             case PERDER:
+                dragon.setPosition(-1000,-1000);
+                btnMenuPerder.setPosition(ANCHO / 3,ALTO/2 - 100 - (btnMenuPerder.getHeight()/2));
                 batch.begin();
                 backGroundPerder.render(batch);
                 text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
@@ -421,6 +422,8 @@ public class LevelOne extends GenericScreen {
                 stagePerder.draw();
                 break;
             case GANAR:
+                dragon.setPosition(-1000,-1000);
+                btnMenuGanar.setPosition(ANCHO / 3,ALTO/2 - 100 - (btnMenuPerder.getHeight()/2));
                 batch.begin();
                 backGroundGanar.render(batch);
                 text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4 - 50);
@@ -680,15 +683,20 @@ public class LevelOne extends GenericScreen {
         }
     }
 
-
-
     @Override
     public void pause() {
+        if (!pause) {
+            xDragon = dragon.getX();
+            yDragon = dragon.getY();
+            pause = true;
+        }
+        dragon.setPosition(-1000, -1000);
         gameState = GameState.PAUSA;
     }
 
     @Override
     public void resume() {
+        //dragon.setPosition(xDragon,yDragon);
         gameState = GameState.PAUSA;
     }
 
