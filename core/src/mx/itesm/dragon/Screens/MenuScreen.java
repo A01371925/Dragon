@@ -130,7 +130,7 @@ public class MenuScreen extends GenericScreen {
                 super.clicked(event, x, y);
                 soundAU.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
-                game.setScreen(new AboutScreen(game));
+                game.setScreen(new LoadingScreen(game, ScreenState.ABOUT));
             }
         });
 

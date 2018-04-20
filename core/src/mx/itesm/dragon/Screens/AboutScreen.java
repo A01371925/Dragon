@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.BackGround;
 
 public class AboutScreen extends GenericScreen {
@@ -121,7 +122,7 @@ public class AboutScreen extends GenericScreen {
                 super.clicked(event, x, y);
                 soundReturn.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
         });
 

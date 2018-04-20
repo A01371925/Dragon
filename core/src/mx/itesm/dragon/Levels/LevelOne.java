@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.Screens.LoadingScreen;
 import mx.itesm.dragon.States.GameState;
 import mx.itesm.dragon.Screens.MenuScreen;
+import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.AnimatedImage;
 import mx.itesm.dragon.Objects.Dragon;
 import mx.itesm.dragon.Objects.Enemigos;
@@ -275,7 +277,7 @@ public class LevelOne extends GenericScreen {
         btnMenu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
         });
         stagePausa.addActor(btnReanudar);
@@ -325,7 +327,7 @@ public class LevelOne extends GenericScreen {
         btnMenuGanar.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
         });
         stageGanar.addActor(btnMenuGanar);
@@ -339,7 +341,7 @@ public class LevelOne extends GenericScreen {
         btnMenuPerder.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
         });
 
