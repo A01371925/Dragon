@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -41,6 +42,11 @@ public class MenuScreen extends GenericScreen {
     private Texture textureBtnSettings;
     private Texture textureBtnPressSettings;
 
+    //Preferencias
+    private Preferences sonido = Gdx.app.getPreferences("preferenceS");
+    private Preferences musica = Gdx.app.getPreferences("preferenceM");
+
+    //Sonidos
     private Music musicMenu;
     private Sound soundAU;
     private Sound soundPlay;
@@ -104,9 +110,15 @@ public class MenuScreen extends GenericScreen {
         soundSettings = assetManager.get("music/config.wav");
 
         // Reproduccion de la musica de backGround
-        musicMenu.setVolume(1);
-        musicMenu.play();
-        musicMenu.setLooping(true);
+        boolean musicaActiva = musica.getBoolean("onMusic");
+        if(musicaActiva){
+            musicMenu.setVolume(1);
+            musicMenu.play();
+            musicMenu.setLooping(true);
+        }
+
+        final boolean sonidoActivo = sonido.getBoolean("onSound");
+
 
         // Posición de los botones.
         imgDragon.setPosition((ANCHO / 2) - imgDragon.getWidth() / 2,ALTO * 0.15F);
@@ -122,7 +134,9 @@ public class MenuScreen extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                soundPlay.play();
+                if (sonidoActivo){
+                    soundPlay.play();
+                }
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
                 game.setScreen(new LoadingScreen(game, ScreenState.LVL_ONE));
             }
@@ -132,7 +146,9 @@ public class MenuScreen extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                soundAU.play();
+                if (sonidoActivo){
+                    soundAU.play();
+                }
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
                 game.setScreen(new LoadingScreen(game, ScreenState.ABOUT));
             }
@@ -143,7 +159,9 @@ public class MenuScreen extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                soundSettings.play();
+                if (sonidoActivo){
+                    soundSettings.play();
+                }
                 game.setScreen(new LoadingScreen(game, ScreenState.SETTINGS));
             }
         });
