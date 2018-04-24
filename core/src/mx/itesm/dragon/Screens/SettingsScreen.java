@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,7 +23,9 @@ public class SettingsScreen extends GenericScreen {
 
     private ImageButton btnRegresar;
     private ImageButton btnSFX;
+    private ImageButton btnNoSFX;
     private ImageButton btnMusic;
+    private ImageButton btnNoMusic;
     private ImageButton btnReset;
 
     // BackGround.
@@ -39,6 +42,10 @@ public class SettingsScreen extends GenericScreen {
     private Texture textureBtnPressReset;
     private Music musicSettings;
     private Sound soundReturn;
+
+    //Preferencia de sonido y musica
+    private Preferences sonido = Gdx.app.getPreferences("preferenceS");
+    private Preferences musica = Gdx.app.getPreferences("preferenceM");
 
     SettingsScreen(Main game) {
         super(game);
@@ -79,10 +86,18 @@ public class SettingsScreen extends GenericScreen {
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressSFX)));
+        btnNoSFX = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnPressSFX)));
         btnMusic = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnMusic)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnPressMusic)));
+        btnNoMusic = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressMusic)));
@@ -94,24 +109,35 @@ public class SettingsScreen extends GenericScreen {
                         new TextureRegion(
                                 textureBtnPressReset)));
 
+
         musicSettings = assetManager.get("music/Kevin MacLeod _ Bumbly March_preconfig.mp3");
         soundReturn = assetManager.get("music/regresar.wav");
-        musicSettings.setVolume(1);
-        musicSettings.play();
-        musicSettings.setLooping(true);
+
+        boolean musicaActiva = musica.getBoolean("onMusic");
+        if(musicaActiva){
+            musicSettings.setVolume(1);
+            musicSettings.play();
+            musicSettings.setLooping(true);
+        }
+
+        final boolean sonidoActivo = sonido.getBoolean("onSound");
 
         // Posición de los botones.
         btnReset.setPosition(ANCHO / 2 - btnReset.getWidth() / 2, ALTO / 2 + btnReset.getHeight() / 2);
         btnRegresar.setPosition(ANCHO - btnRegresar.getWidth() - 20,20);
         btnMusic.setPosition(40, ALTO / 3.5f);
+        btnNoMusic.setPosition(40, ALTO / 3.5f);
         btnSFX.setPosition(ANCHO - btnSFX.getWidth() * 1.3f, btnMusic.getY());
+        btnNoSFX.setPosition(ANCHO - btnSFX.getWidth() * 1.3f, btnMusic.getY());
 
         // Detecta si el usuario hace click en algún actor.
         btnRegresar.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                soundReturn.play();
+                if (sonidoActivo){
+                    soundReturn.play();
+                }
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
                 game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
@@ -122,13 +148,46 @@ public class SettingsScreen extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                sonido.putBoolean("onSound", false);
+                sonido.flush();
+                btnSFX.remove();
+                stageConfiguracion.addActor(btnNoSFX);
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
             }
         });
+
+        btnNoSFX.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                sonido.putBoolean("onSound", true);
+                sonido.flush();
+                btnNoSFX.remove();
+                stageConfiguracion.addActor(btnSFX);
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+            }
+        });
+
         btnMusic.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                musica.putBoolean("onMusic", false);
+                musica.flush();
+                btnMusic.remove();
+                stageConfiguracion.addActor(btnNoMusic);
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+            }
+        });
+
+        btnNoMusic.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                musica.putBoolean("onMusic", true);
+                musica.flush();
+                btnNoMusic.remove();
+                stageConfiguracion.addActor(btnMusic);
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
             }
         });
@@ -143,9 +202,19 @@ public class SettingsScreen extends GenericScreen {
 
         // Se agregan elementos a la GenericScreen Configuración.
         stageConfiguracion.addActor(btnRegresar);
-        stageConfiguracion.addActor(btnSFX);
-        stageConfiguracion.addActor(btnMusic);
-        stageConfiguracion.addActor(btnMusic);
+        if (musicaActiva){
+            stageConfiguracion.addActor(btnMusic);
+        } else{
+            stageConfiguracion.addActor(btnNoMusic);
+        }
+
+        if (sonidoActivo){
+            stageConfiguracion.addActor(btnSFX);
+        }else{
+            stageConfiguracion.addActor(btnNoSFX);
+        }
+
+
         stageConfiguracion.addActor(btnReset);
 
 
