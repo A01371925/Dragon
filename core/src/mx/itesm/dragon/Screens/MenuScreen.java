@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.GameState;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.BackGround;
 
@@ -19,6 +20,8 @@ public class MenuScreen extends GenericScreen {
 
     // Escena para el menu.
     private Stage stageMenu;
+
+    private ScreenState screenState;
 
     private ImageButton imgDragon;
     private ImageButton btnPlay;
@@ -43,8 +46,9 @@ public class MenuScreen extends GenericScreen {
     private Sound soundPlay;
     private Sound soundSettings;
 
-    public MenuScreen(Main game) {
+    public MenuScreen(Main game, ScreenState screenState) {
         super(game);
+        this.screenState = screenState;
     }
 
     public void show() {
@@ -120,7 +124,7 @@ public class MenuScreen extends GenericScreen {
                 super.clicked(event, x, y);
                 soundPlay.play();
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
-                game.setScreen(new GenericScreenCargando(game));
+                game.setScreen(new LoadingScreen(game, ScreenState.LVL_ONE));
             }
         });
 

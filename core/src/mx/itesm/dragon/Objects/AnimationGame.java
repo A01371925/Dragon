@@ -5,15 +5,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Animacion {
+public class AnimationGame {
 
     private Texture textura;
     private TextureRegion[] frames;
-    private Animation<TextureRegion> animacion;
+    private com.badlogic.gdx.graphics.g2d.Animation<TextureRegion> animacion;
     private int tileWidth, tileHeight, textureRegion;
     private float speed;
 
-    public Animacion(Texture textura, int tileWidth, int tileHeight, int textureRegion, float speed) {
+    public AnimationGame(Texture textura, int tileWidth, int tileHeight, int textureRegion, float speed) {
         this.textura = textura;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
@@ -21,23 +21,23 @@ public class Animacion {
         this.speed = speed;
     }
 
-    public Animation<TextureRegion> animacionHorizontal() {
+    public com.badlogic.gdx.graphics.g2d.Animation<TextureRegion> animacionHorizontal() {
         TextureRegion[][] tmp = TextureRegion.split(textura, tileWidth, tileHeight);
         frames = new TextureRegion[textureRegion];
         for (int i = 0; i < frames.length; i++) {
             frames[i] = tmp[0][i];
         }
-        animacion = new Animation<TextureRegion>(speed, frames);
+        animacion = new com.badlogic.gdx.graphics.g2d.Animation<TextureRegion>(speed, frames);
         return animacion;
     }
 
-    public Animation<TextureRegion> animacionVertical() {
+    public com.badlogic.gdx.graphics.g2d.Animation<TextureRegion> animacionVertical() {
         TextureRegion[][] tmp = TextureRegion.split(textura, tileWidth, tileHeight);
         frames = new TextureRegion[textureRegion];
         for (int i = 0; i < frames.length; i++) {
             frames[i] = tmp[i][0];
         }
-        animacion = new Animation<TextureRegion>(speed, frames);
+        animacion = new com.badlogic.gdx.graphics.g2d.Animation<TextureRegion>(speed, frames);
         return animacion;
     }
 }

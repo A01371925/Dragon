@@ -4,13 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Vida {
+public class LifeCharacter {
 
     private static final float SPEED = 8.58f;
     private int vidas;
     private Sprite sprite;
 
-    public Vida(Texture textura, float x, float y) {
+    public LifeCharacter(Texture textura, float x, float y) {
         vidas = 4;
         sprite = new Sprite(textura);
         sprite.setPosition(x, y);

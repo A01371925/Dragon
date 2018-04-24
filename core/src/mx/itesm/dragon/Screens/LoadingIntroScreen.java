@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.ScreenState;
 
 public class LoadingIntroScreen extends GenericScreen {
 
@@ -47,7 +48,7 @@ public class LoadingIntroScreen extends GenericScreen {
 
     private void updateLoad() {
         if (assetManager.update()) {
-            game.setScreen(new MenuScreen(game));
+            game.setScreen(new MenuScreen(game, ScreenState.MENU));
         }
     }
 

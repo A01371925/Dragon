@@ -22,10 +22,10 @@ public class LoadingScreen extends GenericScreen {
     @Override
     public void show() {
         loadingTexture = new Texture("backgrounds/loading.jpg");
-        loadResources();
+        load();
     }
 
-    private void loadResources() {
+    private void load() {
         switch (gameState) {
             case MENU:
                 assetManager.load("backgrounds/mainMenu.jpg", Texture.class);
@@ -68,6 +68,32 @@ public class LoadingScreen extends GenericScreen {
             case LEVELS:
                 break;
             case LVL_ONE:
+                assetManager.load("backgrounds/level1.png", Texture.class);
+                assetManager.load("textures/healthBar.png", Texture.class);
+                assetManager.load("textures/heart.png", Texture.class);
+                assetManager.load("buttons/pause.png", Texture.class);
+                assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("textures/potion.png", Texture.class);
+                assetManager.load("backgrounds/pause.png", Texture.class);
+                assetManager.load("buttons/resume.png", Texture.class);
+                assetManager.load("buttons/resumePressed.png", Texture.class);
+                assetManager.load("buttons/music.png", Texture.class);
+                assetManager.load("buttons/musicPressed.png", Texture.class);
+                assetManager.load("buttons/sfx.png", Texture.class);
+                assetManager.load("buttons/sfxPressed.png", Texture.class);
+                assetManager.load("buttons/mainMenu.png", Texture.class);
+                assetManager.load("buttons/mainMenuPressed.png", Texture.class);
+                assetManager.load("backgrounds/win.png", Texture.class);
+                assetManager.load("backgrounds/gameOver.png", Texture.class);
+                assetManager.load("buttons/reset.png", Texture.class);
+                assetManager.load("buttons/resetPressed.png", Texture.class);
+                assetManager.load("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3", Music.class);
+                assetManager.load("music/flecha.wav", Sound.class);
+                assetManager.load("music/colision.wav", Sound.class);
+                assetManager.load("music/fuego.wav", Sound.class);
+                assetManager.load("music/pausa.wav", Sound.class);
+                assetManager.load("music/reanudar.wav", Sound.class);
+                assetManager.load("music/impacto.wav", Sound.class);
                 break;
             case LVL_TWO:
                 break;
@@ -90,7 +116,7 @@ public class LoadingScreen extends GenericScreen {
         if (assetManager.update()) {
             switch (gameState) {
                 case MENU:
-                    game.setScreen(new MenuScreen(game));
+                    game.setScreen(new MenuScreen(game, ScreenState.MENU));
                     break;
                 case SETTINGS:
                     game.setScreen(new SettingsScreen(game));
@@ -102,7 +128,7 @@ public class LoadingScreen extends GenericScreen {
                     // TODO
                     break;
                 case LVL_ONE:
-                    game.setScreen(new LevelOne(game));
+                    game.setScreen(new LevelOne(game, ScreenState.LVL_ONE));
                     break;
                 case LVL_TWO:
                     // TODO

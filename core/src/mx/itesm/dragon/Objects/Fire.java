@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
-public class Proyectil {
+public class Fire {
 
     private static final int TILEWIDTH = 38;
     private static final int TILEHEIGHT = 76;
@@ -19,7 +19,7 @@ public class Proyectil {
     private Animation animacion;
     private float elapsedTime;
 
-    public Proyectil(Texture textura, float x, float y) {
+    public Fire(Texture textura, float x, float y) {
         sprite = new Sprite(textura);
         sprite.setPosition(x, y);
         //animacion();
@@ -47,7 +47,7 @@ public class Proyectil {
         for (int i = 0; i < frames.length; i++) {
             frames[i] = tmp[0][i];
         }
-        animacion = new Animation(0.125f,frames);
+        animacion = new AnimationGame(0.125f,frames);
     }*/
 
     public Sprite getSprite() {

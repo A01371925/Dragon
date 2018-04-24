@@ -5,10 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/**
- * Created by jorge on 10/02/2018.
- */
-
 public class Text {
 
     private BitmapFont font;

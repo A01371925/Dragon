@@ -16,8 +16,8 @@ public abstract class GenericScreen implements Screen{
     protected final Main game;
     protected  final AssetManager assetManager;
     // Dimensiones.
-    public static final float ANCHO = 720;
-    public static final float ALTO = 1280;
+    protected static final float ANCHO = 720;
+    protected static final float ALTO = 1280;
 
     // Atributos disponibles solo en las subclases.
     // Todas las pantallas tienen una cámara y una vista.

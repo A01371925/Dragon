@@ -1,9 +1,8 @@
 package mx.itesm.dragon.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 
-public class JefeFinal {
+public class Boss {
 
     private static final int TILEWIDTH = 331;
     private static final int TILEHEIGHT = 366;
@@ -12,15 +11,15 @@ public class JefeFinal {
     private int vida = 15;
 
     private Texture jefeFinal;
-    private Animacion animacion;
+    private AnimationGame animationGame;
 
-    public JefeFinal(String textura) {
+    public Boss(String textura) {
         jefeFinal = new Texture(textura);
-        animacion = new Animacion(jefeFinal, TILEWIDTH, TILEHEIGHT, TEXTURE_REGION, SPEED);
+        animationGame = new AnimationGame(jefeFinal, TILEWIDTH, TILEHEIGHT, TEXTURE_REGION, SPEED);
     }
 
-    public Animation animacion() {
-        return animacion.animacionVertical();
+    public com.badlogic.gdx.graphics.g2d.Animation animacion() {
+        return animationGame.animacionVertical();
     }
 
     public int getVida() {

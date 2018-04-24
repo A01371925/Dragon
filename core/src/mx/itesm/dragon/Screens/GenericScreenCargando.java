@@ -5,8 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import mx.itesm.dragon.Main;
 import mx.itesm.dragon.Levels.LevelOne;
+import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.AnimatedImage;
-import mx.itesm.dragon.Objects.Dragon;
+import mx.itesm.dragon.Objects.Character;
 import mx.itesm.dragon.Utils.BackGround;
 
 /**
@@ -18,7 +19,7 @@ class GenericScreenCargando extends GenericScreen
     private float tiempo;   // Tiempo transcurrido
 
     private Stage stage;
-    private Dragon framesDragon;
+    private Character framesCharacter;
     private BackGround backGround;
     private AnimatedImage dragon;
 
@@ -31,8 +32,8 @@ class GenericScreenCargando extends GenericScreen
     public void show() {
         stage = new Stage(vista);
         backGround = new BackGround(new Texture("backgrounds/loading.jpg"));
-        framesDragon = new Dragon("frames/loading.png", 448, 179, 6, 0.2f);
-        dragon = new AnimatedImage(framesDragon.animacion());
+        framesCharacter = new Character("frames/loading.png", 448, 179, 6, 0.2f);
+        dragon = new AnimatedImage(framesCharacter.animacion());
         tiempo = 0;
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, 50);
         stage.addActor(dragon);
@@ -48,7 +49,7 @@ class GenericScreenCargando extends GenericScreen
         // TTL loading screen
         tiempo += delta;  // Acumula tiempo
         if (tiempo>=3) {
-            game.setScreen(new LevelOne(game));
+            game.setScreen(new LevelOne(game, ScreenState.LVL_ONE));
         }
         stage.draw();
     }
