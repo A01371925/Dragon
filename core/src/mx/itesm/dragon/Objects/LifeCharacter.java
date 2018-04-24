@@ -10,10 +10,9 @@ public class LifeCharacter {
     private int vidas;
     private Sprite sprite;
 
-    public LifeCharacter(Texture textura, float x, float y) {
+    public LifeCharacter(Texture textura) {
         vidas = 4;
         sprite = new Sprite(textura);
-        sprite.setPosition(x, y);
     }
 
     public void mover() {

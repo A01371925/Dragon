@@ -20,7 +20,6 @@ import mx.itesm.dragon.Objects.Character;
 import mx.itesm.dragon.Objects.LifeCharacter;
 import mx.itesm.dragon.Screens.GenericScreen;
 import mx.itesm.dragon.Screens.LoadingScreen;
-import mx.itesm.dragon.Screens.MenuScreen;
 import mx.itesm.dragon.States.GameState;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.AnimatedImage;
@@ -29,7 +28,7 @@ import mx.itesm.dragon.Utils.Text;
 
 public abstract class GenericLevel extends GenericScreen {
 
-    private InputMultiplexer multiplexer;
+    protected InputMultiplexer multiplexer;
 
     protected static final float ALTO_MAPA = 2560;
 
@@ -51,6 +50,7 @@ public abstract class GenericLevel extends GenericScreen {
     protected Character framesCharacter;
 
     protected AnimatedImage dragon;
+    protected AnimatedImage boss;
     protected Image barraVida;
     protected Image v1,v2,v3,v4;
     protected ImageButton btnPausa;
@@ -103,7 +103,6 @@ public abstract class GenericLevel extends GenericScreen {
     }
 
     protected void initialization() {
-        loadResources();
         initGame();
         initPause();
         initMusic();
@@ -112,7 +111,8 @@ public abstract class GenericLevel extends GenericScreen {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
-    private void loadResources() {
+    protected void loadResources() {
+
         textureBarLife = assetManager.get("textures/healthBar.png");
         textureLife = assetManager.get("textures/heart.png");
         textureBtnPause = assetManager.get("buttons/pause.png");
@@ -139,7 +139,6 @@ public abstract class GenericLevel extends GenericScreen {
         pause = assetManager.get("music/pausa.wav");
         resume = assetManager.get("music/reanudar.wav");
         impact = assetManager.get("music/impacto.wav");
-
     }
 
     private void initGame() {
@@ -166,7 +165,7 @@ public abstract class GenericLevel extends GenericScreen {
         framesCharacter = new Character("frames/dragon.png"); // Cambiar campo de entrada a Texture y cargarlo con assetmanager
         dragon = new AnimatedImage(framesCharacter.animacion());
 
-        lifeCharacter = new LifeCharacter(texturePotion,0,0);
+        lifeCharacter = new LifeCharacter(texturePotion);
 
         // Posisción inicial de los elementos
         btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
@@ -198,7 +197,7 @@ public abstract class GenericLevel extends GenericScreen {
         stageJuego.addActor(v3);
         stageJuego.addActor(v4);
         stageJuego.addActor(dragon);
-
+        stageJuego.addActor(boss);
         // Se anexan las Escenas al Multiplexor.
         multiplexer.addProcessor(stageJuego);
     }
