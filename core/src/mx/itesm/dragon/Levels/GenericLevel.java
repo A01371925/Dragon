@@ -71,7 +71,7 @@ public abstract class GenericLevel extends GenericScreen {
     protected Sound resume;
     protected Sound pause;
 
-    // Marcador.
+    // Marcador.//
     protected int puntosJugador = 0;
     protected String letras;
     protected Text puntos;  // Muestra los valores en pantalla
