@@ -418,8 +418,9 @@ public class LevelOne extends GenericLevel {
 
     private void actualizarVida(float delta){
         timerVida += delta;
+        int randomX = random.nextInt((int) ANCHO -texturePotion.getWidth());
         if (timerVida >= 5){
-            listaVidas.add(new LifeCharacter(texturePotion));
+            listaVidas.add(new LifeCharacter(texturePotion, randomX, ALTO));
             timerVida = 0;
         }
         for (int i = 0; i < listaVidas.size(); i++) {

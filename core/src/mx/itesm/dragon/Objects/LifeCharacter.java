@@ -15,6 +15,12 @@ public class LifeCharacter {
         sprite = new Sprite(textura);
     }
 
+    public LifeCharacter(Texture texture, int x, float y) {
+        vidas = 4;
+        sprite = new Sprite(texture);
+        sprite.setPosition(x, y);
+    }
+
     public void mover() {
         sprite.setY(sprite.getY() - SPEED);
     }
