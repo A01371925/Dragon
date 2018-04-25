@@ -1,11 +1,14 @@
-package mx.itesm.dragon.Levels;
+package mx.itesm.dragon.Screens;
 
+import mx.itesm.dragon.Levels.GenericLevel;
 import mx.itesm.dragon.Main;
 import mx.itesm.dragon.States.ScreenState;
 
-public class LevelThree extends GenericLevel{
+public class LevelsScreen extends GenericLevel{
 
-    public LevelThree(Main game, ScreenState screenState) {
+    private ScreenState screenState;
+
+    public LevelsScreen(Main game, ScreenState screenState) {
         super(game);
         this.screenState = screenState;
     }
