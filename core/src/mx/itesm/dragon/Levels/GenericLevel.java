@@ -40,6 +40,7 @@ public abstract class GenericLevel extends GenericScreen {
     protected Stage stagePerder;
 
     protected GameState gameState;
+    protected ScreenState screenState;
 
     protected BackGround backGround;
     protected BackGround backGroundPausa;
@@ -319,6 +320,13 @@ public abstract class GenericLevel extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new LoadingScreen(game, ScreenState.MENU));
+            }
+        });
+
+        btnReiniciar.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new LoadingScreen(game, screenState));
             }
         });
 

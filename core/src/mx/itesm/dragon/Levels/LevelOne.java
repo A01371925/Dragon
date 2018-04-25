@@ -49,7 +49,7 @@ public class LevelOne extends GenericLevel {
 
     private Boss framesJefeFinal;
 
-    private ScreenState screenState;
+
 
     // Marcador.
     private int puntosJugador = 0;
@@ -140,13 +140,12 @@ public class LevelOne extends GenericLevel {
                 }
                 batch.end();
                 if (btnPausa.isPressed()) {
-                    xDragon = dragon.getX();
+                    /*xDragon = dragon.getX();
                     yDragon = dragon.getY();
-                    dragon.setPosition(-1000, -1000);
+                    dragon.setPosition(-1000, -1000);*/
                     pause.play();
                     gameState = GameState.PAUSA;
                 }
-                stageJuego.draw();
                 if(lifeCharacter.getVidas() == 0){
                     gameState = GameState.PERDER;
                 }
@@ -154,6 +153,7 @@ public class LevelOne extends GenericLevel {
                 if(framesJefeFinal.getVida() == 0){
                     gameState = GameState.GANAR;
                 }
+                stageJuego.draw();
                 break;
             case PAUSA:
                 batch.begin();
@@ -161,7 +161,7 @@ public class LevelOne extends GenericLevel {
                 batch.end();
                 if (btnReanudar.isPressed()) {
                     resume.play();
-                    dragon.setPosition(xDragon, yDragon);
+                    //dragon.setPosition(xDragon, yDragon);
                     gameState = GameState.JUGANDO;
                 }
                 stagePausa.draw();
