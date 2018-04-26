@@ -76,7 +76,7 @@ public abstract class GenericLevel extends GenericScreen {
     protected Sound resume;
     protected Sound pause;
 
-    //Preferencias
+    //Preferencias.
     protected Preferences sonido = Gdx.app.getPreferences("preferenceS");
     protected Preferences musica = Gdx.app.getPreferences("preferenceM");
 

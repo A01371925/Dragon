@@ -45,7 +45,7 @@ public class SettingsScreen extends GenericScreen {
     private Music musicSettings;
     private Sound soundReturn;
 
-    //Preferencia de sonido y musica
+    //Preferencia de sonido y musica.
     private Preferences sonido = Gdx.app.getPreferences("preferenceS");
     private Preferences musica = Gdx.app.getPreferences("preferenceM");
 

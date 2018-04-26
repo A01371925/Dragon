@@ -40,7 +40,7 @@ public class AboutScreen extends GenericScreen {
     private Texture textureBtnMarco;
     private Texture textureBtnLuis;
 
-    //Preferencias
+    //Preferencias.
     private Preferences sonido = Gdx.app.getPreferences("preferenceS");
     private Preferences musica = Gdx.app.getPreferences("preferenceM");
 
