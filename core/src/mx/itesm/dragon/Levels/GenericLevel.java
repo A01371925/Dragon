@@ -274,7 +274,7 @@ public abstract class GenericLevel extends GenericScreen {
         stagePausa.addActor(btnMenu);
 
         // Se anexan las Escenas al Multiplexor.
-        //multiplexer.addProcessor(stagePausa);
+        multiplexer.addProcessor(stagePausa);
     }
 
     private void initMusic() {

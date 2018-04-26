@@ -143,7 +143,7 @@ public class LevelOne extends GenericLevel {
                     dragon.setPosition(-1000, -1000);*/
                     pause.play();
                     gameState = GameState.PAUSA;
-                    Gdx.input.setInputProcessor(stagePausa);
+                    //Gdx.input.setInputProcessor(stagePausa);
                 }
                 if(lifeCharacter.getVidas() == 0){
                     gameState = GameState.PERDER;
@@ -158,13 +158,13 @@ public class LevelOne extends GenericLevel {
                 break;
             case PAUSA:
                 batch.begin();
-                backGroundPausa.render(batch);
+                //backGroundPausa.render(batch);
                 batch.end();
                 if (btnReanudar.isPressed()) {
                     resume.play();
                     //dragon.setPosition(xDragon, yDragon);
                     gameState = GameState.JUGANDO;
-                    Gdx.input.setInputProcessor(stageJuego);
+                    //Gdx.input.setInputProcessor(stageJuego);
                 }
                 stagePausa.draw();
                 break;
