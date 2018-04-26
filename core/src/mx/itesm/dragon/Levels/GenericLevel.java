@@ -274,7 +274,7 @@ public abstract class GenericLevel extends GenericScreen {
         stagePausa.addActor(btnMenu);
 
         // Se anexan las Escenas al Multiplexor.
-        multiplexer.addProcessor(stagePausa);
+        //multiplexer.addProcessor(stagePausa);
     }
 
     private void initMusic() {
@@ -314,7 +314,7 @@ public abstract class GenericLevel extends GenericScreen {
         });
         stageGanar.addActor(btnMenuGanar);
 
-        multiplexer.addProcessor(stageGanar);
+        //multiplexer.addProcessor(stageGanar);
     }
 
     private void initLose() {
@@ -357,17 +357,17 @@ public abstract class GenericLevel extends GenericScreen {
         stagePerder.addActor(btnMenuPerder);
         stagePerder.addActor(btnReiniciar);
 
-        multiplexer.addProcessor(stagePerder);
+        //multiplexer.addProcessor(stagePerder);
     }
 
     @Override
     public void pause() {
-        gameState = GameState.PAUSA;
+        //gameState = GameState.PAUSA;
     }
 
     @Override
     public void resume() {
-        gameState = GameState.PAUSA;
+        //gameState = GameState.JUGANDO;
     }
 
     @Override
