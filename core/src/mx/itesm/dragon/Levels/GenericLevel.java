@@ -2,6 +2,7 @@ package mx.itesm.dragon.Levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -57,13 +58,16 @@ public abstract class GenericLevel extends GenericScreen {
     protected ImageButton btnPausa;
     protected ImageButton btnReanudar;
     protected ImageButton btnMusica;
+    protected ImageButton btnNoMusic;
     protected ImageButton btnMenu;
     protected ImageButton btnSFX;
+    protected ImageButton btnNoSFX;
     protected ImageButton btnReiniciar;
     protected ImageButton btnMenuPerder;
     protected ImageButton btnMenuGanar;
     protected ImageButton btnSigNivel;
 
+    //Sonido y musica
     protected Music music;
     protected Sound collision;
     protected Sound impact;
@@ -71,6 +75,10 @@ public abstract class GenericLevel extends GenericScreen {
     protected Sound arrow;
     protected Sound resume;
     protected Sound pause;
+
+    //Preferencias
+    protected Preferences sonido = Gdx.app.getPreferences("preferenceS");
+    protected Preferences musica = Gdx.app.getPreferences("preferenceM");
 
     // Marcador.//
     protected int puntosJugador = 0;
@@ -132,6 +140,7 @@ public abstract class GenericLevel extends GenericScreen {
         textureBackgroundLose = assetManager.get("backgrounds/gameOver.png");
         textureBtnReset = assetManager.get("buttons/reset.png");
         textureBtnPressReset = assetManager.get("buttons/resetPressed.png");
+
         // Música y SFX
         music = assetManager.get("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3");
         arrow = assetManager.get("music/flecha.wav");
@@ -221,10 +230,18 @@ public abstract class GenericLevel extends GenericScreen {
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressMusic)));
+        btnNoMusic = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnPressMusic)));
         btnSFX = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnSFX)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnPressSFX)));
+        btnNoSFX = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressSFX)));
@@ -239,7 +256,9 @@ public abstract class GenericLevel extends GenericScreen {
         // Posisción inicial de los elementos
         btnReanudar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f);
         btnMusica.setPosition(ANCHO / 8,btnReanudar.getY() - 300);
+        btnNoMusic.setPosition(ANCHO / 8,btnReanudar.getY() - 300);
         btnSFX.setPosition(btnMusica.getX() + 330, btnMusica.getY());
+        btnNoSFX.setPosition(btnMusica.getX() + 330, btnMusica.getY());
         btnMenu.setPosition(ANCHO / 3,ALTO / 6);
 
         btnMenu.addListener(new ClickListener(){
@@ -260,9 +279,14 @@ public abstract class GenericLevel extends GenericScreen {
 
     private void initMusic() {
         // Reproducir música de backGround
-        music.setVolume(0.5f);
-        music.play();
-        music.setLooping(true);
+        boolean musicaActiva = musica.getBoolean("onMusic");
+        if (musicaActiva){
+            music.setVolume(1);
+            music.play();
+            music.setLooping(true);
+        }
+
+        final boolean sonidoactivo = sonido.getBoolean("onSound");
     }
 
     private void initWin() {

@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,6 +39,10 @@ public class AboutScreen extends GenericScreen {
     private Texture textureBtnJorge;
     private Texture textureBtnMarco;
     private Texture textureBtnLuis;
+
+    //Preferencias
+    private Preferences sonido = Gdx.app.getPreferences("preferenceS");
+    private Preferences musica = Gdx.app.getPreferences("preferenceM");
 
     // Musica de backGround y sonidos
     private Music musicAbout;
@@ -104,9 +109,14 @@ public class AboutScreen extends GenericScreen {
         soundReturn =  assetManager.get("music/regresar.wav");
 
         // Reproduccion de la musica de backGround
-        musicAbout.setVolume(1);
-        musicAbout.play();
-        musicAbout.setLooping(true);
+        boolean musicaActiva = musica.getBoolean("onMusic");
+        if (musicaActiva){
+            musicAbout.setVolume(1);
+            musicAbout.play();
+            musicAbout.setLooping(true);
+        }
+
+        final boolean sonidoActivo = sonido.getBoolean("onSound");
 
         // Posición de los botones.
         btnLuis.setPosition(85,900);
@@ -121,7 +131,9 @@ public class AboutScreen extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                soundReturn.play();
+                if (sonidoActivo){
+                    soundReturn.play();
+                }
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
                 game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }

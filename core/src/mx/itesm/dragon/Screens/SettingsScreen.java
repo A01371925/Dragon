@@ -40,6 +40,8 @@ public class SettingsScreen extends GenericScreen {
     private Texture textureBtnPressMusic;
     private Texture textureBtnReset;
     private Texture textureBtnPressReset;
+
+    //Musica y sonidos
     private Music musicSettings;
     private Sound soundReturn;
 
@@ -175,6 +177,7 @@ public class SettingsScreen extends GenericScreen {
                 super.clicked(event, x, y);
                 musica.putBoolean("onMusic", false);
                 musica.flush();
+                musicSettings.stop();
                 btnMusic.remove();
                 stageConfiguracion.addActor(btnNoMusic);
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
@@ -187,6 +190,9 @@ public class SettingsScreen extends GenericScreen {
                 super.clicked(event, x, y);
                 musica.putBoolean("onMusic", true);
                 musica.flush();
+                musicSettings.play();
+                musicSettings.play();
+                musicSettings.setLooping(true);
                 btnNoMusic.remove();
                 stageConfiguracion.addActor(btnMusic);
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.

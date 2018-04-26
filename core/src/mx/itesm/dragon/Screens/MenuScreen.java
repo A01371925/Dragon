@@ -46,7 +46,7 @@ public class MenuScreen extends GenericScreen {
     private Preferences sonido = Gdx.app.getPreferences("preferenceS");
     private Preferences musica = Gdx.app.getPreferences("preferenceM");
 
-    //Sonidos
+    //Sonidos y musica
     private Music musicMenu;
     private Sound soundAU;
     private Sound soundPlay;
