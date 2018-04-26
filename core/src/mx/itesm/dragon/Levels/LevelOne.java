@@ -166,6 +166,7 @@ public class LevelOne extends GenericLevel {
                     gameState = GameState.JUGANDO;
                     //Gdx.input.setInputProcessor(stageJuego);
                 }
+
                 stagePausa.draw();
                 break;
             case PERDER:
