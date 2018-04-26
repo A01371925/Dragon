@@ -21,6 +21,7 @@ public class LoadingScreen extends GenericScreen {
 
     @Override
     public void show() {
+        borrarPantalla();
         loadingTexture = new Texture("backgrounds/loading.jpg");
         load();
     }
@@ -66,6 +67,9 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/regresar.wav", Sound.class);
                 break;
             case LEVELS:
+                assetManager.load("backgrounds/loading.jpg", Texture.class);
+                assetManager.load("buttons/resume.png", Texture.class);
+                assetManager.load("buttons/resumePressed.png", Texture.class);
                 break;
             case LVL_ONE:
                 assetManager.load("backgrounds/level1.png", Texture.class);
@@ -105,7 +109,6 @@ public class LoadingScreen extends GenericScreen {
 
     @Override
     public void render(float delta) {
-        borrarPantalla();
         updateLoad();
         batch.begin();
             batch.draw(loadingTexture,0,0);
@@ -125,7 +128,7 @@ public class LoadingScreen extends GenericScreen {
                     game.setScreen(new AboutScreen(game));
                     break;
                 case LEVELS:
-                    // TODO
+                    game.setScreen(new LevelsScreen(game, ScreenState.LEVELS));
                     break;
                 case LVL_ONE:
                     game.setScreen(new LevelOne(game, ScreenState.LVL_ONE));

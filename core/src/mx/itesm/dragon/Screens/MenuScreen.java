@@ -58,6 +58,7 @@ public class MenuScreen extends GenericScreen {
     }
 
     public void show() {
+        borrarPantalla();
         crearMenu();
     }
 
@@ -138,7 +139,7 @@ public class MenuScreen extends GenericScreen {
                     soundPlay.play();
                 }
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
-                game.setScreen(new LoadingScreen(game, ScreenState.LVL_ONE));
+                game.setScreen(new LoadingScreen(game, ScreenState.LEVELS));
             }
         });
 
@@ -179,7 +180,6 @@ public class MenuScreen extends GenericScreen {
     @Override
     public void render(float delta) {
         // DIBUJAR.
-        borrarPantalla();
         batch.begin();
             // Dibujar elementos de la pantalla.
             backGround.render(batch);

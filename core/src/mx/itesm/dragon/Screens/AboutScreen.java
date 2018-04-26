@@ -49,6 +49,7 @@ public class AboutScreen extends GenericScreen {
 
     @Override
     public void show() {
+        borrarPantalla();
         crearAcercaDe();
     }
 
@@ -144,7 +145,7 @@ public class AboutScreen extends GenericScreen {
     @Override
     public void render(float delta) {
         // DIBUJAR.
-        borrarPantalla();
+
         batch.begin();
             // Dibujar elementos de la pantalla.
             backGround.render(batch);

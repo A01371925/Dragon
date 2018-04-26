@@ -53,6 +53,7 @@ public class SettingsScreen extends GenericScreen {
 
     @Override
     public void show() {
+        borrarPantalla();
         crearConfiguracion();
     }
 
@@ -226,7 +227,6 @@ public class SettingsScreen extends GenericScreen {
     @Override
     public void render(float delta) {
         // DIBUJAR.
-        borrarPantalla();
         batch.begin();
             // Dibujar elementos de la pantalla.
             backGround.render(batch);
