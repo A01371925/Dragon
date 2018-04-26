@@ -1,12 +1,13 @@
 package mx.itesm.dragon;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 
 import mx.itesm.dragon.Screens.LoadingIntroScreen;
 
-public class Main extends com.badlogic.gdx.Game {
+public class Main extends Game {
 
     private final AssetManager assetManager = new AssetManager();
 

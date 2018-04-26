@@ -47,7 +47,7 @@ public class Fire {
         for (int i = 0; i < frames.length; i++) {
             frames[i] = tmp[0][i];
         }
-        animacion = new AnimationGame(0.125f,frames);
+        animacion = new GenericAnimation(0.125f,frames);
     }*/
 
     public Sprite getSprite() {

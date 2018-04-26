@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import mx.itesm.dragon.Main;
 
-public abstract class GenericScreen implements Screen{
+public abstract class GenericScreen implements Screen {
 
     protected final Main game;
     protected  final AssetManager assetManager;

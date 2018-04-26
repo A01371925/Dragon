@@ -28,8 +28,8 @@ public class BackGround {
     }
 
     public void mover(float dy) {
-        imagenA.setY(imagenA.getY() - dy * 100);
-        imagenB.setY(imagenB.getY() - dy * 100);
+        imagenA.setY(imagenA.getY() - dy * 500);
+        imagenB.setY(imagenB.getY() - dy * 500);
 
         // Actualizar posiciones.
         if (imagenA.getY() <= -imagenA.getHeight()) {
@@ -42,13 +42,5 @@ public class BackGround {
     public void render(SpriteBatch batch) {
         imagenA.draw(batch);
         imagenB.draw(batch);
-    }
-
-    public Sprite getImagenA() {
-        return imagenA;
-    }
-
-    public Sprite getImagenB() {
-        return imagenB;
     }
 }

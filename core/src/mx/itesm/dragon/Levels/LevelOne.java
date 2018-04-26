@@ -20,8 +20,6 @@ import mx.itesm.dragon.Utils.BackGround;
 
 public class LevelOne extends GenericLevel {
 
-    private static final float ALTO_MAPA = 2560;
-
     private float timerProyectil;
     private float timerFlecha;
     private float timerJefeFinal;
@@ -188,7 +186,7 @@ public class LevelOne extends GenericLevel {
     }
 
     private void actualizarObjetos(float delta) {
-        actualizarFondo(delta * 5);
+        actualizarFondo(delta);
         actualizarProyectiles(delta);
         actualizarEnemigos(delta);
         actualizarColisiones(delta);

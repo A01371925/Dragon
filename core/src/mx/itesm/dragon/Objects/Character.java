@@ -1,6 +1,9 @@
 package mx.itesm.dragon.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+
+import mx.itesm.dragon.Utils.GenericAnimation;
 
 public class Character {
 
@@ -9,21 +12,18 @@ public class Character {
     private static final int TEXTURE_REGION = 8;
     private static final float SPEED = 0.125f;
 
-    private Texture dragon;
-    private AnimationGame animationGame;
+    private GenericAnimation genericAnimation;
 
-    public Character(String textura) {
-        dragon = new Texture(textura);
-        animationGame = new AnimationGame(dragon, TILEWIDTH, TILEHEIGHT, TEXTURE_REGION, SPEED);
+    public Character(Texture texture) {
+        genericAnimation = new GenericAnimation(texture, TILEWIDTH, TILEHEIGHT, TEXTURE_REGION, SPEED);
     }
 
-    public Character(String textura, int tileWidth, int tileHeight, int textureRegion, float speed) {
-        dragon = new Texture(textura);
-        animationGame = new AnimationGame(dragon, tileWidth, tileHeight, textureRegion, speed);
+    public Character(Texture texture, int tileWidth, int tileHeight, int textureRegion, float speed) {
+        genericAnimation = new GenericAnimation(texture, tileWidth, tileHeight, textureRegion, speed);
 
     }
-    public com.badlogic.gdx.graphics.g2d.Animation animacion() {
-        return animationGame.animacionHorizontal();
+    public Animation animacion() {
+        return genericAnimation.animacionHorizontal();
     }
 
 }

@@ -153,17 +153,17 @@ public abstract class GenericLevel extends GenericScreen {
         text = new Text();
 
         barraVida = new Image(textureBarLife);
-
         v1 = new Image(textureLife);
         v2 = new Image(textureLife);
         v3 = new Image(textureLife);
         v4 = new Image(textureLife);
 
         btnPausa = new ImageButton(
-                new TextureRegionDrawable(new TextureRegion(
-                        textureBtnPause)));
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnPause)));
 
-        framesCharacter = new Character("frames/dragon.png"); // Cambiar campo de entrada a Texture y cargarlo con assetmanager
+        framesCharacter = new Character(textureFramesDragon);
         dragon = new AnimatedImage(framesCharacter.animacion());
 
         lifeCharacter = new LifeCharacter(texturePotion);
