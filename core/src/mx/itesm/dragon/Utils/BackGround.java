@@ -43,4 +43,8 @@ public class BackGround {
         imagenA.draw(batch);
         imagenB.draw(batch);
     }
+
+    public void dispose() {
+        imagenA.getTexture().dispose();
+    }
 }

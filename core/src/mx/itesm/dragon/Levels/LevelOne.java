@@ -137,12 +137,13 @@ public class LevelOne extends GenericLevel {
                     e.render(batch);
                 }
                 batch.end();
-                if (btnPausa.isPressed()) {
+                if (btnReanudar.isPressed()) {
                     /*xDragon = dragon.getX();
                     yDragon = dragon.getY();
                     dragon.setPosition(-1000, -1000);*/
                     pause.play();
                     gameState = GameState.PAUSA;
+                    Gdx.input.setInputProcessor(stagePausa);
                 }
                 if(lifeCharacter.getVidas() == 0){
                     gameState = GameState.PERDER;
@@ -161,6 +162,7 @@ public class LevelOne extends GenericLevel {
                     resume.play();
                     //dragon.setPosition(xDragon, yDragon);
                     gameState = GameState.JUGANDO;
+                    Gdx.input.setInputProcessor(stageJuego);
                 }
                 stagePausa.draw();
                 break;
@@ -170,7 +172,6 @@ public class LevelOne extends GenericLevel {
                 text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 100);
                 batch.end();
-
                 stagePerder.draw();
                 break;
             case GANAR:
@@ -429,18 +430,6 @@ public class LevelOne extends GenericLevel {
                 listaVidas.remove(i);
             }
         }
-    }
-
-
-
-    @Override
-    public void pause() {
-        gameState = GameState.PAUSA;
-    }
-
-    @Override
-    public void resume() {
-        gameState = GameState.PAUSA;
     }
 
     @Override
