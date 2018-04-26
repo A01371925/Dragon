@@ -29,7 +29,6 @@ import mx.itesm.dragon.Utils.Text;
 
 public abstract class GenericLevel extends GenericScreen {
 
-    protected InputMultiplexer multiplexer;
 
     protected static final float ALTO_MAPA = 2560;
 
@@ -117,7 +116,7 @@ public abstract class GenericLevel extends GenericScreen {
         initMusic();
         initLose();
         initWin();
-        Gdx.input.setInputProcessor(multiplexer);
+        //Gdx.input.setInputProcessor(multiplexer);
     }
 
     protected void loadResources() {
@@ -153,7 +152,6 @@ public abstract class GenericLevel extends GenericScreen {
 
     private void initGame() {
         stageJuego = new Stage(vista);
-        multiplexer = new InputMultiplexer();
 
         timerVida = 0;
 
@@ -187,6 +185,14 @@ public abstract class GenericLevel extends GenericScreen {
         v3.setPosition(v2.getX() + v2.getWidth() + 8, barraVida.getY());
         v4.setPosition(v3.getX() + v3.getWidth() + 8, barraVida.getY());
 
+        btnPausa.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gameState = GameState.PAUSA;
+                Gdx.input.setInputProcessor(stagePausa);
+            }
+        });
+
         dragon.addListener(new DragListener() {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
@@ -207,9 +213,8 @@ public abstract class GenericLevel extends GenericScreen {
         stageJuego.addActor(v3);
         stageJuego.addActor(v4);
         stageJuego.addActor(dragon);
-        stageJuego.addActor(boss);
         // Se anexan las Escenas al Multiplexor.
-        multiplexer.addProcessor(stageJuego);
+        Gdx.input.setInputProcessor(stageJuego);
     }
 
     private void initPause() {
@@ -268,13 +273,20 @@ public abstract class GenericLevel extends GenericScreen {
             }
         });
 
+        btnReanudar.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gameState = GameState.JUGANDO;
+                Gdx.input.setInputProcessor(stageJuego);
+            }
+        });
+
         stagePausa.addActor(btnReanudar);
         stagePausa.addActor(btnMusica);
         stagePausa.addActor(btnSFX);
         stagePausa.addActor(btnMenu);
 
         // Se anexan las Escenas al Multiplexor.
-        multiplexer.addProcessor(stagePausa);
     }
 
     private void initMusic() {
@@ -314,7 +326,6 @@ public abstract class GenericLevel extends GenericScreen {
         });
         stageGanar.addActor(btnMenuGanar);
 
-        //multiplexer.addProcessor(stageGanar);
     }
 
     private void initLose() {
@@ -357,7 +368,6 @@ public abstract class GenericLevel extends GenericScreen {
         stagePerder.addActor(btnMenuPerder);
         stagePerder.addActor(btnReiniciar);
 
-        //multiplexer.addProcessor(stagePerder);
     }
 
     @Override

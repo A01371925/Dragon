@@ -64,19 +64,17 @@ public class LevelOne extends GenericLevel {
     public void show() {
         borrarPantalla();
         loadResources();
-        create();
         initialization();
+        create();
     }
 
     private void create() {
         // INICIALIZACIÓN DE COMPONENTES.
         initJuego();
-        Gdx.input.setInputProcessor(multiplexer);
     }
 
 
     private void initJuego() {
-        stageJuego = new Stage(vista);
         timerProyectil = 0;
         timerFlecha = 0;
         timerJefeFinal = 0;
@@ -112,7 +110,6 @@ public class LevelOne extends GenericLevel {
         switch (gameState) {
             case JUGANDO:
                 actualizarObjetos(delta);
-                stagePausa.unfocusAll();
                 batch.begin();
 
                 puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
@@ -137,14 +134,15 @@ public class LevelOne extends GenericLevel {
                     e.render(batch);
                 }
                 batch.end();
-                if (btnPausa.isPressed()) {
-                    /*xDragon = dragon.getX();
+                stageJuego.draw();
+                /*if (btnPausa.isPressed()) {
+                    xDragon = dragon.getX();
                     yDragon = dragon.getY();
-                    dragon.setPosition(-1000, -1000);*/
+                    dragon.setPosition(-1000, -1000);
                     pause.play();
                     gameState = GameState.PAUSA;
                     //Gdx.input.setInputProcessor(stagePausa);
-                }
+                }*/
                 if(lifeCharacter.getVidas() == 0){
                     gameState = GameState.PERDER;
                     Gdx.input.setInputProcessor(stagePerder);
@@ -154,18 +152,18 @@ public class LevelOne extends GenericLevel {
                     gameState = GameState.GANAR;
                     Gdx.input.setInputProcessor(stageGanar);
                 }
-                stageJuego.draw();
+
                 break;
             case PAUSA:
                 batch.begin();
-                //backGroundPausa.render(batch);
+                backGroundPausa.render(batch);
                 batch.end();
-                if (btnReanudar.isPressed()) {
+                /*if (btnReanudar.isPressed()) {
                     resume.play();
                     //dragon.setPosition(xDragon, yDragon);
                     gameState = GameState.JUGANDO;
                     //Gdx.input.setInputProcessor(stageJuego);
-                }
+                }*/
 
                 stagePausa.draw();
                 break;
@@ -209,7 +207,6 @@ public class LevelOne extends GenericLevel {
         } else if (y > ALTO_MAPA - ANCHO / 2) {   // Última mitad de la pantalla
             camara.position.set(camara.position.x,ALTO_MAPA - ANCHO/2,0);
         }
-        camara.update();
         moverCamara();
     }
 
