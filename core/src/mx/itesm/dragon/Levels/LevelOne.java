@@ -137,7 +137,7 @@ public class LevelOne extends GenericLevel {
                     e.render(batch);
                 }
                 batch.end();
-                if (btnReanudar.isPressed()) {
+                if (btnPausa.isPressed()) {
                     /*xDragon = dragon.getX();
                     yDragon = dragon.getY();
                     dragon.setPosition(-1000, -1000);*/
@@ -147,10 +147,12 @@ public class LevelOne extends GenericLevel {
                 }
                 if(lifeCharacter.getVidas() == 0){
                     gameState = GameState.PERDER;
+                    Gdx.input.setInputProcessor(stagePerder);
                 }
 
                 if(framesJefeFinal.getVida() == 0){
                     gameState = GameState.GANAR;
+                    Gdx.input.setInputProcessor(stageGanar);
                 }
                 stageJuego.draw();
                 break;
