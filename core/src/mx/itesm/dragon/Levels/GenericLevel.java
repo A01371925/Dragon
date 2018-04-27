@@ -81,9 +81,20 @@ public abstract class GenericLevel extends GenericScreen {
 
     // Marcador.//
     protected int puntosJugador = 0;
+    protected int bonusRemainingHealth = 0;
     protected String letras;
+    protected String bonusLvl;
+    protected String bonusLife;
+    protected String totScore;
+    protected String bonusLvlComplete;
     protected Text puntos;  // Muestra los valores en pantalla
     protected Text text;
+    protected Text bonusLvlText;
+    protected Text bonusHeartsText;
+    protected Text newScore;
+    protected Text bonusHeartsNum;
+    protected Text bonusLvlNum;
+
 
     protected Texture textureLife;
     protected Texture textureBarLife;
@@ -156,8 +167,17 @@ public abstract class GenericLevel extends GenericScreen {
         timerVida = 0;
 
         letras = "Score";
+        bonusLvlComplete = "3000";
+        bonusLvl = "Level Complete Bonus";
+        bonusLife = "Remaining Hearts Bonus";
+        totScore = "Total Score";
         puntos = new Text();
         text = new Text();
+        bonusLvlText = new Text();
+        bonusHeartsText = new Text();
+        newScore = new Text();
+        bonusLvlNum = new Text();
+        bonusHeartsNum = new Text();
 
         barraVida = new Image(textureBarLife);
         v1 = new Image(textureLife);

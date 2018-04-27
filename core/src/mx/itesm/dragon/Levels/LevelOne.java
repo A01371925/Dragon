@@ -49,6 +49,7 @@ public class LevelOne extends GenericLevel {
     private int puntosJugador = 0;
     private float timerVida;
     private float timerProyectilJefeFinal;
+    private boolean bonusPoints = true;
 
 
     public LevelOne(Main game, ScreenState lvlOne) {
@@ -108,7 +109,7 @@ public class LevelOne extends GenericLevel {
                 actualizarObjetos(delta);
                 batch.begin();
 
-                puntosJugador += 10; // incrementa los puntos del jugador conforme pasa el tiempo;
+
                 backGround.render(batch);
                 //Marcador
                 text.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
@@ -155,14 +156,41 @@ public class LevelOne extends GenericLevel {
                 backGroundPerder.render(batch);
                 text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 100);
+
                 batch.end();
                 stagePerder.draw();
                 break;
             case GANAR:
+                if (bonusPoints) {
+                    puntosJugador += 3000;
+                    switch (lifeCharacter.getVidas()) {
+                        case 1:
+                            bonusRemainingHealth += 500;
+                            break;
+                        case 2:
+                            bonusRemainingHealth += 1000;
+                            break;
+                        case 3:
+                            bonusRemainingHealth += 1500;
+                            break;
+                        case 4:
+                            bonusRemainingHealth += 2000;
+                            break;
+                    }
+                    bonusPoints = false;
+                }
+
                 batch.begin();
                 backGroundGanar.render(batch);
-                text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4 - 50);
-                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO / 4 - 100);
+                text.mostrarMensaje(batch,letras,ANCHO / 4, ALTO - ALTO / 4 + 50 );
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador -3000), ANCHO - 130, ALTO - ALTO / 4 + 50 );
+                bonusLvlText.mostrarMensaje(batch,bonusLvl,ANCHO / 3, ALTO - ALTO / 4 -10);
+                bonusLvlNum.mostrarMensaje(batch,bonusLvlComplete,ANCHO - 130, ALTO - ALTO / 4 -10);
+                bonusHeartsText.mostrarMensaje(batch,bonusLife,ANCHO / 3, ALTO - ALTO / 4 - 70);
+                bonusHeartsNum.mostrarMensaje(batch,Integer.toString(bonusRemainingHealth), ANCHO - 130, ALTO - ALTO / 4 - 70);
+                newScore.mostrarMensaje(batch,totScore,ANCHO / 3, ALTO - ALTO / 4 - 160);
+                puntos.mostrarMensaje(batch, Integer.toString(puntosJugador + bonusRemainingHealth),ANCHO - 130, ALTO - ALTO / 4 - 160);
+
                 batch.end();
                 stageGanar.draw();
                 break;
@@ -285,6 +313,7 @@ public class LevelOne extends GenericLevel {
                 Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
                 Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
                 if (rectProyectil.overlaps(rectFlechas)) {
+                    puntosJugador += 100;
                     collision.play();
                     listaProyectil.remove(proyectil);
                     listaFlechas.remove(flechas);
@@ -299,6 +328,13 @@ public class LevelOne extends GenericLevel {
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
                 impact.play();
+                if (puntosJugador - 200 >= 0) {
+                    puntosJugador -= 200;
+                }
+                else {
+                    puntosJugador = 0;
+                }
+
                 switch (lifeCharacter.getVidas()) {
                     case 1:
                         lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
