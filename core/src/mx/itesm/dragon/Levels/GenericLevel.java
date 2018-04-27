@@ -115,6 +115,9 @@ public abstract class GenericLevel extends GenericScreen {
     protected Texture textureBtnReset;
     protected Texture textureBtnPressReset;
 
+    boolean musicaActiva = musica.getBoolean("onMusic");
+    boolean sonidoActivo = sonido.getBoolean("onSound");
+
 
     public GenericLevel(Main game) {
         super(game);
@@ -301,7 +304,73 @@ public abstract class GenericLevel extends GenericScreen {
             }
         });
 
+        btnSFX.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                sonido.putBoolean("onSound", false);
+                sonido.flush();
+                btnSFX.remove();
+                stagePausa.addActor(btnNoSFX);
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+            }
+        });
+
+        btnNoSFX.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                sonido.putBoolean("onSound", true);
+                sonido.flush();
+                btnNoSFX.remove();
+                stagePausa.addActor(btnSFX);
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+            }
+        });
+
+        btnMusica.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                musica.putBoolean("onMusic", false);
+                musica.flush();
+                music.stop();
+                btnMusica.remove();
+                stagePausa.addActor(btnNoMusic);
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+            }
+        });
+
+        btnNoMusic.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                musica.putBoolean("onMusic", true);
+                musica.flush();
+                music.play();
+                music.play();
+                music.setLooping(true);
+                btnNoMusic.remove();
+                stagePausa.addActor(btnMusica);
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+            }
+        });
+
         stagePausa.addActor(btnReanudar);
+
+        if (musicaActiva){
+            stagePausa.addActor(btnMusica);
+        } else{
+            stagePausa.addActor(btnNoMusic);
+        }
+
+
+        if (sonidoActivo){
+            stagePausa.addActor(btnSFX);
+        }else{
+            stagePausa.addActor(btnNoSFX);
+        }
+
         stagePausa.addActor(btnMusica);
         stagePausa.addActor(btnSFX);
         stagePausa.addActor(btnMenu);
@@ -311,14 +380,14 @@ public abstract class GenericLevel extends GenericScreen {
 
     private void initMusic() {
         // Reproducir música de backGround
-        boolean musicaActiva = musica.getBoolean("onMusic");
+
         if (musicaActiva){
             music.setVolume(1);
             music.play();
             music.setLooping(true);
         }
 
-        final boolean sonidoactivo = sonido.getBoolean("onSound");
+
     }
 
     private void initWin() {

@@ -261,7 +261,10 @@ public class LevelOne extends GenericLevel {
 
             Rectangle rectJefeFinal = new Rectangle(boss.getX(), boss.getY(), boss.getImageWidth(), boss.getImageHeight());
             if (rectJefeFinal.overlaps(rectProyectil)) {
-                collision.play();
+                boolean sonidoActivo = sonido.getBoolean("onSound");
+                if (sonidoActivo){
+                    collision.play();
+                }
                 listaProyectil.remove(i);
                 framesJefeFinal.setVida(framesJefeFinal.getVida() - 1);
             }
@@ -300,7 +303,11 @@ public class LevelOne extends GenericLevel {
                 Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
                 Rectangle rectProyectilJefe = proyectilJefe.getSprite().getBoundingRectangle();
                 if (rectProyectil.overlaps(rectProyectilJefe)) {
-                    collision.play();
+                    boolean sonidoActivo = sonido.getBoolean("onSound");
+                    if (sonidoActivo){
+                        collision.play();
+                    }
+
                     listaProyectil.remove(proyectil);
                 }
             }
@@ -314,7 +321,10 @@ public class LevelOne extends GenericLevel {
                 Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
                 if (rectProyectil.overlaps(rectFlechas)) {
                     puntosJugador += 100;
-                    collision.play();
+                    boolean sonidoActivo = sonido.getBoolean("onSound");
+                    if (sonidoActivo){
+                        collision.play();
+                    }
                     listaProyectil.remove(proyectil);
                     listaFlechas.remove(flechas);
                     break;
@@ -327,7 +337,10 @@ public class LevelOne extends GenericLevel {
             //Rectangle rectJefeFinal = new Rectangle(boss.getX(), boss.getY(), boss.getImageWidth(), boss.getImageHeight());
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
-                impact.play();
+                boolean sonidoActivo = sonido.getBoolean("onSound");
+                if (sonidoActivo){
+                    impact.play();
+                }
                 if (puntosJugador - 200 >= 0) {
                     puntosJugador -= 200;
                 }
@@ -362,7 +375,10 @@ public class LevelOne extends GenericLevel {
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
             Rectangle rectJefeFinal = proyectilJefe.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectJefeFinal)) {
-                impact.play();
+                boolean sonidoActivo = sonido.getBoolean("onSound");
+                if (sonidoActivo){
+                    impact.play();
+                }
                 switch (lifeCharacter.getVidas()) {
                     case 1:
                         lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
