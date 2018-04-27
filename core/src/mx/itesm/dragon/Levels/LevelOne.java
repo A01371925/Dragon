@@ -28,9 +28,6 @@ public class LevelOne extends GenericLevel {
     private boolean jefePos = false;
     private int direccion = 1;
 
-    private float xDragon;
-    private float yDragon;
-
     private Random random;
 
     private Texture proyectil;
@@ -65,14 +62,16 @@ public class LevelOne extends GenericLevel {
         borrarPantalla();
         loadResources();
         initialization();
-        create();
+        //create();
+        initJuego(); // INICIALIZACIÓN DE COMPONENTES.
     }
 
+    /*
     private void create() {
         // INICIALIZACIÓN DE COMPONENTES.
         initJuego();
     }
-
+    */
 
     private void initJuego() {
         timerProyectil = 0;
@@ -86,8 +85,6 @@ public class LevelOne extends GenericLevel {
         listaProyectilJefe = new ArrayList<Fire>();
 
         random = new Random();
-
-        // Objeto que dibuja al text
 
         backGround = new BackGround(new Texture("backgrounds/level1.png"));
 
@@ -135,14 +132,7 @@ public class LevelOne extends GenericLevel {
                 }
                 batch.end();
                 stageJuego.draw();
-                /*if (btnPausa.isPressed()) {
-                    xDragon = dragon.getX();
-                    yDragon = dragon.getY();
-                    dragon.setPosition(-1000, -1000);
-                    pause.play();
-                    gameState = GameState.PAUSA;
-                    //Gdx.input.setInputProcessor(stagePausa);
-                }*/
+
                 if(lifeCharacter.getVidas() == 0){
                     gameState = GameState.PERDER;
                     Gdx.input.setInputProcessor(stagePerder);
@@ -158,12 +148,6 @@ public class LevelOne extends GenericLevel {
                 batch.begin();
                 backGroundPausa.render(batch);
                 batch.end();
-                /*if (btnReanudar.isPressed()) {
-                    resume.play();
-                    //dragon.setPosition(xDragon, yDragon);
-                    gameState = GameState.JUGANDO;
-                    //Gdx.input.setInputProcessor(stageJuego);
-                }*/
 
                 stagePausa.draw();
                 break;
@@ -184,7 +168,6 @@ public class LevelOne extends GenericLevel {
                 stageGanar.draw();
                 break;
         }
-        // Gdx.app.log("render", "fps="+Gdx.graphics.getFramesPerSecond());
     }
 
     private void actualizarObjetos(float delta) {
@@ -230,7 +213,6 @@ public class LevelOne extends GenericLevel {
             }
             else {
                 if (boss.getX() >= ANCHO / 2 - boss.getImageWidth() / 2) {
-                    //jefeFinal.setPosition(jefeFinal.getX(), jefeFinal.getY());
                     jefePos = true;
                 } else {
                     boss.setPosition(boss.getX() + 3, boss.getY() - 3);
@@ -249,6 +231,7 @@ public class LevelOne extends GenericLevel {
         for (int i = 0; i < listaProyectil.size(); i++) {
             Fire proyectil = listaProyectil.get(i);
             Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
+
             Rectangle rectJefeFinal = new Rectangle(boss.getX(), boss.getY(), boss.getImageWidth(), boss.getImageHeight());
             if (rectJefeFinal.overlaps(rectProyectil)) {
                 collision.play();
@@ -313,7 +296,7 @@ public class LevelOne extends GenericLevel {
         for (int i = 0; i < listaFlechas.size(); i++) {
             Enemy flechas = listaFlechas.get(i);
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
-            Rectangle rectJefeFinal = new Rectangle(boss.getX(), boss.getY(), boss.getImageWidth(), boss.getImageHeight());
+            //Rectangle rectJefeFinal = new Rectangle(boss.getX(), boss.getY(), boss.getImageWidth(), boss.getImageHeight());
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
             if (rectDragon.overlaps(rectFlechas)) {
                 impact.play();

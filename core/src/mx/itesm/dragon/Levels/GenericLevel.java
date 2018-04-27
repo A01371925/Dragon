@@ -64,7 +64,7 @@ public abstract class GenericLevel extends GenericScreen {
     protected ImageButton btnReiniciar;
     protected ImageButton btnMenuPerder;
     protected ImageButton btnMenuGanar;
-    protected ImageButton btnSigNivel;
+    protected ImageButton btnNextLvl;
 
     //Sonido y musica
     protected Music music;
@@ -304,27 +304,44 @@ public abstract class GenericLevel extends GenericScreen {
     private void initWin() {
         stageGanar = new Stage(vista);
         backGroundGanar = new BackGround(textureBackgroundWin);
-        /*btnSigNivel = new ImageButton(
+        btnNextLvl = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonReset.png"))),
+                                new Texture("buttons/reset.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("BotonResetPresionado.png"))));*/
+                                new Texture("buttons/resetPressed.png"))));
         btnMenuGanar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         textureBtnMenu)),
                 new TextureRegionDrawable(new TextureRegion(
                         textureBtnPressMenu)));
 
-        btnMenuGanar.setPosition(ANCHO / 3,ALTO - btnReanudar.getHeight() * 2.3f - btnReiniciar.getHeight() -50);
+        btnMenuGanar.setPosition(ANCHO / 3,ALTO - btnMenuGanar.getHeight() * 2.3f - btnMenuGanar.getHeight() -50);
         btnMenuGanar.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
         });
+
+        btnNextLvl.setPosition(btnMenuPerder.getX(), btnMenuPerder.getY() - btnReiniciar.getHeight() -80);
+
+        btnNextLvl.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(screenState.equals(ScreenState.LVL_ONE)){
+                game.setScreen(new LoadingScreen(game, ScreenState.MENU));}
+                else if(screenState.equals(ScreenState.LVL_TWO)){
+                    game.setScreen(new LoadingScreen(game, ScreenState.LVL_THREE));}
+                else {
+                    game.setScreen(new LoadingScreen(game, ScreenState.MENU));
+                }
+            }
+        });
+
         stageGanar.addActor(btnMenuGanar);
+        stageGanar.addActor(btnNextLvl);
 
     }
 
@@ -357,6 +374,8 @@ public abstract class GenericLevel extends GenericScreen {
                 game.setScreen(new LoadingScreen(game, ScreenState.MENU));
             }
         });
+
+        btnReiniciar.setPosition(btnMenuPerder.getX(), btnMenuPerder.getY() - btnReiniciar.getHeight() -80);
 
         btnReiniciar.addListener(new ClickListener() {
             @Override
