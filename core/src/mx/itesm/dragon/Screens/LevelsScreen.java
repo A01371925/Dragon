@@ -101,7 +101,7 @@ public class LevelsScreen extends GenericScreen{
             }
         });
 
-        btnLvl2.addListener(new ClickListener() {
+        btnLvl3.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new LoadingScreen(game, ScreenState.LVL_THREE));

@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
+import mx.itesm.dragon.Levels.LevelTwo;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Main;
 import mx.itesm.dragon.Levels.LevelOne;
@@ -100,8 +101,60 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/impacto.wav", Sound.class);
                 break;
             case LVL_TWO:
+                assetManager.load("backgrounds/level1.png", Texture.class);
+                assetManager.load("textures/healthBar.png", Texture.class);
+                assetManager.load("textures/heart.png", Texture.class);
+                assetManager.load("buttons/pause.png", Texture.class);
+                assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("textures/potion.png", Texture.class);
+                assetManager.load("backgrounds/pause.png", Texture.class);
+                assetManager.load("buttons/resume.png", Texture.class);
+                assetManager.load("buttons/resumePressed.png", Texture.class);
+                assetManager.load("buttons/music.png", Texture.class);
+                assetManager.load("buttons/musicPressed.png", Texture.class);
+                assetManager.load("buttons/sfx.png", Texture.class);
+                assetManager.load("buttons/sfxPressed.png", Texture.class);
+                assetManager.load("buttons/mainMenu.png", Texture.class);
+                assetManager.load("buttons/mainMenuPressed.png", Texture.class);
+                assetManager.load("backgrounds/win.png", Texture.class);
+                assetManager.load("backgrounds/gameOver.png", Texture.class);
+                assetManager.load("buttons/reset.png", Texture.class);
+                assetManager.load("buttons/resetPressed.png", Texture.class);
+                assetManager.load("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3", Music.class);
+                assetManager.load("music/flecha.wav", Sound.class);
+                assetManager.load("music/colision.wav", Sound.class);
+                assetManager.load("music/fuego.wav", Sound.class);
+                assetManager.load("music/pausa.wav", Sound.class);
+                assetManager.load("music/reanudar.wav", Sound.class);
+                assetManager.load("music/impacto.wav", Sound.class);
                 break;
             case LVL_THREE:
+                assetManager.load("backgrounds/level1.png", Texture.class);
+                assetManager.load("textures/healthBar.png", Texture.class);
+                assetManager.load("textures/heart.png", Texture.class);
+                assetManager.load("buttons/pause.png", Texture.class);
+                assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("textures/potion.png", Texture.class);
+                assetManager.load("backgrounds/pause.png", Texture.class);
+                assetManager.load("buttons/resume.png", Texture.class);
+                assetManager.load("buttons/resumePressed.png", Texture.class);
+                assetManager.load("buttons/music.png", Texture.class);
+                assetManager.load("buttons/musicPressed.png", Texture.class);
+                assetManager.load("buttons/sfx.png", Texture.class);
+                assetManager.load("buttons/sfxPressed.png", Texture.class);
+                assetManager.load("buttons/mainMenu.png", Texture.class);
+                assetManager.load("buttons/mainMenuPressed.png", Texture.class);
+                assetManager.load("backgrounds/win.png", Texture.class);
+                assetManager.load("backgrounds/gameOver.png", Texture.class);
+                assetManager.load("buttons/reset.png", Texture.class);
+                assetManager.load("buttons/resetPressed.png", Texture.class);
+                assetManager.load("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3", Music.class);
+                assetManager.load("music/flecha.wav", Sound.class);
+                assetManager.load("music/colision.wav", Sound.class);
+                assetManager.load("music/fuego.wav", Sound.class);
+                assetManager.load("music/pausa.wav", Sound.class);
+                assetManager.load("music/reanudar.wav", Sound.class);
+                assetManager.load("music/impacto.wav", Sound.class);
                 break;
             default:
         }
@@ -134,10 +187,10 @@ public class LoadingScreen extends GenericScreen {
                     game.setScreen(new LevelOne(game, ScreenState.LVL_ONE));
                     break;
                 case LVL_TWO:
-                    // TODO
+                    game.setScreen(new LevelTwo(game, ScreenState.LVL_TWO));
                     break;
                 case LVL_THREE:
-                    // TODO
+                    game.setScreen(new LevelTwo(game, ScreenState.LVL_THREE));
                     break;
                 default:
             }
