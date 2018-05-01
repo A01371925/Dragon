@@ -52,9 +52,9 @@ public class LevelThree extends GenericLevel {
     private boolean bonusPoints = true;
 
 
-    public LevelThree(Main game, ScreenState lvlOne) {
+    public LevelThree(Main game, ScreenState lvlThree) {
         super(game);
-        screenState = lvlOne;
+        screenState = lvlThree;
     }
 
     @Override
