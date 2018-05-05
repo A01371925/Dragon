@@ -107,9 +107,9 @@ public class LevelOne extends GenericLevel {
         switch (gameState) {
             case JUGANDO:
                 actualizarObjetos(delta);
+                back();
+                home();
                 batch.begin();
-
-
                 backGround.render(batch);
                 //Marcador
                 text.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);
@@ -137,18 +137,15 @@ public class LevelOne extends GenericLevel {
                     gameState = GameState.PERDER;
                     Gdx.input.setInputProcessor(stagePerder);
                 }
-
                 if(framesJefeFinal.getVida() == 0){
                     gameState = GameState.GANAR;
                     Gdx.input.setInputProcessor(stageGanar);
                 }
-
                 break;
             case PAUSA:
                 batch.begin();
                 backGroundPausa.render(batch);
                 batch.end();
-
                 stagePausa.draw();
                 break;
             case PERDER:
@@ -156,7 +153,6 @@ public class LevelOne extends GenericLevel {
                 backGroundPerder.render(batch);
                 text.mostrarMensaje(batch,letras,ANCHO / 2, ALTO - ALTO / 4-50);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador), ANCHO / 2, ALTO - ALTO /4 - 100);
-
                 batch.end();
                 stagePerder.draw();
                 break;

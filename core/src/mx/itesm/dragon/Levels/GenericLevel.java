@@ -1,7 +1,9 @@
 package mx.itesm.dragon.Levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -28,7 +30,6 @@ import mx.itesm.dragon.Utils.BackGround;
 import mx.itesm.dragon.Utils.Text;
 
 public abstract class GenericLevel extends GenericScreen {
-
 
     protected static final float ALTO_MAPA = 2560;
 
@@ -124,17 +125,16 @@ public abstract class GenericLevel extends GenericScreen {
         gameState = GameState.JUGANDO;
     }
 
+
     protected void initialization() {
         initGame();
         initPause();
         initMusic();
         initLose();
         initWin();
-        //Gdx.input.setInputProcessor(multiplexer);
     }
 
     protected void loadResources() {
-
         textureBarLife = assetManager.get("textures/healthBar.png");
         textureLife = assetManager.get("textures/heart.png");
         textureBtnPause = assetManager.get("buttons/pause.png");
@@ -162,6 +162,21 @@ public abstract class GenericLevel extends GenericScreen {
         pause = assetManager.get("music/pausa.wav");
         resume = assetManager.get("music/reanudar.wav");
         impact = assetManager.get("music/impacto.wav");
+    }
+
+    protected void back() {
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            gameState = GameState.PAUSA;
+            //escenaPausa = new EscenaPausa(vistaHUD, batch);
+            Gdx.input.setInputProcessor(stagePausa);
+        }
+    }
+
+    protected void home() {
+        if(Gdx.input.isKeyPressed(Input.Keys.HOME)) {
+            gameState = GameState.PAUSA;
+            Gdx.input.setInputProcessor(stagePausa);
+        }
     }
 
     private void initGame() {
@@ -212,6 +227,7 @@ public abstract class GenericLevel extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gameState = GameState.PAUSA;
+                Gdx.app.log("CLICKED", "SE HIZO CLICK");
                 Gdx.input.setInputProcessor(stagePausa);
             }
         });
@@ -228,6 +244,8 @@ public abstract class GenericLevel extends GenericScreen {
                 }
             }
         });
+
+
         // Se anexan los Actores a la Escena.
         stageJuego.addActor(btnPausa);
         stageJuego.addActor(barraVida);
@@ -237,6 +255,7 @@ public abstract class GenericLevel extends GenericScreen {
         stageJuego.addActor(v4);
         stageJuego.addActor(dragon);
         // Se anexan las Escenas al Multiplexor.
+
         Gdx.input.setInputProcessor(stageJuego);
     }
 
@@ -480,12 +499,12 @@ public abstract class GenericLevel extends GenericScreen {
 
     @Override
     public void pause() {
-        //gameState = GameState.PAUSA;
+        gameState = GameState.PAUSA;
     }
 
     @Override
     public void resume() {
-        //gameState = GameState.JUGANDO;
+        gameState = GameState.PAUSA;
     }
 
     @Override
