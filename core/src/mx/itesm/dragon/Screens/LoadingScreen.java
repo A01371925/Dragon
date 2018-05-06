@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
+import mx.itesm.dragon.Levels.LevelThree;
 import mx.itesm.dragon.Levels.LevelTwo;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Main;
@@ -190,7 +191,7 @@ public class LoadingScreen extends GenericScreen {
                     game.setScreen(new LevelTwo(game, ScreenState.LVL_TWO));
                     break;
                 case LVL_THREE:
-                    game.setScreen(new LevelTwo(game, ScreenState.LVL_THREE));
+                    game.setScreen(new LevelThree(game, ScreenState.LVL_THREE));
                     break;
                 default:
             }

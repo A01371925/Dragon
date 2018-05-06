@@ -182,11 +182,11 @@ public class LevelTwo extends GenericLevel {
 
                 batch.begin();
                 backGroundGanar.render(batch);
-                text.mostrarMensaje(batch,letras,ANCHO / 4, ALTO - ALTO / 4 + 50 );
+                text.mostrarMensaje(batch,letras,ANCHO / 4 - 50, ALTO - ALTO / 4 + 50 );
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador -3000), ANCHO - 130, ALTO - ALTO / 4 + 50 );
-                bonusLvlText.mostrarMensaje(batch,bonusLvl,ANCHO / 3, ALTO - ALTO / 4 -10);
+                bonusLvlText.mostrarMensaje(batch,bonusLvl,ANCHO / 3 + 20, ALTO - ALTO / 4 -10);
                 bonusLvlNum.mostrarMensaje(batch,bonusLvlComplete,ANCHO - 130, ALTO - ALTO / 4 -10);
-                bonusHeartsText.mostrarMensaje(batch,bonusLife,ANCHO / 3, ALTO - ALTO / 4 - 70);
+                bonusHeartsText.mostrarMensaje(batch,bonusLife,ANCHO / 3 + 40, ALTO - ALTO / 4 - 70);
                 bonusHeartsNum.mostrarMensaje(batch,Integer.toString(bonusRemainingHealth), ANCHO - 130, ALTO - ALTO / 4 - 70);
                 newScore.mostrarMensaje(batch,totScore,ANCHO / 3, ALTO - ALTO / 4 - 160);
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador + bonusRemainingHealth),ANCHO - 130, ALTO - ALTO / 4 - 160);

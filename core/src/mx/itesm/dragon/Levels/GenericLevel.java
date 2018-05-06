@@ -439,7 +439,7 @@ public abstract class GenericLevel extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(screenState.equals(ScreenState.LVL_ONE)){
-                game.setScreen(new LoadingScreen(game, ScreenState.MENU));}
+                game.setScreen(new LoadingScreen(game, ScreenState.LVL_TWO));}
                 else if(screenState.equals(ScreenState.LVL_TWO)){
                     game.setScreen(new LoadingScreen(game, ScreenState.LVL_THREE));}
                 else {
