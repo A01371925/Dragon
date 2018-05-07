@@ -22,6 +22,7 @@ public class LevelOne extends GenericLevel {
     private float timerProyectil;
     private float timerFlecha;
     private float timerJefeFinal;
+    private float timerInvincibility; // tiempo que debe transcurrir para que el jugador vuelva a recibir daño.
 
     // determinan el movimiemto del jefe final
     private boolean jefePos = false;
@@ -223,7 +224,7 @@ public class LevelOne extends GenericLevel {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         boss.act(delta);
-        if (timerJefeFinal >= 30){
+        if (timerJefeFinal >= 5){
             if (jefePos) {
                 boss.setPosition(boss.getX() + (3 * direccion), boss.getY());
 
@@ -251,6 +252,7 @@ public class LevelOne extends GenericLevel {
     }
 
     private void actualizarColisiones(float delta) {
+        timerInvincibility -= delta;
         for (int i = 0; i < listaProyectil.size(); i++) {
             Fire proyectil = listaProyectil.get(i);
             Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
@@ -370,6 +372,7 @@ public class LevelOne extends GenericLevel {
             Fire proyectilJefe = listaProyectilJefe.get(i);
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
             Rectangle rectJefeFinal = proyectilJefe.getSprite().getBoundingRectangle();
+            Rectangle rectJefeFinal2 = new Rectangle(boss.getX(),boss.getY(),boss.getImageWidth(),boss.getImageHeight());
             if (rectDragon.overlaps(rectJefeFinal)) {
                 boolean sonidoActivo = sonido.getBoolean("onSound");
                 if (sonidoActivo){
@@ -396,6 +399,29 @@ public class LevelOne extends GenericLevel {
                 listaProyectilJefe.remove(i);
                 break;
             }
+            if (rectDragon.overlaps(rectJefeFinal2)&& timerInvincibility <= 0) {
+                impact.play();
+                switch (lifeCharacter.getVidas()) {
+                    case 1:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v1.setVisible(false);
+                        break;
+                    case 2:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v2.setVisible(false);
+                        break;
+                    case 3:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v3.setVisible(false);
+                        break;
+                    case 4:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v4.setVisible(false);
+                        break;
+                }
+                timerInvincibility = 1.3f;
+                break;
+            }
         }
     }
 
@@ -410,7 +436,7 @@ public class LevelOne extends GenericLevel {
             listaFlechas.get(i).mover();
         }
         for (int i = 0; i < listaFlechas.size(); i++) {
-            if (listaFlechas.get(i).getSprite().getHeight() <= 0) {
+            if (listaFlechas.get(i).getSprite().getY() <= -flecha.getHeight()) {
                 listaFlechas.remove(i);
             }
         }

@@ -21,7 +21,9 @@ public class LevelTwo extends GenericLevel {
 
     private float timerProyectil;
     private float timerFlecha;
+    private float timerGlobo;
     private float timerJefeFinal;
+    private float timerInvincibility; // tiempo que debe transcurrir para que el jugador vuelva a recibir daño.
 
     // determinan el movimiemto del jefe final
     private boolean jefePos = false;
@@ -32,11 +34,13 @@ public class LevelTwo extends GenericLevel {
     private Texture proyectil;
     private Texture proyectilJefeFinal;
     private Texture flecha;
+    private Texture globo;
 
 
     private ArrayList<Fire> listaProyectil;
     private ArrayList<Fire> listaProyectilJefe;
     private ArrayList<Enemy> listaFlechas;
+    private ArrayList<Enemy> listaGlobos;
     private ArrayList<LifeCharacter> listaVidas;
 
     private BackGround backGround;
@@ -81,6 +85,7 @@ public class LevelTwo extends GenericLevel {
 
         listaProyectil = new ArrayList<Fire>();
         listaFlechas = new ArrayList<Enemy>();
+        listaGlobos = new ArrayList<Enemy>();
         listaVidas = new ArrayList<LifeCharacter>();
         listaProyectilJefe = new ArrayList<Fire>();
 
@@ -95,6 +100,7 @@ public class LevelTwo extends GenericLevel {
         proyectil = new Texture("textures/fireBall.png");
         proyectilJefeFinal = new Texture("textures/rock.png");
         flecha = new Texture("textures/arrow.png");
+        globo = new Texture("textures/EnemigoGlobo.png");
         lifeCharacter = new LifeCharacter(texturePotion);
 
         boss.setPosition(0 - boss.getWidth(), ALTO);
@@ -129,6 +135,9 @@ public class LevelTwo extends GenericLevel {
                 for (Enemy e: listaFlechas) {
                     //flecha_s.play();
                     e.render(batch);
+                }
+                for (Enemy g: listaGlobos){
+                    g.render(batch);
                 }
                 batch.end();
                 stageJuego.draw();
@@ -255,6 +264,7 @@ public class LevelTwo extends GenericLevel {
     }
 
     private void actualizarColisiones(float delta) {
+        timerInvincibility -= delta;
         for (int i = 0; i < listaProyectil.size(); i++) {
             Fire proyectil = listaProyectil.get(i);
             Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
@@ -357,10 +367,63 @@ public class LevelTwo extends GenericLevel {
                 break;
             }
         }
+        for (int i = 0; i < listaProyectil.size(); i++) {
+            Fire proyectil = listaProyectil.get(i);
+            for (int j = 0; j < listaGlobos.size(); j++) {
+                Enemy globos = listaGlobos.get(j);
+                Rectangle rectProyectil = proyectil.getSprite().getBoundingRectangle();
+                Rectangle rectGlobo = new Rectangle(globos.getSprite().getX()+9,globos.getSprite().getY()+111,95,91);
+                if (rectProyectil.overlaps(rectGlobo)) {
+                    puntosJugador += 200;
+                    collision.play();
+                    listaProyectil.remove(proyectil);
+                    listaGlobos.remove(globos);
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < listaGlobos.size(); i++) {
+            Enemy globos = listaGlobos.get(i);
+            Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
+            Rectangle rectGlobo = new Rectangle(globos.getSprite().getX()+9,globos.getSprite().getY()+58,95,142 );
+            if (rectDragon.overlaps(rectGlobo) && timerInvincibility <= 0) {
+                impact.play();
+                if (puntosJugador - 200 >= 0) {
+                    puntosJugador -= 200;
+                }
+                else {
+                    puntosJugador = 0;
+                }
+
+                switch (lifeCharacter.getVidas()) {
+                    case 1:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v1.setVisible(false);
+                        break;
+                    case 2:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v2.setVisible(false);
+                        break;
+                    case 3:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v3.setVisible(false);
+                        break;
+                    case 4:
+                        lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                        v4.setVisible(false);
+                        break;
+                }
+                timerInvincibility = 1.5f;
+                //listaGlobos.remove(i);
+                break;
+            }
+        }
+
         for (int i = 0; i < listaProyectilJefe.size(); i++) {
             Fire proyectilJefe = listaProyectilJefe.get(i);
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
             Rectangle rectJefeFinal = proyectilJefe.getSprite().getBoundingRectangle();
+            Rectangle rectJefeFinal2 = new Rectangle(boss.getX(),boss.getY(),boss.getImageWidth(),boss.getImageHeight());
             if (rectDragon.overlaps(rectJefeFinal)) {
                 impact.play();
                 switch (lifeCharacter.getVidas()) {
@@ -384,7 +447,31 @@ public class LevelTwo extends GenericLevel {
                 listaProyectilJefe.remove(i);
                 break;
             }
+            if (rectDragon.overlaps(rectJefeFinal2)&& timerInvincibility <= 0) {
+            impact.play();
+            switch (lifeCharacter.getVidas()) {
+                case 1:
+                    lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                    v1.setVisible(false);
+                    break;
+                case 2:
+                    lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                    v2.setVisible(false);
+                    break;
+                case 3:
+                    lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                    v3.setVisible(false);
+                    break;
+                case 4:
+                    lifeCharacter.setVidas(lifeCharacter.getVidas() - 1);
+                    v4.setVisible(false);
+                    break;
+                }
+            timerInvincibility = 1.3f;
+            break;
+            }
         }
+
     }
 
     private void actualizarEnemigos(float delta) {
@@ -398,10 +485,26 @@ public class LevelTwo extends GenericLevel {
             listaFlechas.get(i).mover();
         }
         for (int i = 0; i < listaFlechas.size(); i++) {
-            if (listaFlechas.get(i).getSprite().getHeight() <= 0) {
+            if (listaFlechas.get(i).getSprite().getY() <= -flecha.getHeight()) {
                 listaFlechas.remove(i);
             }
         }
+        timerGlobo += delta;
+        int randomY = random.nextInt(Math.round(ALTO/2));
+        if (timerGlobo >= 3) {
+            listaGlobos.add(new Enemy(globo, ANCHO, randomY));
+            timerGlobo = 0;
+        }
+        for (int i = 0; i < listaGlobos.size(); i++) {
+            listaGlobos.get(i).moverX();
+        }
+
+        for (int i = 0; i < listaGlobos.size(); i++) {
+            if (listaGlobos.get(i).getSprite().getX() <= -globo.getWidth()) {
+                listaGlobos.remove(i);
+            }
+        }
+
     }
 
     private void actualizarProyectiles(float delta) {
@@ -458,6 +561,7 @@ public class LevelTwo extends GenericLevel {
         stageGanar.dispose();
         proyectil.dispose();
         flecha.dispose();
+        globo.dispose();
         assetManager.unload("textures/healthBar.png");
         assetManager.unload("textures/heart.png");
         assetManager.unload("buttons/pause.png");

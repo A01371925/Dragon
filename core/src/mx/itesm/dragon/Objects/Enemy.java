@@ -30,6 +30,10 @@ public class Enemy {
         sprite.setY(sprite.getY() - SPEED);
     }
 
+    public void moverX(){
+        sprite.setX(sprite.getX() - SPEED / 5);
+    }
+
     public Sprite getSprite() {
         return sprite;
     }
