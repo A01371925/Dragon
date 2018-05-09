@@ -390,8 +390,6 @@ public abstract class GenericLevel extends GenericScreen {
             stagePausa.addActor(btnNoSFX);
         }
 
-        stagePausa.addActor(btnMusica);
-        stagePausa.addActor(btnSFX);
         stagePausa.addActor(btnMenu);
 
         // Se anexan las Escenas al Multiplexor.

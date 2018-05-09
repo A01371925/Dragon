@@ -48,6 +48,7 @@ public class SettingsScreen extends GenericScreen {
     //Preferencia de sonido y musica.
     private Preferences sonido = Gdx.app.getPreferences("preferenceS");
     private Preferences musica = Gdx.app.getPreferences("preferenceM");
+    private Preferences progress = Gdx.app.getPreferences("preferenceProg");
 
     SettingsScreen(Main game) {
         super(game);
@@ -204,6 +205,8 @@ public class SettingsScreen extends GenericScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 // Cambia de pantalla, solo puede hacerlo 'game'.
+                progress.putInteger("preferenceProg", 1);
+                progress.flush();
             }
         });
 

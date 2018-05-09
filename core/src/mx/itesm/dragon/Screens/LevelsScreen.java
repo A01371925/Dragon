@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -30,6 +31,8 @@ public class LevelsScreen extends GenericScreen{
     private ImageButton btnLvl1;
     private ImageButton btnLvl2;
     private ImageButton btnLvl3;
+
+    private Preferences progress = Gdx.app.getPreferences("preferenceProg");
 
     private BackGround backGround;
 
@@ -109,6 +112,15 @@ public class LevelsScreen extends GenericScreen{
         });
 
         stageLevelsSreen.addActor(btnLvl1);
+
+        /*Integer levelProg = progress.getInteger("progLevels");
+        if (levelProg == 2 || levelProg == 3){
+            stageLevelsSreen.addActor(btnLvl2);
+        }
+
+        if (levelProg == 3){
+            stageLevelsSreen.addActor(btnLvl3);
+        }*/
         stageLevelsSreen.addActor(btnLvl2);
         stageLevelsSreen.addActor(btnLvl3);
 

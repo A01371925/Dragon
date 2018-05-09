@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -51,6 +52,8 @@ public class LevelOne extends GenericLevel {
     private float timerVida;
     private float timerProyectilJefeFinal;
     private boolean bonusPoints = true;
+
+    private Preferences progress = Gdx.app.getPreferences("preferenceProg");
 
 
     public LevelOne(Main game, ScreenState lvlOne) {

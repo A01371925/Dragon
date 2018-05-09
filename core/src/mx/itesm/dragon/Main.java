@@ -22,8 +22,11 @@ public class Main extends Game {
         Gdx.input.setCatchMenuKey(true);
         Preferences prefs = Gdx.app.getPreferences("preferenceS");
         Preferences prefm = Gdx.app.getPreferences("preferenceM");
+        Preferences prefprog = Gdx.app.getPreferences("preferenceProg");
+        prefprog.putInteger("progress", 1);
         prefs.putBoolean("onSound", true);
         prefm.putBoolean("onMusic", true);
+        prefprog.flush();
         prefs.flush();
         prefm.flush();
 
