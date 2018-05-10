@@ -166,16 +166,18 @@ public abstract class GenericLevel extends GenericScreen {
 
     protected void back() {
         if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            Gdx.input.setInputProcessor(stagePausa);
             gameState = GameState.PAUSA;
             //escenaPausa = new EscenaPausa(vistaHUD, batch);
-            Gdx.input.setInputProcessor(stagePausa);
+
         }
     }
 
     protected void home() {
         if(Gdx.input.isKeyPressed(Input.Keys.HOME)) {
+            //Gdx.input.setInputProcessor(stagePausa);
             gameState = GameState.PAUSA;
-            Gdx.input.setInputProcessor(stagePausa);
+
         }
     }
 
@@ -497,6 +499,7 @@ public abstract class GenericLevel extends GenericScreen {
 
     @Override
     public void pause() {
+
         gameState = GameState.PAUSA;
     }
 

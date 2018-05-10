@@ -147,6 +147,7 @@ public class LevelOne extends GenericLevel {
                 }
                 break;
             case PAUSA:
+                Gdx.input.setInputProcessor(stagePausa);
                 batch.begin();
                 backGroundPausa.render(batch);
                 batch.end();
