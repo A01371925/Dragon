@@ -91,7 +91,7 @@ public class LevelTwo extends GenericLevel {
 
         random = new Random();
 
-        backGround = new BackGround(new Texture("backgrounds/gameOver.png"));
+        backGround = new BackGround(new Texture("backgrounds/level2.png"));
 
         framesJefeFinal = new Boss("frames/finalBoss1.png");
         boss = new AnimatedImage(framesJefeFinal.animacion());

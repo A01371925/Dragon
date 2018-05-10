@@ -92,7 +92,7 @@ public class LevelThree extends GenericLevel {
 
         random = new Random();
 
-        backGround = new BackGround(new Texture("backgrounds/win.png"));
+        backGround = new BackGround(new Texture("backgrounds/level3.png"));
 
         framesJefeFinal = new Boss("frames/finalBoss1.png");
         boss = new AnimatedImage(framesJefeFinal.animacion());
