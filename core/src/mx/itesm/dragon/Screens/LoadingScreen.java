@@ -68,6 +68,13 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/preacerca.mp3", Music.class);
                 assetManager.load("music/regresar.wav", Sound.class);
                 break;
+            case TUTORIAL:
+                assetManager.load("backgrounds/about.png", Texture.class);
+                assetManager.load("buttons/return.png", Texture.class);
+                assetManager.load("buttons/returnPressed.png", Texture.class);
+                assetManager.load("music/preacerca.mp3", Music.class);
+                assetManager.load("music/regresar.wav", Sound.class);
+                break;
             case LEVELS:
                 assetManager.load("backgrounds/loading.jpg", Texture.class);
                 assetManager.load("buttons/resume.png", Texture.class);
@@ -180,6 +187,9 @@ public class LoadingScreen extends GenericScreen {
                     break;
                 case ABOUT:
                     game.setScreen(new AboutScreen(game));
+                    break;
+                case TUTORIAL:
+                    game.setScreen(new TutorialScreen(game));
                     break;
                 case LEVELS:
                     game.setScreen(new LevelsScreen(game, ScreenState.LEVELS));

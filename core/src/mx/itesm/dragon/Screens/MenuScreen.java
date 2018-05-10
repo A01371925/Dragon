@@ -28,6 +28,7 @@ public class MenuScreen extends GenericScreen {
     private ImageButton btnPlay;
     private ImageButton btnAU;
     private ImageButton btnConfig;
+    private ImageButton btnTutorial;
 
     // BackGround.
     private BackGround backGround;
@@ -39,6 +40,8 @@ public class MenuScreen extends GenericScreen {
     private Texture textureBtnPressPlay;
     private Texture textureBtnAU;
     private Texture textureBtnPressAU;
+    private Texture textureBtnTut;
+    private Texture textureBtnPressTut;
     private Texture textureBtnSettings;
     private Texture textureBtnPressSettings;
 
@@ -52,6 +55,7 @@ public class MenuScreen extends GenericScreen {
     private Sound soundAU;
     private Sound soundPlay;
     private Sound soundSettings;
+    private Sound soundTut;
 
     public MenuScreen(Main game, ScreenState screenState) {
         super(game);
@@ -77,6 +81,8 @@ public class MenuScreen extends GenericScreen {
         textureBtnPressPlay = assetManager.get("buttons/playPressed.png");
         textureBtnAU = assetManager.get("buttons/about.png");
         textureBtnPressAU = assetManager.get("buttons/aboutPressed.png");
+        textureBtnTut = assetManager.get("buttons/about.png");
+        textureBtnPressTut = assetManager.get("buttons/aboutPressed.png");
         textureBtnSettings = assetManager.get("buttons/settings.png");
         textureBtnPressSettings = assetManager.get("buttons/settingsPressed.png");
         imgDragon = new ImageButton(
@@ -104,12 +110,19 @@ public class MenuScreen extends GenericScreen {
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnPressSettings)));
-
+        btnTutorial = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnTut)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnPressTut)));
         // Creacion de la musica de backGround.
         musicMenu = assetManager.get("music/premenu.mp3");
         soundAU = assetManager.get("music/config.wav");
         soundPlay = assetManager.get("music/jugar.wav");
         soundSettings = assetManager.get("music/config.wav");
+        soundTut = assetManager.get("music/config.wav");
 
         // Reproduccion de la musica de backGround
         boolean musicaActiva = musica.getBoolean("onMusic");
@@ -130,6 +143,8 @@ public class MenuScreen extends GenericScreen {
         btnAU.setPosition(ANCHO - btnAU.getWidth()-10,ALTO - btnAU.getHeight()-20);
 
         btnConfig.setPosition(ANCHO - btnConfig.getWidth()-20,btnConfig.getHeight()/4);
+
+        btnTutorial.setPosition(0,btnTutorial.getHeight()/4);
 
         // Detecta si el usuario hace click en algún actor.
         btnPlay.addListener(new ClickListener(){
@@ -167,12 +182,24 @@ public class MenuScreen extends GenericScreen {
                 game.setScreen(new LoadingScreen(game, ScreenState.SETTINGS));
             }
         });
+        btnTutorial.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if (sonidoActivo){
+                    soundTut.play();
+                }
+                // Cambia de pantalla, solo lo puede hacerlo 'game'.
+                game.setScreen(new LoadingScreen(game, ScreenState.TUTORIAL));
+            }
+        });
 
         // Se agregan elementos al menú.
         stageMenu.addActor(imgDragon);
         stageMenu.addActor(btnPlay);
         stageMenu.addActor(btnAU);
         stageMenu.addActor(btnConfig);
+        stageMenu.addActor(btnTutorial);
 
         // Indica quién escucha y atiende eventos.
         Gdx.input.setInputProcessor(stageMenu);
