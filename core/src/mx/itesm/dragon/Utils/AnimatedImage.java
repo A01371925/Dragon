@@ -33,6 +33,10 @@ public class AnimatedImage extends Image {
         return frames;
     }
 
+    public Animation getAnimation() {
+        return animation;
+    }
+
     public TextureRegion get(int i) {
         for (int j = 0; j < frames.length; j++){
             if (i == j) {

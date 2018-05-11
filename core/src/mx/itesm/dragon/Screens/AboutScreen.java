@@ -14,8 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.Objects.Character;
 import mx.itesm.dragon.States.GameState;
 import mx.itesm.dragon.States.ScreenState;
+import mx.itesm.dragon.Utils.AnimatedImage;
 import mx.itesm.dragon.Utils.BackGround;
 
 public class AboutScreen extends GenericScreen {

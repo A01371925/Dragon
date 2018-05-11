@@ -1,20 +1,35 @@
 package mx.itesm.dragon.Screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import mx.itesm.dragon.Levels.LevelThree;
 import mx.itesm.dragon.Levels.LevelTwo;
+import mx.itesm.dragon.Objects.Character;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Main;
 import mx.itesm.dragon.Levels.LevelOne;
+import mx.itesm.dragon.Utils.AnimatedImage;
+import mx.itesm.dragon.Utils.BackGround;
 
 public class LoadingScreen extends GenericScreen {
 
     private ScreenState gameState;
 
     private Texture loadingTexture;
+    private Texture textureFramesDragon;
+
+    private Character framesCharacter;
+
+    private BackGround backGroundLoading;
+
+    private AnimatedImage dragon;
+    private Stage stageLoading;
+    private float acumulador;
 
     public LoadingScreen(Main game, ScreenState gameState) {
         super(game);
@@ -24,8 +39,22 @@ public class LoadingScreen extends GenericScreen {
     @Override
     public void show() {
         borrarPantalla();
-        loadingTexture = new Texture("backgrounds/loading.jpg");
+        stageLoading = new Stage(vista);
+        loadingTexture = new Texture("backgrounds/loading.png");
+        backGroundLoading = new BackGround(loadingTexture);
+
+        textureFramesDragon = new Texture("frames/loading.png");
+        framesCharacter = new Character(textureFramesDragon, 448, 179, 5, .25f);
+        dragon = new AnimatedImage(framesCharacter.animacion(),framesCharacter.getFrames());
+
+
+        dragon.setPosition(ANCHO / 2 , ALTO - 800);
+
+        stageLoading.addActor(dragon);
+
         load();
+
+        Gdx.input.setInputProcessor(stageLoading);
     }
 
     private void load() {
@@ -77,7 +106,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/regresar.wav", Sound.class);
                 break;
             case LEVELS:
-                assetManager.load("backgrounds/loading.jpg", Texture.class);
+                assetManager.load("backgrounds/loading.png", Texture.class);
                 assetManager.load("buttons/resume.png", Texture.class);
                 assetManager.load("buttons/resumePressed.png", Texture.class);
                 assetManager.load("buttons/return.png", Texture.class);
@@ -173,17 +202,22 @@ public class LoadingScreen extends GenericScreen {
 
     @Override
     public void render(float delta) {
-        updateLoad();
+        acumulador+=delta;
+        updateLoad(acumulador);
+        dragon.act(delta);
         batch.begin();
-            batch.draw(loadingTexture,0,0);
+            backGroundLoading.render(batch);
         batch.end();
+        stageLoading.draw();
     }
 
-    private void updateLoad() {
+    private void updateLoad(float delta) {
         if (assetManager.update()) {
             switch (gameState) {
                 case MENU:
-                    game.setScreen(new MenuScreen(game, ScreenState.MENU));
+                    if (dragon.getAnimation().isAnimationFinished(10)) {
+                        game.setScreen(new MenuScreen(game, ScreenState.MENU));
+                    }
                     break;
                 case SETTINGS:
                     game.setScreen(new SettingsScreen(game));
@@ -195,7 +229,10 @@ public class LoadingScreen extends GenericScreen {
                     game.setScreen(new TutorialScreen(game));
                     break;
                 case LEVELS:
-                    game.setScreen(new LevelsScreen(game, ScreenState.LEVELS));
+                    if (delta >= 5) {
+                        acumulador = 0;
+                        game.setScreen(new LevelsScreen(game, ScreenState.LEVELS));
+                    }
                     break;
                 case LVL_ONE:
                     game.setScreen(new LevelOne(game, ScreenState.LVL_ONE));
@@ -223,6 +260,6 @@ public class LoadingScreen extends GenericScreen {
 
     @Override
     public void dispose() {
-
+        loadingTexture.dispose();
     }
 }
