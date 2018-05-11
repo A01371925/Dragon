@@ -56,7 +56,7 @@ public class TutorialScreen extends GenericScreen {
         stageTutorial = new Stage(vista);
 
         // Creacion del backGround.
-        textureBackground = assetManager.get("backgrounds/about.png");
+        textureBackground = assetManager.get("backgrounds/tutorial.png");
         backGround = new BackGround(textureBackground);
 
         // Creación de los botones del menú.
@@ -137,7 +137,7 @@ public class TutorialScreen extends GenericScreen {
     public void dispose() {
         stageTutorial.dispose();
         batch.dispose();
-        assetManager.unload("backgrounds/about.png");
+        assetManager.unload("backgrounds/tutorial.png");
         assetManager.unload("buttons/return.png");
         assetManager.unload("buttons/returnPressed.png");
         assetManager.unload("music/preacerca.mp3");
