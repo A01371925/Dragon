@@ -114,9 +114,9 @@ public class LevelThree extends GenericLevel {
         switch (gameState) {
             case JUGANDO:
                 actualizarObjetos(delta);
+                home();
+                back();
                 batch.begin();
-
-
                 backGround.render(batch);
                 //Marcador
                 text.mostrarMensaje(batch,letras,ANCHO - ANCHO/8, ALTO);

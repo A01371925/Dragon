@@ -500,7 +500,6 @@ public abstract class GenericLevel extends GenericScreen {
 
     @Override
     public void pause() {
-
         gameState = GameState.PAUSA;
     }
 

@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.GameState;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.BackGround;
 
@@ -149,8 +151,15 @@ public class LevelsScreen extends GenericScreen{
         Gdx.input.setInputProcessor(stageLevelsSreen);
     }
 
+    protected void back() {
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            game.setScreen(new LoadingScreen(game, ScreenState.MENU));
+        }
+    }
+
     @Override
     public void render(float delta) {
+        back();
         batch.begin();
             backGround.render(batch);
         batch.end();

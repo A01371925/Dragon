@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -237,9 +238,15 @@ public class SettingsScreen extends GenericScreen {
         Gdx.input.setInputProcessor(stageConfiguracion);
     }
 
+    protected void back() {
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            game.setScreen(new LoadingScreen(game, ScreenState.MENU));
+        }
+    }
 
     @Override
     public void render(float delta) {
+        back();
         // DIBUJAR.
         batch.begin();
             // Dibujar elementos de la pantalla.

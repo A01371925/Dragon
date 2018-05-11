@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.States.GameState;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.BackGround;
 
@@ -153,11 +155,16 @@ public class AboutScreen extends GenericScreen {
         Gdx.input.setInputProcessor(stageAcercaDe);
     }
 
+    protected void back() {
+        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            game.setScreen(new LoadingScreen(game, ScreenState.MENU));
+        }
+    }
 
     @Override
     public void render(float delta) {
         // DIBUJAR.
-
+        back();
         batch.begin();
             // Dibujar elementos de la pantalla.
             backGround.render(batch);
