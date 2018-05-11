@@ -39,4 +39,8 @@ public class GenericAnimation {
         animacion = new Animation<TextureRegion>(speed, frames);
         return animacion;
     }
+
+    public TextureRegion[] getFrames() {
+        return frames;
+    }
 }

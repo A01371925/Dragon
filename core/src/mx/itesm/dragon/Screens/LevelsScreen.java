@@ -26,11 +26,14 @@ public class LevelsScreen extends GenericScreen{
     private Texture textureBtnPressLvl2;
     private Texture textureBtnLvl3;
     private Texture textureBtnPressLvl3;
-
+    private Texture textureBtnReturn;
+    private Texture textureBtnReturnPressed;
 
     private ImageButton btnLvl1;
     private ImageButton btnLvl2;
     private ImageButton btnLvl3;
+    private ImageButton btnReturn;
+
 
     private Preferences progress = Gdx.app.getPreferences("preferenceProg");
 
@@ -61,6 +64,8 @@ public class LevelsScreen extends GenericScreen{
         textureBtnPressLvl2 = assetManager.get("buttons/resumePressed.png");
         textureBtnLvl3 = assetManager.get("buttons/resume.png");
         textureBtnPressLvl3 = assetManager.get("buttons/resumePressed.png");
+        textureBtnReturn = assetManager.get("buttons/return.png");
+        textureBtnReturnPressed = assetManager.get("buttons/returnPressed.png");
 
         btnLvl1 = new ImageButton(
                 new TextureRegionDrawable(
@@ -86,9 +91,18 @@ public class LevelsScreen extends GenericScreen{
                         new TextureRegion(
                                 textureBtnPressLvl3)));
 
+        btnReturn = new ImageButton(
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnReturn)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnReturnPressed)));
+
         btnLvl1.setPosition(0,0);
         btnLvl2.setPosition(btnLvl1.getWidth(),0);
         btnLvl3.setPosition(btnLvl1.getWidth() + btnLvl2.getWidth(), 0);
+        btnReturn.setPosition(20, ALTO - btnReturn.getHeight() - 20);
 
         btnLvl1.addListener(new ClickListener() {
             @Override
@@ -111,6 +125,13 @@ public class LevelsScreen extends GenericScreen{
             }
         });
 
+        btnReturn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new LoadingScreen(game, ScreenState.MENU));
+            }
+        });
+
         stageLevelsSreen.addActor(btnLvl1);
 
         int levelProg = progress.getInteger("progress");
@@ -123,6 +144,7 @@ public class LevelsScreen extends GenericScreen{
         }
         /*stageLevelsSreen.addActor(btnLvl2);
         stageLevelsSreen.addActor(btnLvl3);*/
+        stageLevelsSreen.addActor(btnReturn);
 
         Gdx.input.setInputProcessor(stageLevelsSreen);
     }
@@ -150,5 +172,7 @@ public class LevelsScreen extends GenericScreen{
         assetManager.unload("backgrounds/loading.jpg");
         assetManager.unload("buttons/resume.png");
         assetManager.unload("buttons/resumePressed.png");
+        assetManager.unload("buttons/return.png");
+        assetManager.unload("buttons/returnPressed.png");
     }
 }

@@ -212,7 +212,7 @@ public abstract class GenericLevel extends GenericScreen {
                                 textureBtnPause)));
 
         framesCharacter = new Character(textureFramesDragon);
-        dragon = new AnimatedImage(framesCharacter.animacion());
+        dragon = new AnimatedImage(framesCharacter.animacion(),framesCharacter.getFrames());
 
         lifeCharacter = new LifeCharacter(texturePotion);
 

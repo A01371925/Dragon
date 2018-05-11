@@ -70,6 +70,7 @@ public class LoadingScreen extends GenericScreen {
                 break;
             case TUTORIAL:
                 assetManager.load("backgrounds/tutorial.png", Texture.class);
+                assetManager.load("textures/dragon.png", Texture.class);
                 assetManager.load("buttons/return.png", Texture.class);
                 assetManager.load("buttons/returnPressed.png", Texture.class);
                 assetManager.load("music/preacerca.mp3", Music.class);
@@ -79,6 +80,8 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("backgrounds/loading.jpg", Texture.class);
                 assetManager.load("buttons/resume.png", Texture.class);
                 assetManager.load("buttons/resumePressed.png", Texture.class);
+                assetManager.load("buttons/return.png", Texture.class);
+                assetManager.load("buttons/returnPressed.png", Texture.class);
                 break;
             case LVL_ONE:
                 assetManager.load("backgrounds/level1.png", Texture.class);

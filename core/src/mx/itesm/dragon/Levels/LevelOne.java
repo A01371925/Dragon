@@ -340,6 +340,7 @@ public class LevelOne extends GenericLevel {
         }
         for (int i = 0; i < listaFlechas.size(); i++) {
             Enemy flechas = listaFlechas.get(i);
+
             Rectangle rectDragon = new Rectangle(dragon.getX() + 151,dragon.getY(),151,dragon.getHeight() / 2);
             //Rectangle rectJefeFinal = new Rectangle(boss.getX(), boss.getY(), boss.getImageWidth(), boss.getImageHeight());
             Rectangle rectFlechas = flechas.getSprite().getBoundingRectangle();
