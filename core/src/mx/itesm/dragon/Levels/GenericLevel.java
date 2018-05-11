@@ -80,6 +80,7 @@ public abstract class GenericLevel extends GenericScreen {
     protected Preferences sonido = Gdx.app.getPreferences("preferenceS");
     protected Preferences musica = Gdx.app.getPreferences("preferenceM");
 
+
     // Marcador.//
     protected int puntosJugador = 0;
     protected int bonusRemainingHealth = 0;

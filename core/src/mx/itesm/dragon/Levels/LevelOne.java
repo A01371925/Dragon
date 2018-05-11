@@ -142,6 +142,11 @@ public class LevelOne extends GenericLevel {
                     Gdx.input.setInputProcessor(stagePerder);
                 }
                 if(framesJefeFinal.getVida() == 0){
+                    int progUp = progress.getInteger("progress");
+                    if (progUp == 1){
+                        progress.putInteger("progress",2);
+                        progress.flush();
+                    }
                     gameState = GameState.GANAR;
                     Gdx.input.setInputProcessor(stageGanar);
                 }

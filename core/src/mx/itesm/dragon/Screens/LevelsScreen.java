@@ -113,16 +113,16 @@ public class LevelsScreen extends GenericScreen{
 
         stageLevelsSreen.addActor(btnLvl1);
 
-        /*Integer levelProg = progress.getInteger("progLevels");
+        int levelProg = progress.getInteger("progress");
         if (levelProg == 2 || levelProg == 3){
             stageLevelsSreen.addActor(btnLvl2);
         }
 
         if (levelProg == 3){
             stageLevelsSreen.addActor(btnLvl3);
-        }*/
-        stageLevelsSreen.addActor(btnLvl2);
-        stageLevelsSreen.addActor(btnLvl3);
+        }
+        /*stageLevelsSreen.addActor(btnLvl2);
+        stageLevelsSreen.addActor(btnLvl3);*/
 
         Gdx.input.setInputProcessor(stageLevelsSreen);
     }

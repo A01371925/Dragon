@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -47,6 +48,7 @@ public class LevelTwo extends GenericLevel {
 
     private Boss framesJefeFinal;
 
+    private Preferences progress = Gdx.app.getPreferences("preferenceProg");
 
 
     // Marcador.
@@ -148,6 +150,11 @@ public class LevelTwo extends GenericLevel {
                 }
 
                 if(framesJefeFinal.getVida() == 0){
+                    int progUp = progress.getInteger("progress");
+                    if (progUp == 1 || progUp == 2){
+                        progress.putInteger("progress",3);
+                        progress.flush();
+                    }
                     gameState = GameState.GANAR;
                     Gdx.input.setInputProcessor(stageGanar);
                 }

@@ -126,6 +126,8 @@ public class SettingsScreen extends GenericScreen {
 
         final boolean sonidoActivo = sonido.getBoolean("onSound");
 
+        final int progReset = progress.getInteger("progress");
+
         // Posición de los botones.
         btnReset.setPosition(ANCHO / 2 - btnReset.getWidth() / 2, ALTO / 2 + btnReset.getHeight() / 2);
         btnRegresar.setPosition(ANCHO - btnRegresar.getWidth() - 20,20);
@@ -205,8 +207,11 @@ public class SettingsScreen extends GenericScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 // Cambia de pantalla, solo puede hacerlo 'game'.
-                progress.putInteger("preferenceProg", 1);
-                progress.flush();
+                if (progReset > 1){
+                    progress.putInteger("progress", 1);
+                    progress.flush();
+                }
+
             }
         });
 
