@@ -24,6 +24,7 @@ public class LevelOne extends GenericLevel {
     private float timerFlecha;
     private float timerJefeFinal;
     private float timerInvincibility; // tiempo que debe transcurrir para que el jugador vuelva a recibir daño.
+    protected static int finalScore;
 
     // determinan el movimiemto del jefe final
     private boolean jefePos = false;
@@ -48,7 +49,7 @@ public class LevelOne extends GenericLevel {
 
 
     // Marcador.
-    private int puntosJugador = 0;
+    private static int puntosJugador = 0;
     private float timerVida;
     private float timerProyectilJefeFinal;
     private boolean bonusPoints = true;
@@ -198,6 +199,7 @@ public class LevelOne extends GenericLevel {
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador + bonusRemainingHealth),ANCHO - 130, ALTO - ALTO / 4 - 160);
 
                 batch.end();
+                finalScore = puntosJugador + bonusRemainingHealth;
                 stageGanar.draw();
                 break;
         }
@@ -496,6 +498,10 @@ public class LevelOne extends GenericLevel {
                 listaVidas.remove(i);
             }
         }
+    }
+
+    public static int getScore(){
+        return finalScore;
     }
 
     @Override

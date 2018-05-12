@@ -89,7 +89,7 @@ public abstract class GenericLevel extends GenericScreen {
     protected String bonusLife;
     protected String totScore;
     protected String bonusLvlComplete;
-    protected Text puntos;  // Muestra los valores en pantalla
+    protected Text puntos;
     protected Text text;
     protected Text bonusLvlText;
     protected Text bonusHeartsText;

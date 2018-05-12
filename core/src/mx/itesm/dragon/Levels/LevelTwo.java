@@ -56,6 +56,7 @@ public class LevelTwo extends GenericLevel {
     private float timerVida;
     private float timerProyectilJefeFinal;
     private boolean bonusPoints = true;
+    protected static int finalScore;
 
 
     public LevelTwo(Main game, ScreenState lvlTwo) {
@@ -209,6 +210,7 @@ public class LevelTwo extends GenericLevel {
                 puntos.mostrarMensaje(batch, Integer.toString(puntosJugador + bonusRemainingHealth),ANCHO - 130, ALTO - ALTO / 4 - 160);
 
                 batch.end();
+                finalScore = puntosJugador + bonusRemainingHealth;
                 stageGanar.draw();
                 break;
         }
@@ -559,6 +561,10 @@ public class LevelTwo extends GenericLevel {
                 listaVidas.remove(i);
             }
         }
+    }
+
+    public static int getScore(){
+        return finalScore;
     }
 
     @Override

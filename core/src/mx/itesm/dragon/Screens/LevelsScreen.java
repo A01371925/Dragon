@@ -11,10 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import mx.itesm.dragon.Levels.LevelOne;
+import mx.itesm.dragon.Levels.LevelThree;
+import mx.itesm.dragon.Levels.LevelTwo;
 import mx.itesm.dragon.Main;
 import mx.itesm.dragon.States.GameState;
 import mx.itesm.dragon.States.ScreenState;
 import mx.itesm.dragon.Utils.BackGround;
+import mx.itesm.dragon.Utils.Text;
 
 public class LevelsScreen extends GenericScreen{
 
@@ -148,6 +152,13 @@ public class LevelsScreen extends GenericScreen{
         stageLevelsSreen.addActor(btnLvl3);*/
         stageLevelsSreen.addActor(btnReturn);
 
+        marcador = new Text("fonts/fuenteMini.fnt");
+        letras = "Score";
+        scoreLvl1 = new Text("fonts/fuenteMini.fnt");
+        scoreLvl2 = new Text("fonts/fuenteMini.fnt");
+        scoreLvl3 = new Text("fonts/fuenteMini.fnt");
+
+
         Gdx.input.setInputProcessor(stageLevelsSreen);
     }
 
@@ -161,7 +172,13 @@ public class LevelsScreen extends GenericScreen{
     public void render(float delta) {
         back();
         batch.begin();
-            backGround.render(batch);
+        backGround.render(batch);
+        marcador.mostrarMensaje(batch, letras,btnLvl1.getWidth()/3,btnLvl1.getHeight()+50);
+        marcador.mostrarMensaje(batch, letras,btnLvl2.getX() + 85,btnLvl1.getHeight()+50);
+        marcador.mostrarMensaje(batch, letras,btnLvl3.getX() + 85,btnLvl1.getHeight()+50);
+        scoreLvl1.mostrarMensaje(batch, Integer.toString(LevelOne.getScore()),btnLvl1.getWidth()/3 + 85,btnLvl1.getHeight()+50);
+        scoreLvl2.mostrarMensaje(batch, Integer.toString(LevelTwo.getScore()),btnLvl2.getX() + 170,btnLvl1.getHeight()+50);
+        scoreLvl3.mostrarMensaje(batch, Integer.toString(LevelThree.getScore()),btnLvl3.getX()+ 170,btnLvl1.getHeight()+50);
         batch.end();
         stageLevelsSreen.draw();
     }

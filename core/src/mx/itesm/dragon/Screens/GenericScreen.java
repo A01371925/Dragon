@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.Utils.Text;
 
 public abstract class GenericScreen implements Screen {
 
@@ -26,6 +27,12 @@ public abstract class GenericScreen implements Screen {
 
     // Todas las pantallas dibujan.
     protected SpriteBatch batch;
+
+    protected Text marcador;
+    protected String letras;
+    protected Text scoreLvl1;
+    protected Text scoreLvl2;
+    protected Text scoreLvl3;
 
     public GenericScreen(Main game) {
         this.game = game;
