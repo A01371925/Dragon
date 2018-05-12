@@ -105,7 +105,7 @@ public class LevelThree extends GenericLevel {
         lifeCharacter = new LifeCharacter(texturePotion);
         globo = new Texture("textures/EnemigoGlobo.png");
 
-        boss.setPosition(0 - boss.getWidth(), ALTO);
+        boss.setPosition(0 - boss.getWidth()*2, ALTO);
         stageJuego.addActor(boss);
         // Se anexan las Escenas al Multiplexor.
     }
@@ -255,7 +255,7 @@ public class LevelThree extends GenericLevel {
                 if (boss.getX() >= ANCHO / 2 - boss.getImageWidth() / 2) {
                     jefePos = true;
                 } else {
-                    boss.setPosition(boss.getX() + 3, boss.getY() - 3);
+                    boss.setPosition(boss.getX() + 3, boss.getY() - 1.5f);
                 }
             }
         }

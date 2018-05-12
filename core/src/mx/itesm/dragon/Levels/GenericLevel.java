@@ -217,7 +217,7 @@ public abstract class GenericLevel extends GenericScreen {
         lifeCharacter = new LifeCharacter(texturePotion);
 
         // Posisción inicial de los elementos
-        btnPausa.setPosition(0,ALTO - btnPausa.getHeight());
+        btnPausa.setPosition(10,ALTO - btnPausa.getHeight() - 10);
         barraVida.setPosition( ANCHO / 2 - barraVida.getWidth() / 2, ALTO - barraVida.getHeight() - barraVida.getHeight() / 2);
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, dragon.getY() + dragon.getHeight());
 

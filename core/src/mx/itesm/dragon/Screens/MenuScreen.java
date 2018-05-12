@@ -144,7 +144,8 @@ public class MenuScreen extends GenericScreen {
 
         btnConfig.setPosition(ANCHO - btnConfig.getWidth()-20,btnConfig.getHeight()/4);
 
-        btnTutorial.setPosition(0,btnTutorial.getHeight()/4);
+        btnTutorial.setPosition(15,btnConfig.getY() - 11);
+
 
         // Detecta si el usuario hace click en algún actor.
         btnPlay.addListener(new ClickListener(){
