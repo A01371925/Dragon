@@ -594,12 +594,13 @@ public class LevelTwo extends GenericLevel {
         assetManager.unload("backgrounds/gameOver.png");
         assetManager.unload("buttons/reset.png");
         assetManager.unload("buttons/resetPressed.png");
-        assetManager.unload("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3");
+        assetManager.unload("music/lvl2.mp3");
         assetManager.unload("music/flecha.wav");
         assetManager.unload("music/colision.wav");
         assetManager.unload("music/fuego.wav");
         assetManager.unload("music/pausa.wav");
         assetManager.unload("music/reanudar.wav");
         assetManager.unload("music/impacto.wav");
+        assetManager.unload("music/heal.wav");
     }
 }

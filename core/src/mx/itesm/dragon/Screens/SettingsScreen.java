@@ -115,7 +115,7 @@ public class SettingsScreen extends GenericScreen {
                                 textureBtnPressReset)));
 
 
-        musicSettings = assetManager.get("music/Kevin MacLeod _ Bumbly March_preconfig.mp3");
+        musicSettings = assetManager.get("music/preconfig.mp3");
         soundReturn = assetManager.get("music/regresar.wav");
 
         boolean musicaActiva = musica.getBoolean("onMusic");
@@ -278,7 +278,7 @@ public class SettingsScreen extends GenericScreen {
         assetManager.unload("buttons/musicPressed.png");
         assetManager.unload("buttons/reset.png");
         assetManager.unload("buttons/resetPressed.png");
-        assetManager.unload("music/Kevin MacLeod _ Bumbly March_preconfig.mp3");
+        assetManager.unload("music/preconfig.mp3");
         assetManager.unload("music/regresar.wav");
     }
 }

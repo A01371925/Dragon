@@ -119,7 +119,7 @@ public class MenuScreen extends GenericScreen {
                                 textureBtnPressTut)));
         // Creacion de la musica de backGround.
         musicMenu = assetManager.get("music/premenu.mp3");
-        soundAU = assetManager.get("music/config.wav");
+        soundAU = assetManager.get("music/jugar.wav");
         soundPlay = assetManager.get("music/jugar.wav");
         soundSettings = assetManager.get("music/config.wav");
         soundTut = assetManager.get("music/config.wav");

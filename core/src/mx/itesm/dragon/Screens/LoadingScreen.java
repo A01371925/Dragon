@@ -82,7 +82,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("buttons/musicPressed.png", Texture.class);
                 assetManager.load("buttons/reset.png", Texture.class);
                 assetManager.load("buttons/resetPressed.png", Texture.class);
-                assetManager.load("music/Kevin MacLeod _ Bumbly March_preconfig.mp3", Music.class);
+                assetManager.load("music/preconfig.mp3", Music.class);
                 assetManager.load("music/regresar.wav", Sound.class);
                 break;
             case ABOUT:
@@ -132,7 +132,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("backgrounds/gameOver.png", Texture.class);
                 assetManager.load("buttons/reset.png", Texture.class);
                 assetManager.load("buttons/resetPressed.png", Texture.class);
-                assetManager.load("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3", Music.class);
+                assetManager.load("music/lvl1.mp3", Music.class);
                 assetManager.load("music/flecha.wav", Sound.class);
                 assetManager.load("music/colision.wav", Sound.class);
                 assetManager.load("music/fuego.wav", Sound.class);
@@ -160,7 +160,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("backgrounds/gameOver.png", Texture.class);
                 assetManager.load("buttons/reset.png", Texture.class);
                 assetManager.load("buttons/resetPressed.png", Texture.class);
-                assetManager.load("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3", Music.class);
+                assetManager.load("music/lvl2.mp3", Music.class);
                 assetManager.load("music/flecha.wav", Sound.class);
                 assetManager.load("music/colision.wav", Sound.class);
                 assetManager.load("music/fuego.wav", Sound.class);
@@ -188,7 +188,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("backgrounds/gameOver.png", Texture.class);
                 assetManager.load("buttons/reset.png", Texture.class);
                 assetManager.load("buttons/resetPressed.png", Texture.class);
-                assetManager.load("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3", Music.class);
+                assetManager.load("music/lvl3.mp3", Music.class);
                 assetManager.load("music/flecha.wav", Sound.class);
                 assetManager.load("music/colision.wav", Sound.class);
                 assetManager.load("music/fuego.wav", Sound.class);

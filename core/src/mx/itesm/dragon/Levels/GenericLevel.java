@@ -69,12 +69,15 @@ public abstract class GenericLevel extends GenericScreen {
 
     //Sonido y musica
     protected Music music;
+    protected Music music2;
+    protected Music music3;
     protected Sound collision;
     protected Sound impact;
     protected Sound fire;
     protected Sound arrow;
     protected Sound resume;
     protected Sound pause;
+    protected Sound heal;
 
     //Preferencias.
     protected Preferences sonido = Gdx.app.getPreferences("preferenceS");
@@ -156,13 +159,21 @@ public abstract class GenericLevel extends GenericScreen {
         textureBtnPressReset = assetManager.get("buttons/resetPressed.png");
 
         // Música y SFX
-        music = assetManager.get("music/Hyrule Field - The Legend of Zelda Twilight Princess.mp3");
+
+        if(screenState.equals(ScreenState.LVL_ONE)){
+            music = assetManager.get("music/lvl1.mp3");
+        } else if (screenState.equals(ScreenState.LVL_TWO)){
+            music2 = assetManager.get("music/lvl2.mp3");
+        } else if (screenState.equals(ScreenState.LVL_THREE)){
+            music3 = assetManager.get("music/lvl3.mp3");
+        }
         arrow = assetManager.get("music/flecha.wav");
         collision = assetManager.get("music/colision.wav");
         fire = assetManager.get("music/fuego.wav");
         pause = assetManager.get("music/pausa.wav");
         resume = assetManager.get("music/reanudar.wav");
         impact = assetManager.get("music/impacto.wav");
+        heal = assetManager.get("music/heal.wav");
     }
 
     protected void back() {
@@ -356,7 +367,13 @@ public abstract class GenericLevel extends GenericScreen {
                 super.clicked(event, x, y);
                 musica.putBoolean("onMusic", false);
                 musica.flush();
-                music.stop();
+                if(screenState.equals(ScreenState.LVL_ONE)){
+                    music.stop();
+                } else if (screenState.equals(ScreenState.LVL_TWO)){
+                    music2.stop();
+                } else if (screenState.equals(ScreenState.LVL_THREE)){
+                    music3.stop();
+                }
                 btnMusica.remove();
                 stagePausa.addActor(btnNoMusic);
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
@@ -369,9 +386,16 @@ public abstract class GenericLevel extends GenericScreen {
                 super.clicked(event, x, y);
                 musica.putBoolean("onMusic", true);
                 musica.flush();
-                music.play();
-                music.play();
-                music.setLooping(true);
+                if(screenState.equals(ScreenState.LVL_ONE)){
+                    music.play();
+                    music.setLooping(true);
+                } else if (screenState.equals(ScreenState.LVL_TWO)){
+                    music2.play();
+                    music2.setLooping(true);
+                } else if (screenState.equals(ScreenState.LVL_THREE)){
+                    music3.play();
+                    music3.setLooping(true);
+                }
                 btnNoMusic.remove();
                 stagePausa.addActor(btnMusica);
                 // Cambia de pantalla, solo lo puede hacerlo 'game'.
@@ -402,9 +426,19 @@ public abstract class GenericLevel extends GenericScreen {
         // Reproducir música de backGround
 
         if (musicaActiva){
-            music.setVolume(1);
-            music.play();
-            music.setLooping(true);
+            if(screenState.equals(ScreenState.LVL_ONE)){
+                music.setVolume(1);
+                music.play();
+                music.setLooping(true);
+            } else if (screenState.equals(ScreenState.LVL_TWO)){
+                music2.setVolume(1);
+                music2.play();
+                music2.setLooping(true);
+            } else if (screenState.equals(ScreenState.LVL_THREE)){
+                music3.setVolume(1);
+                music3.play();
+                music3.setLooping(true);
+            }
         }
 
 
