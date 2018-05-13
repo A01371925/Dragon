@@ -1,26 +1,26 @@
 package mx.itesm.dragon.Screens;
 
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 import mx.itesm.dragon.Main;
 import mx.itesm.dragon.States.ScreenState;
-import mx.itesm.dragon.Utils.BackGround;
 
-public class LoadingIntroScreen extends GenericScreen {
+public class SplashScreen extends GenericScreen {
 
     private Texture textureLogo;
 
 
-    public LoadingIntroScreen(Main game) {
+    public SplashScreen(Main game) {
         super(game);
     }
 
     @Override
     public void show() {
         loadResources();
-        textureLogo = new Texture("textures/tecLogo.jpg");
+        textureLogo = new Texture("backgrounds/loadingLogo.png");
     }
 
     private void loadResources() {
@@ -41,9 +41,9 @@ public class LoadingIntroScreen extends GenericScreen {
 
     @Override
     public void render(float delta) {
-        borrarPantalla(1,1,1,1);
         batch.begin();
             batch.draw(textureLogo, ANCHO / 2 - textureLogo.getWidth() / 2, ALTO / 2 - textureLogo.getHeight() / 2);
+            borrarPantalla();
         batch.end();
         updateLoad();
     }

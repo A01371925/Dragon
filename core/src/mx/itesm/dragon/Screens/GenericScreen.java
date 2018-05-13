@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
@@ -15,7 +16,8 @@ import mx.itesm.dragon.Utils.Text;
 public abstract class GenericScreen implements Screen {
 
     protected final Main game;
-    protected  final AssetManager assetManager;
+    protected final AssetManager assetManager;
+
     // Dimensiones.
     protected static final float ANCHO = 720;
     protected static final float ALTO = 1280;

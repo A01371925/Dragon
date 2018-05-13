@@ -48,7 +48,7 @@ public class LoadingScreen extends GenericScreen {
         dragon = new AnimatedImage(framesCharacter.animacion(),framesCharacter.getFrames());
 
 
-        dragon.setPosition(ANCHO / 2 , ALTO - 800);
+        dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, ALTO - 700);
 
         stageLoading.addActor(dragon);
 
@@ -216,37 +216,35 @@ public class LoadingScreen extends GenericScreen {
 
     private void updateLoad(float delta) {
         if (assetManager.update()) {
-            switch (gameState) {
-                case MENU:
-                    if (dragon.getAnimation().isAnimationFinished(10)) {
+            if (delta >= 3) {
+                acumulador = 0;
+                switch (gameState) {
+                    case MENU:
                         game.setScreen(new MenuScreen(game, ScreenState.MENU));
-                    }
-                    break;
-                case SETTINGS:
-                    game.setScreen(new SettingsScreen(game));
-                    break;
-                case ABOUT:
-                    game.setScreen(new AboutScreen(game));
-                    break;
-                case TUTORIAL:
-                    game.setScreen(new TutorialScreen(game));
-                    break;
-                case LEVELS:
-                    if (delta >= 5) {
-                        acumulador = 0;
+                        break;
+                    case SETTINGS:
+                        game.setScreen(new SettingsScreen(game));
+                        break;
+                    case ABOUT:
+                        game.setScreen(new AboutScreen(game));
+                        break;
+                    case TUTORIAL:
+                        game.setScreen(new TutorialScreen(game));
+                        break;
+                    case LEVELS:
                         game.setScreen(new LevelsScreen(game, ScreenState.LEVELS));
-                    }
-                    break;
-                case LVL_ONE:
-                    game.setScreen(new LevelOne(game, ScreenState.LVL_ONE));
-                    break;
-                case LVL_TWO:
-                    game.setScreen(new LevelTwo(game, ScreenState.LVL_TWO));
-                    break;
-                case LVL_THREE:
-                    game.setScreen(new LevelThree(game, ScreenState.LVL_THREE));
-                    break;
-                default:
+                        break;
+                    case LVL_ONE:
+                        game.setScreen(new LevelOne(game, ScreenState.LVL_ONE));
+                        break;
+                    case LVL_TWO:
+                        game.setScreen(new LevelTwo(game, ScreenState.LVL_TWO));
+                        break;
+                    case LVL_THREE:
+                        game.setScreen(new LevelThree(game, ScreenState.LVL_THREE));
+                        break;
+                    default:
+                }
             }
         }
     }

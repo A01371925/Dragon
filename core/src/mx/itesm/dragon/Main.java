@@ -2,12 +2,10 @@ package mx.itesm.dragon;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 
-import mx.itesm.dragon.Screens.LoadingIntroScreen;
+import mx.itesm.dragon.Screens.SplashScreen;
 
 public class Main extends Game {
 
@@ -17,7 +15,6 @@ public class Main extends Game {
     @Override
     public void create() {
         // Pone la pantalla inicial.
-        setScreen(new LoadingIntroScreen(this));
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
         Preferences prefs = Gdx.app.getPreferences("preferenceS");
@@ -29,6 +26,7 @@ public class Main extends Game {
         prefprog.flush();
         prefs.flush();
         prefm.flush();
+        setScreen(new SplashScreen(this));
 
     }
 
@@ -37,8 +35,6 @@ public class Main extends Game {
     public AssetManager getAssetManager() {
         return assetManager;
     }
-
-
 
     @Override
     public void dispose() {
