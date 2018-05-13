@@ -139,6 +139,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/pausa.wav", Sound.class);
                 assetManager.load("music/reanudar.wav", Sound.class);
                 assetManager.load("music/impacto.wav", Sound.class);
+                assetManager.load("music/heal.wav", Sound.class);
                 break;
             case LVL_TWO:
                 assetManager.load("backgrounds/level1.png", Texture.class);
@@ -167,6 +168,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/pausa.wav", Sound.class);
                 assetManager.load("music/reanudar.wav", Sound.class);
                 assetManager.load("music/impacto.wav", Sound.class);
+                assetManager.load("music/heal.wav", Sound.class);
                 break;
             case LVL_THREE:
                 assetManager.load("backgrounds/level1.png", Texture.class);
@@ -195,6 +197,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/pausa.wav", Sound.class);
                 assetManager.load("music/reanudar.wav", Sound.class);
                 assetManager.load("music/impacto.wav", Sound.class);
+                assetManager.load("music/heal.wav", Sound.class);
                 break;
             default:
         }
