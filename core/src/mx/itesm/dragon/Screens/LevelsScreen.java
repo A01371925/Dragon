@@ -64,11 +64,11 @@ public class LevelsScreen extends GenericScreen{
         backGround = new BackGround(textureBackground);
 
         textureBtnLvl1 = assetManager.get("buttons/botonNivel1.png");
-        textureBtnPressLvl1 = assetManager.get("buttons/resumePressed.png");
+        textureBtnPressLvl1 = assetManager.get("buttons/level1Button.png");
         textureBtnLvl2 = assetManager.get("buttons/botonNivel2.png");
-        textureBtnPressLvl2 = assetManager.get("buttons/resumePressed.png");
+        textureBtnPressLvl2 = assetManager.get("buttons/level2Button.png");
         textureBtnLvl3 = assetManager.get("buttons/botonNivel3.png");
-        textureBtnPressLvl3 = assetManager.get("buttons/resumePressed.png");
+        textureBtnPressLvl3 = assetManager.get("buttons/level3Button.png");
         textureBtnReturn = assetManager.get("buttons/return.png");
         textureBtnReturnPressed = assetManager.get("buttons/returnPressed.png");
 
@@ -172,12 +172,12 @@ public class LevelsScreen extends GenericScreen{
 
         batch.begin();
         backGround.render(batch);
-        marcador.mostrarMensaje(batch, letras,btnLvl1.getWidth()/3,btnLvl1.getHeight()+50);
-        marcador.mostrarMensaje(batch, letras,btnLvl2.getX() + 85,btnLvl1.getHeight()+50);
-        marcador.mostrarMensaje(batch, letras,btnLvl3.getX() + 85,btnLvl1.getHeight()+50);
-        scoreLvl1.mostrarMensaje(batch, Integer.toString(LevelOne.getScore()),btnLvl1.getWidth()/3 + 85,btnLvl1.getHeight()+50);
-        scoreLvl2.mostrarMensaje(batch, Integer.toString(LevelTwo.getScore()),btnLvl2.getX() + 170,btnLvl1.getHeight()+50);
-        scoreLvl3.mostrarMensaje(batch, Integer.toString(LevelThree.getScore()),btnLvl3.getX()+ 170,btnLvl1.getHeight()+50);
+        marcador.mostrarMensaje(batch, letras,btnLvl1.getX() + btnLvl1.getWidth()/3,btnLvl1.getY()-10);
+        marcador.mostrarMensaje(batch, letras,btnLvl2.getX() + btnLvl2.getWidth()/3,btnLvl2.getY()-10);
+        marcador.mostrarMensaje(batch, letras,btnLvl3.getX() + btnLvl3.getWidth()/3,btnLvl3.getY()-10);
+        scoreLvl1.mostrarMensaje(batch, Integer.toString(LevelOne.getScore()),btnLvl1.getX() + 170,btnLvl1.getY()-10);
+        scoreLvl2.mostrarMensaje(batch, Integer.toString(LevelTwo.getScore()),btnLvl2.getX() + 170,btnLvl2.getY()-10);
+        scoreLvl3.mostrarMensaje(batch, Integer.toString(LevelThree.getScore()),btnLvl3.getX()+ 170,btnLvl3.getY()-10);
         batch.end();
         stageLevelsSreen.draw();
     }
@@ -198,7 +198,6 @@ public class LevelsScreen extends GenericScreen{
         assetManager.unload("buttons/botonNivel1.png");
         assetManager.unload("buttons/botonNivel2.png");
         assetManager.unload("buttons/botonNivel3.png");
-        assetManager.unload("buttons/resumePressed.png");
         assetManager.unload("buttons/return.png");
         assetManager.unload("buttons/returnPressed.png");
     }

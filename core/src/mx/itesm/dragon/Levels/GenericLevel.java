@@ -449,10 +449,10 @@ public abstract class GenericLevel extends GenericScreen {
         btnNextLvl = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/reset.png"))),
+                                new Texture("buttons/resume.png"))),
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                new Texture("buttons/resetPressed.png"))));
+                                new Texture("buttons/resumePressed.png"))));
         btnMenuGanar = new ImageButton(
                 new TextureRegionDrawable(new TextureRegion(
                         textureBtnMenu)),

@@ -33,6 +33,8 @@ public class SplashScreen extends GenericScreen {
         assetManager.load("buttons/aboutPressed.png", Texture.class);
         assetManager.load("buttons/settings.png", Texture.class);
         assetManager.load("buttons/settingsPressed.png", Texture.class);
+        assetManager.load("buttons/info.png", Texture.class);
+        assetManager.load("buttons/infoPressed.png", Texture.class);
         assetManager.load("music/premenu.mp3", Music.class);
         assetManager.load("music/jugar.wav", Sound.class);
         assetManager.load("music/config.wav", Sound.class);

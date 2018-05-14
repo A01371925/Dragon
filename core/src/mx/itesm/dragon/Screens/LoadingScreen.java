@@ -67,6 +67,8 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("buttons/aboutPressed.png", Texture.class);
                 assetManager.load("buttons/settings.png", Texture.class);
                 assetManager.load("buttons/settingsPressed.png", Texture.class);
+                assetManager.load("buttons/info.png", Texture.class);
+                assetManager.load("buttons/infoPressed.png", Texture.class);
                 assetManager.load("music/premenu.mp3", Music.class);
                 assetManager.load("music/jugar.wav", Sound.class);
                 assetManager.load("music/config.wav", Sound.class);
@@ -112,9 +114,11 @@ public class LoadingScreen extends GenericScreen {
             case LEVELS:
                 assetManager.load("backgrounds/levelSelect.png", Texture.class);
                 assetManager.load("buttons/botonNivel1.png", Texture.class);
+                assetManager.load("buttons/level1Button.png", Texture.class);
                 assetManager.load("buttons/botonNivel2.png", Texture.class);
+                assetManager.load("buttons/level2Button.png", Texture.class);
                 assetManager.load("buttons/botonNivel3.png", Texture.class);
-                assetManager.load("buttons/resumePressed.png", Texture.class);
+                assetManager.load("buttons/level3Button.png", Texture.class);
                 assetManager.load("buttons/return.png", Texture.class);
                 assetManager.load("buttons/returnPressed.png", Texture.class);
                 break;

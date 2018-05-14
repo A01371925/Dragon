@@ -81,8 +81,8 @@ public class MenuScreen extends GenericScreen {
         textureBtnPressPlay = assetManager.get("buttons/playPressed.png");
         textureBtnAU = assetManager.get("buttons/about.png");
         textureBtnPressAU = assetManager.get("buttons/aboutPressed.png");
-        textureBtnTut = assetManager.get("buttons/about.png");
-        textureBtnPressTut = assetManager.get("buttons/aboutPressed.png");
+        textureBtnTut = assetManager.get("buttons/info.png");
+        textureBtnPressTut = assetManager.get("buttons/infoPressed.png");
         textureBtnSettings = assetManager.get("buttons/settings.png");
         textureBtnPressSettings = assetManager.get("buttons/settingsPressed.png");
         imgDragon = new ImageButton(
@@ -234,8 +234,8 @@ public class MenuScreen extends GenericScreen {
         assetManager.unload("textures/dragonPlay1.png");
         assetManager.unload("buttons/play.png");
         assetManager.unload("buttons/playPressed.png");
-        assetManager.unload("buttons/about.png");
-        assetManager.unload("buttons/aboutPressed.png");
+        assetManager.unload("buttons/info.png");
+        assetManager.unload("buttons/infoPressed.png");
         assetManager.unload("buttons/settings.png");
         assetManager.unload("buttons/settingsPressed.png");
         assetManager.unload("music/premenu.mp3");
