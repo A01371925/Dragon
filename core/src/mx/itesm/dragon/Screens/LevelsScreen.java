@@ -61,7 +61,7 @@ public class LevelsScreen extends GenericScreen{
     private void loadResources() {
         stageLevelsSreen = new Stage(vista);
 
-        textureBackground = assetManager.get("backgrounds4/levelSelect.png");
+        textureBackground = assetManager.get("backgrounds/levelSelect.png");
         backGround = new BackGround(textureBackground);
 
         textureBtnLvl1 = assetManager.get("buttons/resume.png");

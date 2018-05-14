@@ -46,7 +46,7 @@ public class LevelTwo extends GenericLevel {
 
     private BackGround backGround;
 
-    private Boss framesJefeFinal;
+    private Boss jefeFinal;
 
     private Preferences progress = Gdx.app.getPreferences("preferenceProg");
 
@@ -57,6 +57,10 @@ public class LevelTwo extends GenericLevel {
     private float timerProyectilJefeFinal;
     private boolean bonusPoints = true;
     protected static int finalScore;
+
+    private Texture textureFramesFinalBoss;
+
+    private Boss framesJefeFinal;
 
 
     public LevelTwo(Main game, ScreenState lvlTwo) {
@@ -96,7 +100,9 @@ public class LevelTwo extends GenericLevel {
 
         backGround = new BackGround(new Texture("backgrounds/level2.png"));
 
-        framesJefeFinal = new Boss("frames/finalBoss1.png");
+        textureFramesFinalBoss = assetManager.get("frames/finalBoss2.png");
+        framesJefeFinal = new Boss(textureFramesFinalBoss, 530, 302, 2,125f);
+
         boss = new AnimatedImage(framesJefeFinal.animacion());
 
 

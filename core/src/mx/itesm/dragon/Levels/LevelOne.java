@@ -35,7 +35,8 @@ public class LevelOne extends GenericLevel {
     private Texture proyectil;
     private Texture proyectilJefeFinal;
     private Texture flecha;
-
+    private Texture framesBoss;
+    private Texture textureBackground;
 
     private ArrayList<Fire> listaProyectil;
     private ArrayList<Fire> listaProyectilJefe;
@@ -46,8 +47,6 @@ public class LevelOne extends GenericLevel {
 
     private Boss framesJefeFinal;
 
-
-
     // Marcador.
     private static int puntosJugador = 0;
     private float timerVida;
@@ -55,6 +54,8 @@ public class LevelOne extends GenericLevel {
     private boolean bonusPoints = true;
 
     private Preferences progress = Gdx.app.getPreferences("preferenceProg");
+
+
 
 
     public LevelOne(Main game, ScreenState lvlOne) {
@@ -91,15 +92,18 @@ public class LevelOne extends GenericLevel {
 
         random = new Random();
 
-        backGround = new BackGround(new Texture("backgrounds/level1.png"));
+        textureBackground = assetManager.get("backgrounds/level1.png");
+        framesBoss = assetManager.get("frames/finalBoss1.png");
 
-        framesJefeFinal = new Boss("frames/finalBoss1.png");
+        backGround = new BackGround(textureBackground);
+
+        framesJefeFinal = new Boss(framesBoss);
         boss = new AnimatedImage(framesJefeFinal.animacion());
 
 
-        proyectil = new Texture("textures/fireBall.png");
-        proyectilJefeFinal = new Texture("textures/rock.png");
-        flecha = new Texture("textures/arrow.png");
+        proyectil = assetManager.get("textures/fireBall.png");
+        proyectilJefeFinal = assetManager.get("textures/rock.png");
+        flecha = assetManager.get("textures/arrow.png");
         lifeCharacter = new LifeCharacter(texturePotion);
 
         boss.setPosition(0-boss.getWidth()*2, ALTO);

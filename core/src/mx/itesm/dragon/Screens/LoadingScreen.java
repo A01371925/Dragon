@@ -96,6 +96,11 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("buttons/aboutMarco.png", Texture.class);
                 assetManager.load("music/preacerca.mp3", Music.class);
                 assetManager.load("music/regresar.wav", Sound.class);
+                assetManager.load("buttons/aboutAnaPressed.png", Texture.class);
+                assetManager.load("buttons/aboutCharlottePressed.png", Texture.class);
+                assetManager.load("buttons/aboutJorgePressed.png", Texture.class);
+                assetManager.load("buttons/aboutMarcoPressed.png", Texture.class);
+                assetManager.load("buttons/aboutLuisPressed.png", Texture.class);
                 break;
             case TUTORIAL:
                 assetManager.load("backgrounds/tutorial.png", Texture.class);
@@ -116,8 +121,12 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("backgrounds/level1.png", Texture.class);
                 assetManager.load("textures/healthBar.png", Texture.class);
                 assetManager.load("textures/heart.png", Texture.class);
+                assetManager.load("textures/fireBall.png", Texture.class);
+                assetManager.load("textures/rock.png", Texture.class);
+                assetManager.load("textures/arrow.png", Texture.class);
                 assetManager.load("buttons/pause.png", Texture.class);
                 assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("frames/finalBoss1.png", Texture.class);
                 assetManager.load("textures/potion.png", Texture.class);
                 assetManager.load("backgrounds/pause.png", Texture.class);
                 assetManager.load("buttons/resume.png", Texture.class);
@@ -145,8 +154,12 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("backgrounds/level1.png", Texture.class);
                 assetManager.load("textures/healthBar.png", Texture.class);
                 assetManager.load("textures/heart.png", Texture.class);
+                assetManager.load("textures/fireBall.png", Texture.class);
+                assetManager.load("textures/rock.png", Texture.class);
+                assetManager.load("textures/arrow.png", Texture.class);
                 assetManager.load("buttons/pause.png", Texture.class);
                 assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("frames/finalBoss2.png", Texture.class);
                 assetManager.load("textures/potion.png", Texture.class);
                 assetManager.load("backgrounds/pause.png", Texture.class);
                 assetManager.load("buttons/resume.png", Texture.class);
@@ -176,6 +189,10 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("textures/heart.png", Texture.class);
                 assetManager.load("buttons/pause.png", Texture.class);
                 assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("textures/fireBall.png", Texture.class);
+                assetManager.load("textures/arrow.png", Texture.class);
+                assetManager.load("textures/rock.png", Texture.class);
+                assetManager.load("frames/finalBoss3.png", Texture.class);
                 assetManager.load("textures/potion.png", Texture.class);
                 assetManager.load("backgrounds/pause.png", Texture.class);
                 assetManager.load("buttons/resume.png", Texture.class);
@@ -216,7 +233,7 @@ public class LoadingScreen extends GenericScreen {
 
     private void updateLoad(float delta) {
         if (assetManager.update()) {
-            if (delta >= 3) {
+            if (delta >= 1) {
                 acumulador = 0;
                 switch (gameState) {
                     case MENU:

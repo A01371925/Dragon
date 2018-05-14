@@ -12,12 +12,15 @@ public class Boss {
     private static final float SPEED = 0.125f;
     private int vida = 15;
 
-    private Texture jefeFinal;
+
     private GenericAnimation genericAnimation;
 
-    public Boss(String textura) {
-        jefeFinal = new Texture(textura);
-        genericAnimation = new GenericAnimation(jefeFinal, TILEWIDTH, TILEHEIGHT, TEXTURE_REGION, SPEED);
+    public Boss(Texture texture) {
+        genericAnimation = new GenericAnimation(texture, TILEWIDTH, TILEHEIGHT, TEXTURE_REGION, SPEED);
+    }
+
+    public Boss(Texture texture, int tileWidth, int tileHeight, int regions, float speed) {
+        genericAnimation = new GenericAnimation(texture, tileWidth, tileHeight, regions, speed);
     }
 
     public com.badlogic.gdx.graphics.g2d.Animation animacion() {
