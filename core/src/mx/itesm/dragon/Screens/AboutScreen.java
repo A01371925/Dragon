@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -32,6 +33,8 @@ public class AboutScreen extends GenericScreen {
     private ImageButton btnLuis;
     private ImageButton btnMarco;
 
+
+
     // BackGround.
     private BackGround backGround;
     private Texture textureBackground;
@@ -43,6 +46,15 @@ public class AboutScreen extends GenericScreen {
     private Texture textureBtnJorge;
     private Texture textureBtnMarco;
     private Texture textureBtnLuis;
+
+    //Pressed person buttons-
+    private Texture textureBtnAnaPressed;
+    private Texture textureBtnCharlottePressed;
+    private Texture textureBtnJorgePressed;
+    private Texture textureBtnMarcoPressed;
+    private Texture textureBtnLuisPressed;
+
+
 
     //Preferencias.
     private Preferences sonido = Gdx.app.getPreferences("preferenceS");
@@ -79,34 +91,60 @@ public class AboutScreen extends GenericScreen {
         textureBtnLuis = assetManager.get("buttons/aboutLuis.png");
         textureBtnMarco = assetManager.get("buttons/aboutMarco.png");
 
+        // Creación de botones con información de persona-
+        textureBtnAnaPressed = assetManager.get("buttons/aboutAnaPressed.png");
+        textureBtnCharlottePressed = assetManager.get("buttons/aboutCharlottePressed.png");
+        textureBtnJorgePressed = assetManager.get("buttons/aboutJorgePressed.png");
+        textureBtnMarcoPressed = assetManager.get("buttons/aboutMarcoPressed.png");
+        textureBtnLuisPressed = assetManager.get("buttons/aboutLuisPressed.png");
+
+
+
         // Creación de los botones a la GenericScreen Acerca De.
+
+        //Se agreguó la textura de boton presionado para todas las personas-
         btnRegresar = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
                                 textureBtnReturn)),
-                new TextureRegionDrawable(
+                new TextureRegionDrawable( //en esta parte-
                         new TextureRegion(
                                 textureBtnPressReturn)));
         btnAna = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                textureBtnAna)));
+                                textureBtnAna)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnAnaPressed)));
         btnCharlotte = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                textureBtnCharlotte)));
+                                textureBtnCharlotte)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnCharlottePressed)));
         btnJorge = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                textureBtnJorge)));
+                                textureBtnJorge)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnJorgePressed)));
         btnLuis = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                textureBtnLuis)));
+                                textureBtnLuis)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnLuisPressed)));
         btnMarco = new ImageButton(
                 new TextureRegionDrawable(
                         new TextureRegion(
-                                textureBtnMarco)));
+                                textureBtnMarco)),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                textureBtnMarcoPressed)));
 
         // Creacion de musica y sonido
         musicAbout =  assetManager.get("music/preacerca.mp3");
@@ -143,6 +181,43 @@ public class AboutScreen extends GenericScreen {
             }
         });
 
+        // Detecta si el usuario hace click en el boton de la persona-
+
+        btnLuis.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
+        btnCharlotte.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
+        btnJorge.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
+        btnAna.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
+        btnMarco.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+            }
+        });
         // TODO FALTA HABILITAR LOS BOTONES CON SU RESPECTIVA DESCRIPCION.
 
         // Se agregan elementos a la GenericScreen Acerca De.
@@ -152,6 +227,9 @@ public class AboutScreen extends GenericScreen {
         stageAcercaDe.addActor(btnJorge);
         stageAcercaDe.addActor(btnLuis);
         stageAcercaDe.addActor(btnMarco);
+
+
+
 
         // Indica quién escucha y atiende eventos.
         Gdx.input.setInputProcessor(stageAcercaDe);
@@ -198,5 +276,13 @@ public class AboutScreen extends GenericScreen {
         assetManager.unload("buttons/aboutMarco.png");
         assetManager.unload("music/preacerca.mp3");
         assetManager.unload("music/regresar.wav");
+
+        //Y se va-
+        assetManager.unload("buttons/aboutAnaPressed.png");
+        assetManager.unload("buttons/aboutCharlottePressed.png");
+        assetManager.unload("buttons/aboutJorgePressed.png");
+        assetManager.unload("buttons/aboutMarcoPressed.png");
+        assetManager.unload("buttons/aboutLuisPressed.png");
+
     }
 }
