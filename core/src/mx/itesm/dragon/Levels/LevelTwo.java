@@ -112,7 +112,7 @@ public class LevelTwo extends GenericLevel {
         globo = new Texture("textures/EnemigoGlobo.png");
         lifeCharacter = new LifeCharacter(texturePotion);
 
-        boss.setPosition(0 - boss.getWidth()*2, ALTO);
+        boss.setPosition(0 - boss.getWidth()*2, ALTO + boss.getHeight() - 80);
         stageJuego.addActor(boss);
         // Se anexan las Escenas al Multiplexor.
     }
@@ -252,7 +252,7 @@ public class LevelTwo extends GenericLevel {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         boss.act(delta);
-        if (timerJefeFinal >= 30){
+        if (timerJefeFinal >= 5){
             if (jefePos) {
                 boss.setPosition(boss.getX() + (3 * direccion), boss.getY());
 
