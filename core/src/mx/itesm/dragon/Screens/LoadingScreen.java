@@ -99,7 +99,7 @@ public class LoadingScreen extends GenericScreen {
                 break;
             case TUTORIAL:
                 assetManager.load("backgrounds/tutorial.png", Texture.class);
-                assetManager.load("textures/dragon.png", Texture.class);
+                assetManager.load("frames/dragon.png", Texture.class);
                 assetManager.load("buttons/return.png", Texture.class);
                 assetManager.load("buttons/returnPressed.png", Texture.class);
                 assetManager.load("music/preacerca.mp3", Music.class);
