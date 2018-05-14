@@ -22,7 +22,6 @@ import mx.itesm.dragon.Utils.Text;
 
 public class LevelsScreen extends GenericScreen{
 
-
     private ScreenState screenState;
 
     private Texture textureBackground;
@@ -64,11 +63,11 @@ public class LevelsScreen extends GenericScreen{
         textureBackground = assetManager.get("backgrounds/levelSelect.png");
         backGround = new BackGround(textureBackground);
 
-        textureBtnLvl1 = assetManager.get("buttons/resume.png");
+        textureBtnLvl1 = assetManager.get("buttons/botonNivel1.png");
         textureBtnPressLvl1 = assetManager.get("buttons/resumePressed.png");
-        textureBtnLvl2 = assetManager.get("buttons/resume.png");
+        textureBtnLvl2 = assetManager.get("buttons/botonNivel2.png");
         textureBtnPressLvl2 = assetManager.get("buttons/resumePressed.png");
-        textureBtnLvl3 = assetManager.get("buttons/resume.png");
+        textureBtnLvl3 = assetManager.get("buttons/botonNivel3.png");
         textureBtnPressLvl3 = assetManager.get("buttons/resumePressed.png");
         textureBtnReturn = assetManager.get("buttons/return.png");
         textureBtnReturnPressed = assetManager.get("buttons/returnPressed.png");
@@ -105,9 +104,9 @@ public class LevelsScreen extends GenericScreen{
                         new TextureRegion(
                                 textureBtnReturnPressed)));
 
-        btnLvl1.setPosition(0,0);
-        btnLvl2.setPosition(btnLvl1.getWidth(),0);
-        btnLvl3.setPosition(btnLvl1.getWidth() + btnLvl2.getWidth(), 0);
+        btnLvl1.setPosition(ANCHO / 2 - btnLvl1.getWidth() / 2,ALTO - 300);
+        btnLvl2.setPosition(ANCHO / 2 - btnLvl2.getWidth() / 2,ALTO - 600);
+        btnLvl3.setPosition(ANCHO / 2 - btnLvl3.getWidth() / 2,ALTO - 900);
         btnReturn.setPosition(20, ALTO - btnReturn.getHeight() - 20);
 
         btnLvl1.addListener(new ClickListener() {
@@ -158,7 +157,6 @@ public class LevelsScreen extends GenericScreen{
         scoreLvl2 = new Text("fonts/fuenteMini.fnt");
         scoreLvl3 = new Text("fonts/fuenteMini.fnt");
 
-
         Gdx.input.setInputProcessor(stageLevelsSreen);
     }
 
@@ -171,6 +169,7 @@ public class LevelsScreen extends GenericScreen{
     @Override
     public void render(float delta) {
         back();
+
         batch.begin();
         backGround.render(batch);
         marcador.mostrarMensaje(batch, letras,btnLvl1.getWidth()/3,btnLvl1.getHeight()+50);
@@ -196,7 +195,9 @@ public class LevelsScreen extends GenericScreen{
     @Override
     public void dispose() {
         assetManager.unload("backgrounds/levelSelect.png");
-        assetManager.unload("buttons/resume.png");
+        assetManager.unload("buttons/botonNivel1.png");
+        assetManager.unload("buttons/botonNivel2.png");
+        assetManager.unload("buttons/botonNivel3.png");
         assetManager.unload("buttons/resumePressed.png");
         assetManager.unload("buttons/return.png");
         assetManager.unload("buttons/returnPressed.png");
