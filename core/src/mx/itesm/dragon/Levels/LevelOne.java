@@ -521,11 +521,13 @@ public class LevelOne extends GenericLevel {
         stagePausa.dispose();
         stagePerder.dispose();
         stageGanar.dispose();
-        proyectil.dispose();
-        flecha.dispose();
         assetManager.unload("textures/healthBar.png");
+        assetManager.unload("textures/fireBall.png");
+        assetManager.unload("textures/arrow.png");
+        assetManager.unload("frames/finalBoss1.png");
         assetManager.unload("textures/heart.png");
         assetManager.unload("buttons/pause.png");
+        assetManager.unload("backgrounds/level1.png");
         assetManager.unload("frames/dragon.png");
         assetManager.unload("textures/potion.png");
         assetManager.unload("backgrounds/pause.png");

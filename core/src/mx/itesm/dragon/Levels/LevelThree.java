@@ -103,10 +103,10 @@ public class LevelThree extends GenericLevel {
         globo = new Texture("textures/EnemigoGlobo.png");
 
         textureFramesFinalBoss = assetManager.get("frames/finalBoss3.png");
-        framesJefeFinal  = new Boss(textureFramesFinalBoss,402,509,2,.125f);
+        framesJefeFinal  = new Boss(textureFramesFinalBoss,516,425,2,.125f);
         boss = new AnimatedImage(framesJefeFinal.animacion());
 
-        boss.setPosition(/*0 - boss.getWidth()*2, ALTO*/0,0);
+        boss.setPosition(0 - boss.getWidth()*2, ALTO);
         stageJuego.addActor(boss);
         // Se anexan las Escenas al Multiplexor.
     }
