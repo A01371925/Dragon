@@ -156,14 +156,15 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/heal.wav", Sound.class);
                 break;
             case LVL_TWO:
-                assetManager.load("backgrounds/level1.png", Texture.class);
+                assetManager.load("backgrounds/level2.png", Texture.class);
                 assetManager.load("textures/healthBar.png", Texture.class);
                 assetManager.load("textures/heart.png", Texture.class);
                 assetManager.load("textures/fireBall.png", Texture.class);
-                assetManager.load("textures/rock.png", Texture.class);
-                assetManager.load("textures/arrow.png", Texture.class);
+                assetManager.load("textures/carbonBoss.png", Texture.class);
+                assetManager.load("textures/carbon.png", Texture.class);
                 assetManager.load("buttons/pause.png", Texture.class);
                 assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("textures/EnemigoGlobo.png", Texture.class);
                 assetManager.load("frames/finalBoss2.png", Texture.class);
                 assetManager.load("textures/potion.png", Texture.class);
                 assetManager.load("backgrounds/pause.png", Texture.class);
@@ -189,14 +190,15 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/heal.wav", Sound.class);
                 break;
             case LVL_THREE:
-                assetManager.load("backgrounds/level1.png", Texture.class);
+                assetManager.load("backgrounds/level3.png", Texture.class);
                 assetManager.load("textures/healthBar.png", Texture.class);
                 assetManager.load("textures/heart.png", Texture.class);
                 assetManager.load("buttons/pause.png", Texture.class);
                 assetManager.load("frames/dragon.png", Texture.class);
+                assetManager.load("textures/EnemigoGlobo.png", Texture.class);
                 assetManager.load("textures/fireBall.png", Texture.class);
                 assetManager.load("textures/arrow.png", Texture.class);
-                assetManager.load("textures/rock.png", Texture.class);
+                assetManager.load("textures/ladrillo.png", Texture.class);
                 assetManager.load("frames/finalBoss3.png", Texture.class);
                 assetManager.load("textures/potion.png", Texture.class);
                 assetManager.load("backgrounds/pause.png", Texture.class);

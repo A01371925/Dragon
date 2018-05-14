@@ -57,6 +57,7 @@ public class LevelThree extends GenericLevel {
     private boolean bonusPoints = true;
     protected static int finalScore;
     private Texture textureFramesFinalBoss;
+    private Texture textureBackground;
 
 
     public LevelThree(Main game, ScreenState lvlThree) {
@@ -94,13 +95,14 @@ public class LevelThree extends GenericLevel {
 
         random = new Random();
 
-        backGround = new BackGround(new Texture("backgrounds/level3.png"));
+        textureBackground = assetManager.get("backgrounds/level3.png");
+        backGround = new BackGround(textureBackground);
 
-        proyectil = new Texture("textures/fireBall.png");
-        proyectilJefeFinal = new Texture("textures/rock.png");
-        flecha = new Texture("textures/arrow.png");
+        proyectil = assetManager.get("textures/fireBall.png");
+        proyectilJefeFinal = assetManager.get("textures/ladrillo.png");
+        flecha = assetManager.get("textures/arrow.png");
         lifeCharacter = new LifeCharacter(texturePotion);
-        globo = new Texture("textures/EnemigoGlobo.png");
+        globo = assetManager.get("textures/EnemigoGlobo.png");
 
         textureFramesFinalBoss = assetManager.get("frames/finalBoss3.png");
         framesJefeFinal  = new Boss(textureFramesFinalBoss,516,425,2,.125f);
@@ -595,14 +597,17 @@ public class LevelThree extends GenericLevel {
         stagePausa.dispose();
         stagePerder.dispose();
         stageGanar.dispose();
-        proyectil.dispose();
-        flecha.dispose();
-        globo.dispose();
         assetManager.unload("textures/healthBar.png");
+        assetManager.unload("backgrounds/level3.png");
+        assetManager.unload("textures/fireBall.png");
+        assetManager.unload("textures/ladrillo.png");
+        assetManager.unload("textures/arrow.png");
         assetManager.unload("textures/heart.png");
         assetManager.unload("buttons/pause.png");
+        assetManager.unload("textures/EnemigoGlobo.png");
         assetManager.unload("frames/dragon.png");
         assetManager.unload("textures/potion.png");
+        assetManager.unload("frames/finalBoss3.png");
         assetManager.unload("backgrounds/pause.png");
         assetManager.unload("buttons/resume.png");
         assetManager.unload("buttons/resumePressed.png");
