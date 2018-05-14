@@ -101,7 +101,7 @@ public class LevelTwo extends GenericLevel {
         backGround = new BackGround(new Texture("backgrounds/level2.png"));
 
         textureFramesFinalBoss = assetManager.get("frames/finalBoss2.png");
-        framesJefeFinal = new Boss(textureFramesFinalBoss, 530, 302, 2,125f);
+        framesJefeFinal = new Boss(textureFramesFinalBoss, 530, 302, 3,.125f);
 
         boss = new AnimatedImage(framesJefeFinal.animacion());
 

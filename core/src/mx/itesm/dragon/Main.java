@@ -17,7 +17,9 @@ public class Main extends Game {
         // Pone la pantalla inicial.
         Gdx.input.setCatchBackKey(true);
         Gdx.input.setCatchMenuKey(true);
-        Preferences prefs = Gdx.app.getPreferences("preferenceS");
+
+        preferences = Gdx.app.getPreferences("Preferences");
+        /*Preferences prefs = Gdx.app.getPreferences("preferenceS");
         Preferences prefm = Gdx.app.getPreferences("preferenceM");
         Preferences prefprog = Gdx.app.getPreferences("preferenceProg");
         prefprog.putInteger("progress", 1);
@@ -25,7 +27,7 @@ public class Main extends Game {
         prefm.putBoolean("onMusic", true);
         prefprog.flush();
         prefs.flush();
-        prefm.flush();
+        prefm.flush();*/
         setScreen(new SplashScreen(this));
 
     }

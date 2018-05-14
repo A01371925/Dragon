@@ -56,6 +56,7 @@ public class LevelThree extends GenericLevel {
     private float timerProyectilJefeFinal;
     private boolean bonusPoints = true;
     protected static int finalScore;
+    private Texture textureFramesFinalBoss;
 
 
     public LevelThree(Main game, ScreenState lvlThree) {
@@ -95,17 +96,17 @@ public class LevelThree extends GenericLevel {
 
         backGround = new BackGround(new Texture("backgrounds/level3.png"));
 
-        framesJefeFinal = new Boss(new Texture("frames/finalBoss3.png"));
-        boss = new AnimatedImage(framesJefeFinal.animacion());
-
-
         proyectil = new Texture("textures/fireBall.png");
         proyectilJefeFinal = new Texture("textures/rock.png");
         flecha = new Texture("textures/arrow.png");
         lifeCharacter = new LifeCharacter(texturePotion);
         globo = new Texture("textures/EnemigoGlobo.png");
 
-        boss.setPosition(0 - boss.getWidth()*2, ALTO);
+        textureFramesFinalBoss = assetManager.get("frames/finalBoss3.png");
+        framesJefeFinal  = new Boss(textureFramesFinalBoss,402,509,2,.125f);
+        boss = new AnimatedImage(framesJefeFinal.animacion());
+
+        boss.setPosition(/*0 - boss.getWidth()*2, ALTO*/0,0);
         stageJuego.addActor(boss);
         // Se anexan las Escenas al Multiplexor.
     }
