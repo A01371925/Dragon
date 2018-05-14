@@ -47,7 +47,6 @@ public class LoadingScreen extends GenericScreen {
         framesCharacter = new Character(textureFramesDragon, 448, 179, 5, .15f);
         dragon = new AnimatedImage(framesCharacter.animacion(),framesCharacter.getFrames());
 
-
         dragon.setPosition(ANCHO / 2 - dragon.getWidth() / 2, ALTO - 700);
 
         stageLoading.addActor(dragon);
