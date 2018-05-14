@@ -245,7 +245,7 @@ public abstract class GenericLevel extends GenericScreen {
             }
         });
 
-        dragon.addListener(new DragListener() {
+        dragon.addListener(new ClickListener() {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 Vector3 v = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
