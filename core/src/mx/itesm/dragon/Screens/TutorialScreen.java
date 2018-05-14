@@ -147,6 +147,7 @@ TutorialScreen extends GenericScreen {
     @Override
     public void render(float delta) {
         back();
+        dragon.act(delta);
         // DIBUJAR.
         batch.begin();
         // Dibujar elementos de la pantalla.
@@ -170,7 +171,7 @@ TutorialScreen extends GenericScreen {
         stageTutorial.dispose();
         batch.dispose();
         assetManager.unload("backgrounds/tutorial.png");
-        assetManager.unload("textures/dragon.png");
+        assetManager.unload("frames/dragon.png");
         assetManager.unload("buttons/return.png");
         assetManager.unload("buttons/returnPressed.png");
         assetManager.unload("music/preacerca.mp3");
