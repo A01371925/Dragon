@@ -252,7 +252,7 @@ public class LevelTwo extends GenericLevel {
     private void actualizarJefeFinal(float delta) {
         timerJefeFinal += delta;
         boss.act(delta);
-        if (timerJefeFinal >= 5){
+        if (timerJefeFinal >= 30){
             if (jefePos) {
                 boss.setPosition(boss.getX() + (3 * direccion), boss.getY());
 
