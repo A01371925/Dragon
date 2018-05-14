@@ -79,7 +79,7 @@ public class AboutScreen extends GenericScreen {
         stageAcercaDe = new Stage(vista);
 
         // Creacion del backGround.
-        textureBackground = assetManager.get("backgrounds/about.png");
+        textureBackground = assetManager.get("backgrounds/about.jpg");
         backGround = new BackGround(textureBackground);
 
         // Creación de los botones del menú.
@@ -222,12 +222,13 @@ public class AboutScreen extends GenericScreen {
 
         // Se agregan elementos a la GenericScreen Acerca De.
         stageAcercaDe.addActor(btnRegresar);
+        /*
         stageAcercaDe.addActor(btnAna);
         stageAcercaDe.addActor(btnCharlotte);
         stageAcercaDe.addActor(btnJorge);
         stageAcercaDe.addActor(btnLuis);
         stageAcercaDe.addActor(btnMarco);
-
+*/
 
 
 
@@ -266,7 +267,7 @@ public class AboutScreen extends GenericScreen {
     public void dispose() {
         stageAcercaDe.dispose();
         batch.dispose();
-        assetManager.unload("backgrounds/about.png");
+        assetManager.unload("backgrounds/about.jpg");
         assetManager.unload("buttons/return.png");
         assetManager.unload("buttons/returnPressed.png");
         assetManager.unload("buttons/aboutAna.png");
