@@ -106,7 +106,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("music/regresar.wav", Sound.class);
                 break;
             case LEVELS:
-                assetManager.load("backgrounds/loading.png", Texture.class);
+                assetManager.load("backgrounds/levelSelect.png", Texture.class);
                 assetManager.load("buttons/resume.png", Texture.class);
                 assetManager.load("buttons/resumePressed.png", Texture.class);
                 assetManager.load("buttons/return.png", Texture.class);
