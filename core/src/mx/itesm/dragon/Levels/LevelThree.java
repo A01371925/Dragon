@@ -1,6 +1,7 @@
 package mx.itesm.dragon.Levels;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -48,6 +49,7 @@ public class LevelThree extends GenericLevel {
 
     private Boss framesJefeFinal;
 
+    private Preferences score3 = Gdx.app.getPreferences("preferenceSc3");
 
 
     // Marcador.
@@ -208,6 +210,8 @@ public class LevelThree extends GenericLevel {
 
                 batch.end();
                 finalScore = puntosJugador + bonusRemainingHealth;
+                score3.putInteger("sc3", finalScore);
+                score3.flush();
                 stageGanar.draw();
                 break;
         }

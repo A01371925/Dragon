@@ -49,7 +49,7 @@ public class LevelTwo extends GenericLevel {
     private Boss jefeFinal;
 
     private Preferences progress = Gdx.app.getPreferences("preferenceProg");
-
+    private Preferences score2 = Gdx.app.getPreferences("preferenceSc2");
 
     // Marcador.
     private int puntosJugador = 0;
@@ -160,10 +160,12 @@ public class LevelTwo extends GenericLevel {
 
                 if(framesJefeFinal.getVida() == -5){
                     int progUp = progress.getInteger("progress");
-                    if (progUp == 1 || progUp == 2){
+                    /*if (progUp == 1 || progUp == 2){
                         progress.putInteger("progress",3);
                         progress.flush();
-                    }
+                    }*/
+                    progress.putInteger("progress",3);
+                    progress.flush();
                     gameState = GameState.GANAR;
                     Gdx.input.setInputProcessor(stageGanar);
                 }
@@ -219,6 +221,8 @@ public class LevelTwo extends GenericLevel {
 
                 batch.end();
                 finalScore = puntosJugador + bonusRemainingHealth;
+                score2.putInteger("sc2", finalScore);
+                score2.flush();
                 stageGanar.draw();
                 break;
         }

@@ -54,8 +54,7 @@ public class LevelOne extends GenericLevel {
     private boolean bonusPoints = true;
 
     private Preferences progress = Gdx.app.getPreferences("preferenceProg");
-
-
+    private Preferences score1 = Gdx.app.getPreferences("preferenceSc1");
 
 
     public LevelOne(Main game, ScreenState lvlOne) {
@@ -148,10 +147,16 @@ public class LevelOne extends GenericLevel {
                 }
                 if(framesJefeFinal.getVida() == 0){
                     int progUp = progress.getInteger("progress");
-                    if (progUp == 1){
+                    /*if (progUp == 1){
                         progress.putInteger("progress",2);
                         progress.flush();
+                    }*/
+                    if (progUp < 3){
+                        progress.putInteger("progress",2);
+                    } else {
+                        progress.putInteger("progress",3);
                     }
+                    progress.flush();
                     gameState = GameState.GANAR;
                     Gdx.input.setInputProcessor(stageGanar);
                 }
@@ -204,6 +209,8 @@ public class LevelOne extends GenericLevel {
 
                 batch.end();
                 finalScore = puntosJugador + bonusRemainingHealth;
+                score1.putInteger("sc1", finalScore);
+                score1.flush();
                 stageGanar.draw();
                 break;
         }

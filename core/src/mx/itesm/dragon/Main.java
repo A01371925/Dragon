@@ -23,12 +23,24 @@ public class Main extends Game {
         Preferences prefs = Gdx.app.getPreferences("preferenceS");
         Preferences prefm = Gdx.app.getPreferences("preferenceM");
         Preferences prefprog = Gdx.app.getPreferences("preferenceProg");
+        Preferences prefcom = Gdx.app.getPreferences("preferenceC");
+        Preferences prefsc1 = Gdx.app.getPreferences("preferenceSc1");
+        Preferences prefsc2 = Gdx.app.getPreferences("preferenceSc2");
+        Preferences prefsc3 = Gdx.app.getPreferences("preferenceSc3");
         prefprog.getInteger("progress", 1);
+        prefsc1.getInteger("sc1",0);
+        prefsc2.getInteger("sc2",0);
+        prefsc2.getInteger("sc3",0);
         prefs.getBoolean("onSound", true);
         prefm.getBoolean("onMusic", true);
+        prefcom.getBoolean("comicSeen", false);
         prefprog.flush();
+        prefcom.flush();
         prefs.flush();
         prefm.flush();
+        prefsc1.flush();
+        prefsc2.flush();
+        prefsc3.flush();
         setScreen(new SplashScreen(this));
 
     }
