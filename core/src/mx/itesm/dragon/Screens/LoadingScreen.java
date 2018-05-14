@@ -206,6 +206,9 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("backgrounds/gameOver.png", Texture.class);
                 assetManager.load("buttons/reset.png", Texture.class);
                 assetManager.load("buttons/resetPressed.png", Texture.class);
+                assetManager.load("buttons/botonNivel1.png", Texture.class);
+                assetManager.load("buttons/botonNivel2.png", Texture.class);
+                assetManager.load("buttons/botonNivel3.png", Texture.class);
                 assetManager.load("music/lvl3.mp3", Music.class);
                 assetManager.load("music/flecha.wav", Sound.class);
                 assetManager.load("music/colision.wav", Sound.class);
