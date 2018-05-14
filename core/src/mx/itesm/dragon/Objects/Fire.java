@@ -22,6 +22,7 @@ public class Fire {
     public Fire(Texture textura, float x, float y) {
         sprite = new Sprite(textura);
         sprite.setPosition(x, y);
+
         //animacion();
 
     }
