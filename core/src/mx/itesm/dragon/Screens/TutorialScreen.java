@@ -17,7 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import mx.itesm.dragon.Main;
+import mx.itesm.dragon.Objects.Character;
 import mx.itesm.dragon.States.ScreenState;
+import mx.itesm.dragon.Utils.AnimatedImage;
 import mx.itesm.dragon.Utils.BackGround;
 
 /**
@@ -38,7 +40,7 @@ TutorialScreen extends GenericScreen {
     private Texture textureBtnReturn;
     private Texture textureBtnPressReturn;
 
-    private Image dragon;
+    private AnimatedImage dragon;
 
     //Preferencias.
     private Preferences sonido = Gdx.app.getPreferences("preferenceS");
@@ -47,6 +49,8 @@ TutorialScreen extends GenericScreen {
     // Musica de backGround y sonidos
     private Music musicTutorial;
     private Sound soundReturn;
+    private Character framesCharacter;
+    private com.badlogic.gdx.graphics.Texture textureFramesDragon;
 
     public TutorialScreen(Main game) {
         super(game);
@@ -69,7 +73,7 @@ TutorialScreen extends GenericScreen {
         // Creación de los botones del menú.
         textureBtnReturn = assetManager.get("buttons/return.png");
         textureBtnPressReturn = assetManager.get("buttons/returnPressed.png");
-        textureDragon = assetManager.get("textures/dragon.png");
+        textureFramesDragon = assetManager.get("frames/dragon.png");
 
 
         // Creación de los botones a la GenericScreen Acerca De.
@@ -81,11 +85,12 @@ TutorialScreen extends GenericScreen {
                         new TextureRegion(
                                 textureBtnPressReturn)));
 
-        dragon = new Image(textureDragon);
-
         // Creacion de musica y sonido
         musicTutorial =  assetManager.get("music/preacerca.mp3");
         soundReturn =  assetManager.get("music/regresar.wav");
+
+        framesCharacter = new Character(textureFramesDragon);
+        dragon = new AnimatedImage(framesCharacter.animacion(),framesCharacter.getFrames());
 
         // Reproduccion de la musica de backGround
         boolean musicaActiva = musica.getBoolean("onMusic");

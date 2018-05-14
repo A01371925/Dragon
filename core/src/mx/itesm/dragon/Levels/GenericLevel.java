@@ -241,7 +241,6 @@ public abstract class GenericLevel extends GenericScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 gameState = GameState.PAUSA;
-                Gdx.app.log("CLICKED", "SE HIZO CLICK");
                 Gdx.input.setInputProcessor(stagePausa);
             }
         });
