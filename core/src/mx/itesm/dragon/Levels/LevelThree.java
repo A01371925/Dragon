@@ -149,7 +149,7 @@ public class LevelThree extends GenericLevel {
                     Gdx.input.setInputProcessor(stagePerder);
                 }
 
-                if(framesJefeFinal.getVida() == 0){
+                if(framesJefeFinal.getVida() == -10){
                     gameState = GameState.GANAR;
                     Gdx.input.setInputProcessor(stageGanar);
                 }

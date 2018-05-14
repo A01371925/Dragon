@@ -156,7 +156,7 @@ public class LevelTwo extends GenericLevel {
                     Gdx.input.setInputProcessor(stagePerder);
                 }
 
-                if(framesJefeFinal.getVida() == 0){
+                if(framesJefeFinal.getVida() == -5){
                     int progUp = progress.getInteger("progress");
                     if (progUp == 1 || progUp == 2){
                         progress.putInteger("progress",3);
