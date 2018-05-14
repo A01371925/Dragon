@@ -111,7 +111,9 @@ public class LoadingScreen extends GenericScreen {
                 break;
             case LEVELS:
                 assetManager.load("backgrounds/levelSelect.png", Texture.class);
-                assetManager.load("buttons/resume.png", Texture.class);
+                assetManager.load("buttons/botonNivel1.png", Texture.class);
+                assetManager.load("buttons/botonNivel2.png", Texture.class);
+                assetManager.load("buttons/botonNivel3.png", Texture.class);
                 assetManager.load("buttons/resumePressed.png", Texture.class);
                 assetManager.load("buttons/return.png", Texture.class);
                 assetManager.load("buttons/returnPressed.png", Texture.class);
