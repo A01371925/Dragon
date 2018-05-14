@@ -41,6 +41,9 @@ public class LevelsScreen extends GenericScreen{
 
 
     private Preferences progress = Gdx.app.getPreferences("preferenceProg");
+    private Preferences score1 = Gdx.app.getPreferences("preferenceSc1");
+    private Preferences score2 = Gdx.app.getPreferences("preferenceSc2");
+    private Preferences score3 = Gdx.app.getPreferences("preferenceSc3");
 
     private BackGround backGround;
 
@@ -172,12 +175,15 @@ public class LevelsScreen extends GenericScreen{
 
         batch.begin();
         backGround.render(batch);
+        int sco1 = score1.getInteger("sc1");
+        int sco2 = score2.getInteger("sc2");
+        int sco3 = score3.getInteger("sc3");
         marcador.mostrarMensaje(batch, letras,btnLvl1.getX() + btnLvl1.getWidth()/3,btnLvl1.getY()-10);
         marcador.mostrarMensaje(batch, letras,btnLvl2.getX() + btnLvl2.getWidth()/3,btnLvl2.getY()-10);
         marcador.mostrarMensaje(batch, letras,btnLvl3.getX() + btnLvl3.getWidth()/3,btnLvl3.getY()-10);
-        scoreLvl1.mostrarMensaje(batch, Integer.toString(LevelOne.getScore()),btnLvl1.getX() + 170,btnLvl1.getY()-10);
-        scoreLvl2.mostrarMensaje(batch, Integer.toString(LevelTwo.getScore()),btnLvl2.getX() + 170,btnLvl2.getY()-10);
-        scoreLvl3.mostrarMensaje(batch, Integer.toString(LevelThree.getScore()),btnLvl3.getX()+ 170,btnLvl3.getY()-10);
+        scoreLvl1.mostrarMensaje(batch, Integer.toString(sco1),btnLvl1.getX() + 170,btnLvl1.getY()-10);
+        scoreLvl2.mostrarMensaje(batch, Integer.toString(sco2),btnLvl2.getX() + 170,btnLvl2.getY()-10);
+        scoreLvl3.mostrarMensaje(batch, Integer.toString(sco3),btnLvl3.getX()+ 170,btnLvl3.getY()-10);
         batch.end();
         stageLevelsSreen.draw();
     }
