@@ -44,7 +44,7 @@ public class LoadingScreen extends GenericScreen {
         backGroundLoading = new BackGround(loadingTexture);
 
         textureFramesDragon = new Texture("frames/loading.png");
-        framesCharacter = new Character(textureFramesDragon, 448, 179, 5, .25f);
+        framesCharacter = new Character(textureFramesDragon, 448, 179, 5, .15f);
         dragon = new AnimatedImage(framesCharacter.animacion(),framesCharacter.getFrames());
 
 
@@ -233,7 +233,7 @@ public class LoadingScreen extends GenericScreen {
 
     private void updateLoad(float delta) {
         if (assetManager.update()) {
-            if (delta >= 1) {
+            if (delta >= 1.5f) {
                 acumulador = 0;
                 switch (gameState) {
                     case MENU:
