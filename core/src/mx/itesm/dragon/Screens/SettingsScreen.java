@@ -218,6 +218,7 @@ public class SettingsScreen extends GenericScreen {
                     score1.putInteger("sc1", 0);
                     score2.putInteger("sc2",0);
                     score3.putInteger("sc3",0);
+
                     score1.flush();
                     score2.flush();
                     score3.flush();
