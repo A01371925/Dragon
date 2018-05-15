@@ -67,12 +67,7 @@ public class SplashScreen extends GenericScreen {
 
     private void updateLoad() {
         if (assetManager.update()) {
-            boolean first = comic.getBoolean("comicSeen");
-            if (first){
-                game.setScreen(new comic1Screen(game));
-            } else {
                 game.setScreen(new MenuScreen(game, ScreenState.MENU));
-            }
         }
     }
 
