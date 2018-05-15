@@ -65,6 +65,7 @@ public class MenuScreen extends GenericScreen {
     public void show() {
         borrarPantalla();
         crearMenu();
+
     }
 
     private void crearMenu() {

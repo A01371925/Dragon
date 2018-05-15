@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import mx.itesm.dragon.Main;
 import mx.itesm.dragon.States.ScreenState;
 
-public class SplashScreen extends GenericScreen {
+public class comic2Screen extends GenericScreen {
 
     private Texture textureLogo;
     private Texture comic1;
@@ -17,7 +17,7 @@ public class SplashScreen extends GenericScreen {
 
     private Preferences comic = Gdx.app.getPreferences("preferenceC");
 
-    public SplashScreen(Main game) {
+    public comic2Screen(Main game) {
         super(game);
     }
 
@@ -50,29 +50,17 @@ public class SplashScreen extends GenericScreen {
     @Override
     public void render(float delta) {
         batch.begin();
-            batch.draw(textureLogo, ANCHO / 2 - textureLogo.getWidth() / 2, ALTO / 2 - textureLogo.getHeight() / 2);
-            borrarPantalla();
-            /*boolean first = comic.getBoolean("comicSeen");
-            if (first){
-                batch.draw(comic1, ANCHO / 2 - comic1.getWidth() / 2, ALTO / 2 - comic1.getHeight() / 2);
-                borrarPantalla();
                 batch.draw(comic2, ANCHO / 2 - comic2.getWidth() / 2, ALTO / 2 - comic2.getHeight() / 2);
                 borrarPantalla();
                 comic.putBoolean("comicSeen", false);
                 comic.flush();
-            }*/
         batch.end();
         updateLoad();
     }
 
     private void updateLoad() {
         if (assetManager.update()) {
-            boolean first = comic.getBoolean("comicSeen");
-            if (first){
-                game.setScreen(new comic1Screen(game));
-            } else {
-                game.setScreen(new MenuScreen(game, ScreenState.MENU));
-            }
+            game.setScreen(new MenuScreen(game, ScreenState.MENU));
         }
     }
 
