@@ -214,14 +214,15 @@ public class SettingsScreen extends GenericScreen {
                 // Cambia de pantalla, solo puede hacerlo 'game'.
                 if (progReset > 1){
                     progress.putInteger("progress", 1);
-                    score1.putInteger("sc1",0);
-                    score2.putInteger("sc2",0);
-                    score3.putInteger("sc3",0);
-                    score1.flush();
-                    score2.flush();
-                    score3.flush();
+
                     progress.flush();
                 }
+                score1.putInteger("sc1",0);
+                score2.putInteger("sc2",0);
+                score3.putInteger("sc3",0);
+                score1.flush();
+                score2.flush();
+                score3.flush();
 
             }
         });
