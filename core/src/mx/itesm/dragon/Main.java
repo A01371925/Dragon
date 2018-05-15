@@ -23,7 +23,7 @@ public class Main extends Game {
         Preferences prefs = Gdx.app.getPreferences("preferenceS");
         Preferences prefm = Gdx.app.getPreferences("preferenceM");
         Preferences prefprog = Gdx.app.getPreferences("preferenceProg");
-        Preferences prefcom = Gdx.app.getPreferences("preferenceC");
+        //Preferences prefcom = Gdx.app.getPreferences("preferenceC");
         Preferences prefsc1 = Gdx.app.getPreferences("preferenceSc1");
         Preferences prefsc2 = Gdx.app.getPreferences("preferenceSc2");
         Preferences prefsc3 = Gdx.app.getPreferences("preferenceSc3");
@@ -33,9 +33,9 @@ public class Main extends Game {
         prefsc2.getInteger("sc3",0);
         prefs.getBoolean("onSound", true);
         prefm.getBoolean("onMusic", true);
-        prefcom.getBoolean("comicSeen", false);
+        //prefcom.getBoolean("comicSeen", true);
         prefprog.flush();
-        prefcom.flush();
+        //prefcom.flush();
         prefs.flush();
         prefm.flush();
         prefsc1.flush();

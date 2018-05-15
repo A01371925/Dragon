@@ -50,6 +50,10 @@ public class SettingsScreen extends GenericScreen {
     private Preferences sonido = Gdx.app.getPreferences("preferenceS");
     private Preferences musica = Gdx.app.getPreferences("preferenceM");
     private Preferences progress = Gdx.app.getPreferences("preferenceProg");
+    private Preferences score1 = Gdx.app.getPreferences("preferenceSc1");
+    private Preferences score2 = Gdx.app.getPreferences("preferenceSc2");
+    private Preferences score3 = Gdx.app.getPreferences("preferenceSc3");
+
 
     SettingsScreen(Main game) {
         super(game);
@@ -128,6 +132,7 @@ public class SettingsScreen extends GenericScreen {
         final boolean sonidoActivo = sonido.getBoolean("onSound");
 
         final int progReset = progress.getInteger("progress");
+
 
         // Posición de los botones.
         btnReset.setPosition(ANCHO / 2 - btnReset.getWidth() / 2, ALTO / 2 + btnReset.getHeight() / 2);
@@ -210,6 +215,12 @@ public class SettingsScreen extends GenericScreen {
                 // Cambia de pantalla, solo puede hacerlo 'game'.
                 if (progReset > 1){
                     progress.putInteger("progress", 1);
+                    score1.putInteger("sc1", 0);
+                    score2.putInteger("sc2",0);
+                    score3.putInteger("sc3",0);
+                    score1.flush();
+                    score2.flush();
+                    score3.flush();
                     progress.flush();
                 }
 
