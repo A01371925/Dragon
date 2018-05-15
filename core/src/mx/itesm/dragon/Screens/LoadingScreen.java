@@ -199,6 +199,7 @@ public class LoadingScreen extends GenericScreen {
                 assetManager.load("textures/fireBall.png", Texture.class);
                 assetManager.load("textures/arrow.png", Texture.class);
                 assetManager.load("textures/ladrillo.png", Texture.class);
+                assetManager.load("textures/raindrop.png", Texture.class);
                 assetManager.load("frames/finalBoss3.png", Texture.class);
                 assetManager.load("textures/potion.png", Texture.class);
                 assetManager.load("backgrounds/pause.png", Texture.class);

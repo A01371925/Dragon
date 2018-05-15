@@ -102,7 +102,7 @@ public class LevelThree extends GenericLevel {
 
         proyectil = assetManager.get("textures/fireBall.png");
         proyectilJefeFinal = assetManager.get("textures/ladrillo.png");
-        flecha = assetManager.get("textures/arrow.png");
+        flecha = assetManager.get("textures/raindrop.png");
         lifeCharacter = new LifeCharacter(texturePotion);
         globo = assetManager.get("textures/EnemigoGlobo.png");
 
